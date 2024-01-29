@@ -1,5 +1,7 @@
 ---
 import { Counter } from '../components/Counter.jsx';
+
+export const prerender = false
 ---
 
 <header class="py-8 px-4 mx-auto max-w-xl pt-32 lg:px-5">
@@ -7,8 +9,9 @@ import { Counter } from '../components/Counter.jsx';
         <h2 class="mb-4 lg:text-7xl sm:text-6xl text-5xl tracking-tight font-extrabold dark:text-white text-slate-900">
             Welcome to <span class="block bg-gradient-to-r from-blue-600 to-green-500 text-transparent bg-clip-text">KnowMe</span>
         </h2>
-        <p class="text-gray-500 sm:text-xl dark:text-gray-400">
+        <p class="text-gray-500 sm:text-xl dark:text-gray-400"> 
             Web application for create and share your own portfolio.
-            <Counter client:visible/>
-        </div>
+        </p>
+        <Counter client:visible/>
+    </div>
 </header>
