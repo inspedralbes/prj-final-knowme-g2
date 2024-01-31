@@ -1,0 +1,16 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "npm: dev",
+            "command": "git pull; npm install; npm run dev",
+            "options": {
+                "cwd": "${workspaceFolder}/front"
+            },
+            "runOptions": {
+                "runOn": "folderOpen"
+            },
+        }
+    ]
+}
