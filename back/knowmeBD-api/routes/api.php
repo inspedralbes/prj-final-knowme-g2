@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserApiController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DomainController;
 
 /*
@@ -19,16 +19,16 @@ use App\Http\Controllers\DomainController;
 
 //public routes
     //users
-    Route::post('/register', [UserApiController::class, 'register']);
-    Route::post('/login', [UserApiController::class, 'login']);
+    Route::post('/register', [AuthController::class, 'register']);
+    Route::post('/login', [AuthController::class, 'login']);
 
 
 //protected routes
 Route::group(['middleware' => ['auth:sanctum']], function () {
     //users
-    Route::put('/users/{id}', [UserApiController::class, 'update']);
-    Route::delete('/users/{id}', [UserApiController::class, 'delete']);
-    Route::post('/logout', [UserApiController::class,'logout']);
+    Route::put('/users/{id}', [AuthController::class, 'update']);
+    Route::delete('/users/{id}', [AuthController::class, 'delete']);
+    Route::post('/logout', [AuthController::class,'logout']);
     //domains
     Route::get('/users/{id}/domains', [DomainController::class, 'show']);
     Route::post('/users/{id}/domains', [DomainController::class, 'create']);

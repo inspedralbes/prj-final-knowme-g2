@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\UserApi;
 
 
-class UserApiController extends Controller
+class AuthController extends Controller
 {
     public function register(Request $request){
         $fields = $request->validate([
@@ -20,7 +20,7 @@ class UserApiController extends Controller
             'password'=> 'required|string|confirmed'
         ]);
 
-        $user = User::create([
+        $user = UserApi::create([
             'user'=> $fields['user'],
             'name'=> $fields['name'],
             'surnames'=> $fields['surnames'],
@@ -45,7 +45,7 @@ class UserApiController extends Controller
         ]);
 
         //Check email
-        $user = User::where('user', $fields['user'])->first();
+        $user = UserApi::where('user', $fields['user'])->first();
 
         //Check password
         if(!$user || !Hash::check($fields['password'], $user->password)){
@@ -73,7 +73,7 @@ class UserApiController extends Controller
     }
 
     public function update(Request $request, $id){
-        $user = User::find($id);
+        $user = UserApi::find($id);
         $user->update($request->all());
         return $user;
     }

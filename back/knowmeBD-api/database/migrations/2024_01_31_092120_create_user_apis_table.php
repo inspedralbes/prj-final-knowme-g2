@@ -13,12 +13,11 @@ return new class extends Migration
     {
         Schema::create('users_api', function (Blueprint $table) {
             $table->id()->autoIncrement();
-            $table->string('userNickName')->unique();
+            $table->string('user')->unique();
             $table->string('name');
             $table->string('surnames');
             $table->string('email')->unique();
             $table->string('password');
-        
         });
     }
 
