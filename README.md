@@ -1,19 +1,8 @@
-# transversals
-Esquema mínim de carpetes pels projectes transversals
+# KnowMe
+* Aplicació web per poder crear el teu portfoli de manera senzilla i perfecta.
+* Damià Brea Cervino, Arnau Fernández Gil, Loris Crisafo Norte, Julie Villegas Vergara, Martí Sala Vallès. 
+* [Penpot](https://design.penpot.app/#/workspace/af8aaf7c-05e6-8124-8003-ce02dae46d97/75aa5258-9a82-8002-8003-ce02dcbb5841?page-id=75aa5258-9a82-8002-8003-ce02dcbb5842)
+* [Taiga](https://tree.taiga.io/project/marti-sv-knowme/backlog)
+* [Producció](knowme.cat)
 
-És obligatori seguir aquesta estructura tot i que la podeu ampliar.
-
-## Atenció
-Un cop comenceu heu de canviar aquesta explicació amb la corresponent al vostre projecte (utilitzant markdown)
-
-## Docker & Docker compose
-El projecte s'ha de poder desplegar en mode desenvolupament simplement fent docker compose up
-
-# Aquest fitxer ha de contenir com a mínim:
- * Nom dels integrants
- * Nom del projecte
- * Petita descripció
- * Adreça del gestor de tasques (taiga, jira, trello...)
- * Adreça del prototip gràfic del projecte (Penpot, figma, moqups...)
- * URL de producció (quan la tingueu)
- * Estat: (explicació d'en quin punt està)
+Estat: <span style="color:#ffa500;">En procés</span>👷‍♂️👷‍♀️
