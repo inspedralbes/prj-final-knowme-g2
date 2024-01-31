@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserApiController;
+use App\Http\Controllers\DomainController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,6 +15,27 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+
+
+//public routes
+    //users
+    Route::post('/register', [UserApiController::class, 'register']);
+    Route::post('/login', [UserApiController::class, 'login']);
+
+
+//protected routes
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    //users
+    Route::put('/users/{id}', [UserApiController::class, 'update']);
+    Route::delete('/users/{id}', [UserApiController::class, 'delete']);
+    Route::post('/logout', [UserApiController::class,'logout']);
+    //domains
+    Route::get('/users/{id}/domains', [DomainController::class, 'show']);
+    Route::post('/users/{id}/domains', [DomainController::class, 'create']);
+    Route::get('/users/{id}/domains/{domain_id}', [DomainController::class, 'find']);
+    Route::put('/users/{id}/domains/{domain_id}', [DomainController::class, 'update']);
+    Route::delete('/users/{id}/domains/{domain_id}', [DomainController::class, 'delete']);
+});
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
