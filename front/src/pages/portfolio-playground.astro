@@ -1,6 +1,6 @@
 ---
 import EditPortfolio from "../layouts/EditPortfolio.astro";
-import RightSideBar from "../components/RightSideBar.astro";
+import RightSideBar from "../components/RightSideBar.jsx";
 import PrototypePortfolio from "../components/PrototypePortfolio.astro";
 ---
 
@@ -8,7 +8,7 @@ import PrototypePortfolio from "../components/PrototypePortfolio.astro";
 	<main class="h-max w-screen">
 		<div class="flex w-full">
 			<PrototypePortfolio />
-			<RightSideBar/>
+			<RightSideBar client:visible/>
 		</div>
 	</main>
 </EditPortfolio>
