@@ -14,7 +14,7 @@ export function OptImg({ selected, setSelected }) {
     }, [radius]);
     return (
         <>
-            <h2>Image</h2>
+            <h2 className="font-sans font-bold text-[30px]">Image</h2>
             <div>
                 <label htmlFor="imatge">+ Add File</label>
                 <input onInput={(event) => {
