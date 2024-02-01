@@ -2,7 +2,6 @@ import { EditText } from "./EditText.jsx";
 import { useState, useEffect } from 'react'
 
 import { MenuBar } from "./MenuBar.jsx";
-import { counterStore } from "../stores/counterStore";
 
 export function RightSideBar() {
     let [selected, setSelected] = useState(null);
@@ -10,8 +9,8 @@ export function RightSideBar() {
 return (
     
         <>
-        <div class="h-full w-auto bg-[#2d2d2d] flex fixed top-0 right-0 text-[#E8E9EA]">
-        <div class="h-full w-96 bg-[#2d2d2d]   top-0  text-[#E8E9EA]">     
+        <div class="h-screen w-1/4  min-w-fit bg-[#2d2d2d] flex text-[#E8E9EA]">
+        <div class="h-full w-96 bg-[#2d2d2d]  text-[#E8E9EA]">     
             <main class="mx-10 my-10">
             {selected == 0 ? <EditText />: null}
             </main>
