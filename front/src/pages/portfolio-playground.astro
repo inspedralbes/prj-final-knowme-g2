@@ -1,10 +1,10 @@
 ---
 import EditPortfolio from '../layouts/EditPortfolio.astro';
-import RightSideBar from '../components/RightSideBar.astro';
+import { RightSideBar }from '../components/RightSideBar.jsx';
 ---
 
 <EditPortfolio title="KnowMe Playground">
 	<main class="h-max">
-		<RightSideBar />
+		<RightSideBar client:visible/>
 	</main>
 </EditPortfolio>
