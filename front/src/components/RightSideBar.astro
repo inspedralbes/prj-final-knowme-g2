@@ -4,14 +4,13 @@ import { MenuBar } from "./MenuBar.jsx";
 import stars from "../icons/stars.svg";
 ---
 
-<div class="h-full w-auto bg-[#2d2d2d] flex fixed top-0 right-0 text-[#E8E9EA]">
-<div class="h-full w-96 bg-[#2d2d2d]   top-0  text-[#E8E9EA]">
-    
-    <main class="mx-10 my-10">
-        <EditText client:visible />
-    </main>
-</div>
-<nav class="h-full w-14 bg-[#4e4e4e] top-0  text-[#E8E9EA]">
-    <MenuBar client:visible />
-</nav>
+<div class="h-screen w-1/4 bg-[#2d2d2d] flex text-[#E8E9EA]">
+    <div class="h-full w-96 bg-[#2d2d2d] top-0 text-[#E8E9EA]">
+        <main class="mx-10 my-10">
+            <EditText client:visible />
+        </main>
+    </div>
+    <nav class="h-full w-14 bg-[#4e4e4e] top-0 text-[#E8E9EA]">
+        <MenuBar client:visible />
+    </nav>
 </div>

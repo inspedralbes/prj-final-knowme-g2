@@ -14,7 +14,7 @@ export function EditText() {
                 <textarea
                     className={"text-lg w-full overflow-hidden h-14 px-2 mt-2 resize-none focus:outline-none rounded-lg bg-[#313131] text-[#E8E9EA] border-2 border-[#E8E9EA] pr-10 " + (isBold ? ' font-bold ' : '') + (isItaly ? 'italic ' : '')}
                 ></textarea>
-                <span className="icon-[bi--stars] w-5 h-5 absolute top-8 right-1 text-white"></span>
+                <span className="icon-[bi--stars] size-5 absolute top-8 right-1 text-white"></span>
             </div>
             <div className="flex items-center">
                 <button onClick={() => setIsBold(!isBold)} className={"rounded-full bg-[#454545] w-24 h-10 min-w-10 transition-all duration-100 hover:bg-opacity-80 mr-2 flex justify-center items-center " + (isBold ? 'bg-[#e0ffff] text-[#444444]' : '')}>
