@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react'
 import { MenuBar } from "./MenuBar.jsx";
 import { OptImg } from "./OptImg.jsx";
 
-export function RightSideBar({ componentData, setComponentData }) {
+export function RightSideBar({ componentData, setComponentData, imgData, setImgData}) {
     let [selected, setSelected] = useState(null);
 
     return (
@@ -16,7 +16,7 @@ export function RightSideBar({ componentData, setComponentData }) {
                     <main className="m-10">
                         {selected == 0 ? <EditText componentData={componentData} setComponentData={setComponentData} /> : null}
                         {selected == 1 ? <EditComponent /> : null}
-                        {selected == 3 ? <OptImg /> : null}
+                        {selected == 3 ? <OptImg imgData={imgData} setImgData={setImgData} /> : null}
 
                     </main>
                 </div>
