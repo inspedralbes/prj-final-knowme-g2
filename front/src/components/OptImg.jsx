@@ -1,5 +1,3 @@
-
-import { counterStore } from "../stores/counterStore";
 export function OptImg({ imgData, setImgData }) {
     let img = undefined;
     let styles = {
@@ -9,15 +7,16 @@ export function OptImg({ imgData, setImgData }) {
 
     return (
         <>
-            <h2 className="font-sans font-bold text-[30px]">Image</h2>
-            <div>
-                <label htmlFor="imatge">+ Add File</label>
+            <h2 className="text-2xl font-bold mb-5">Image</h2>
+            <button className="relative font-bold text-lg w-full h-12 rounded-full bg-[#69b4ff] text-[#ffffff] hover:opacity-90 transition-all duration-100">
+                + Add File
                 <input onInput={(event) => {
-                    var output = document.getElementById('preview');
+                    let output = document.getElementById('preview');
                     output.src = URL.createObjectURL(event.target.files[0])
                     setImgData({ ...imgData, src: output.src })
-                }} className="hidden" type="file" name="img" id="imatge" />
-            </div>
+                }} className=" top-0 left-0 rounded-full opacity-0 bg-slate-500 absolute w-full h-full hover:cursor-pointer" type="file" name="img" id="imatge" accept="image/*" />
+
+            </button>
             <div><label htmlFor="radius" >Radius</label>
                 <input type="number" onInput={(e) => setImgData({ ...imgData, radius: e.target.value })}
                     className=" bg-black " value={imgData.radius} name="radius" id="radius" />
