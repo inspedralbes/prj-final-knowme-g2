@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { TitleComponent } from "./TitleComponent.jsx";
-import { ImgComponent} from "./ImgComponent.jsx";
+import { TitleComponent } from "./PortfolioComponents/TitleComponent.jsx";
+import { ImgComponent } from "./PortfolioComponents/ImgComponent.jsx";
 export function PrototypePortfolio({ componentData, imgData }) {
     const [portfolioComponents, setPortfolioComponents] = useState([]);
 
