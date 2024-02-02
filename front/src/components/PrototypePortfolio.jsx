@@ -19,8 +19,6 @@ export function PrototypePortfolio({ componentData }) {
             mode: evt.dataTransfer.getData("itemMode")
         }
 
-        console.log(item.mode);
-
         if (item.mode == "add") {
             switch (item.id) {
                 case "TitleComponent":
@@ -42,20 +40,30 @@ export function PrototypePortfolio({ componentData }) {
         }
     }
 
+    const deleteComponent = (index) => {
+        const updatedComponents = [...portfolioComponents];
+        updatedComponents.splice(index, 1);
+
+        setPortfolioComponents(updatedComponents);
+    }
+
     return (
         <>
             <div className="h-screen w-3/4 max-w-proses mx-20 bg-white shadow-lg p-8 overflow-hidden overflow-ellipsis whitespace-nowrap" droppable="true" onDragOver={(evt => draggingOver(evt))} onDrop={(evt => onDrop(evt, 1))}>
-                <TitleComponent componentData={componentData} />
-
                 {portfolioComponents.map((component, index) => (
-                    <div className="relative group" id={index} key={index} draggable onDragStart={(evt) => startDrag(evt, index)}>
+                    <div className="relative group border-2 border-transparent hover:border-2 hover:border-pink-500" id={index} key={index} draggable onDragStart={(evt) => startDrag(evt, index)}>
                         {component}
-                        <button className='absolute inline-block right-0 top-[10%] opacity-0 group-hover:opacity-100 bg-red-600 rounded-full z-10 p-4 size-12 transition-all duration-150'>
-                            <svg viewBox="0 0 448 512" class="svgIcon"><path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"></path></svg>
-                        </button>
+                        <div className='absolute right-[-16px] z-10 top-0 h-full flex flex-col items-center justify-center'>
+                            <button onClick={() => deleteComponent(index)} className='flex justify-center items-center opacity-0 group-hover:opacity-100 bg-red-600 rounded-full size-[30px] transition-all duration-150 hover:bg-red-700'>
+                                <span className="icon-[tabler--trash] text-white"></span>
+                            </button>
+                            <button className='flex justify-center items-center mt-1 opacity-0 group-hover:opacity-100 bg-blue-600 rounded-full size-[30px] transition-all duration-150 hover:bg-blue-700'>
+                                <span className="icon-[tabler--edit] text-white"></span>
+                            </button>
+                        </div>
                     </div>
                 ))}
-            </div>
+            </div >
         </>
     )
 }
