@@ -1,9 +1,9 @@
-import { EditText } from "./EditText";
-import { EditComponent } from "./EditComponent";
+import { EditText } from "./SideBarTools/EditText.jsx";
+import { EditComponent } from "./SideBarTools/EditComponent.jsx";
 import { useState, useEffect } from 'react'
 
 import { MenuBar } from "./MenuBar.jsx";
-import { OptImg } from "./OptImg.jsx";
+import { OptImg } from "./SideBarTools/EditImage.jsx";
 
 export function RightSideBar({ componentData, setComponentData, imgData, setImgData}) {
     let [selected, setSelected] = useState(null);
