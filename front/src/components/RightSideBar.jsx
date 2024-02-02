@@ -1,9 +1,10 @@
 import { EditText } from "./EditText";
+import { EditComponent } from "./EditComponent";
 import { useState, useEffect } from 'react'
 
 import { MenuBar } from "./MenuBar.jsx";
-import { counterStore } from "../stores/counterStore";
 import { OptImg } from "./OptImg.jsx";
+
 export function RightSideBar({ componentData, setComponentData }) {
     let [selected, setSelected] = useState(null);
 
@@ -14,6 +15,7 @@ export function RightSideBar({ componentData, setComponentData }) {
                 <div className="h-full w-96 bg-[#2d2d2d]  text-[#E8E9EA]">
                     <main className="m-10">
                         {selected == 0 ? <EditText componentData={componentData} setComponentData={setComponentData} /> : null}
+                        {selected == 1 ? <EditComponent /> : null}
                         {selected == 3 ? <OptImg /> : null}
 
                     </main>
