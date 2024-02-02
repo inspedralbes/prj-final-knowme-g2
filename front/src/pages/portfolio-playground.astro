@@ -1,14 +1,12 @@
 ---
-import EditPortfolio from "../layouts/EditPortfolio.astro";
-import RightSideBar from "../components/RightSideBar.jsx";
-import PrototypePortfolio from "../components/PrototypePortfolio.astro";
+import EditPortfolioLayout from "../layouts/EditPortfolioLayout.astro";
+import EditPortfolio from "../components/EditPortfolio.jsx";
 ---
 
-<EditPortfolio title="KnowMe Playground">
+<EditPortfolioLayout title="KnowMe Playground">
 	<main class="h-max w-screen">
 		<div class="flex">
-			<PrototypePortfolio />
-			<RightSideBar client:visible/>
+			<EditPortfolio client:visible/>
 		</div>
 	</main>
-</EditPortfolio>
+</EditPortfolioLayout>
