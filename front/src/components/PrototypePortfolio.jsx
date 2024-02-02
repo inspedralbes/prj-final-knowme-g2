@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { TitleComponent } from "./TitleComponent.jsx";
-
-export function PrototypePortfolio({ componentData }) {
+import { ImgComponent} from "./ImgComponent.jsx";
+export function PrototypePortfolio({ componentData, imgData }) {
     const [portfolioComponents, setPortfolioComponents] = useState([]);
 
     const draggingOver = (evt) => {
@@ -24,8 +24,8 @@ export function PrototypePortfolio({ componentData }) {
                 case "TitleComponent":
                     setPortfolioComponents([...portfolioComponents, <TitleComponent key={portfolioComponents.length + 1} componentData={componentData} />]);
                     break;
-                case "TitiComponent":
-                    setPortfolioComponents([...portfolioComponents, <TitiComponent key={portfolioComponents.length + 1} />]);
+                case "ImgComponent":
+                    setPortfolioComponents([...portfolioComponents, <ImgComponent key={portfolioComponents.length + 1} imgData={imgData} />]);
                     break;
             }
         } else if (item.mode == "move") {

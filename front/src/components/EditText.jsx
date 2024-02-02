@@ -1,9 +1,15 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 
 export function EditText({ componentData, setComponentData }) {
     const sizes = ['Primary', 'Secondary', 'Tertiary'];
     let [size, setSize] = useState(0);
     let [dropDown, setDropDown] = useState(false);
+
+    function useOutsideAlerter(ref) {
+        useEffect(() => {
+            
+        }, [ref])
+    }
 
     return (
         <>
