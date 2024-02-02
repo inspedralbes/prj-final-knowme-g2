@@ -22,8 +22,11 @@ export function EditComponent({ componentData, setComponentData }) {
                 <div id="TitleComponent" className="bg-red-600" draggable onDragStart={(evt) => startDrag(evt, "TitleComponent")}>
                     <h1>Title component</h1>
                 </div>
-                <div id="TitleComponent" className="bg-red-600" draggable onDragStart={(evt) => startDragImg(evt, "ImgComponent")}>
+                <div id="TitleComponent" className="bg-red-600 mt-4" draggable onDragStart={(evt) => startDragImg(evt, "ImgComponent")}>
                     <h1>Image</h1>
+                </div>
+                <div id="TitleComponent" className="bg-red-600 mt-4" draggable onDragStart={(evt) => startDragImg(evt, "SocialComponent")}>
+                    <h1>Social Media</h1>
                 </div>
             </div>
         </>
