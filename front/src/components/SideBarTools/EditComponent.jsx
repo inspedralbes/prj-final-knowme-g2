@@ -4,30 +4,16 @@ export function EditComponent({ componentData, setComponentData }) {
     const [draggedText, setDraggedText] = useState(null);
     const [posX, setPosX] = useState(0);
     const [posY, setPosY] = useState(0);
-    const [eventData, setEventData] = useState({
 
-        itemID: null,
-        itemMode: null,
-        posX: null,
-        posY: null,
-
-    });
-
-    onmousemove = (evt) => {
-        setPosX(evt.clientX);
-        setPosY(evt.clientY);
-    }
     const startDrag = (evt, id) => {
-
-    }
-
-    const endDrag = (evt, id) => {
-        console.log("endDrag");
-        evt.preventDefault();
         evt.dataTransfer.setData("itemID", id);
         evt.dataTransfer.setData("itemMode", "add");
-        evt.dataTransfer.setData("posX", posX);
-        evt.dataTransfer.setData("posY", posY);
+
+        setDraggedText(id);
+    }
+    const startDragImg = (evt, id) => {
+        evt.dataTransfer.setData("itemID", id);
+        evt.dataTransfer.setData("itemMode", "add");
         setDraggedText(id);
     }
     return (

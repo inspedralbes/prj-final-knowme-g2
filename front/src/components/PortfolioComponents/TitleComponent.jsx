@@ -1,18 +1,22 @@
-import { useState, useEffect } from 'react'
+import { useRightSideBarStore } from '../../store/rightSideBarStore.js'
 
-export function TitleComponent({ componentData, pos }) {
+export function TitleComponent({pos}) {
+    const { setType, content, setContent } = useRightSideBarStore(state => state);
+
+    content == null ? setContent({ ...content, text: 'Hey, I\'m Loris Crisafo Norte', bold: true }) : null;
+
+    const handleClick = () => {
+        setType('text'); 
+    }
 
     const styles = {
-        border: `${imgData.border}px solid ${imgData.color}`,
-        borderRadius: `${imgData.radius}px`,
-        absolute,
-        top: `${pos[1]}px`,
         left: `${pos[0]}px`,
+        top: `${pos[1]}px`,
     }
     return (
         <>
-            <div className="w-2/3">
-                <h1 className={"text-8xl font-inter text-pretty absolute"  + (componentData.bold ? 'font-bold ' : '') + (componentData.italic ? 'italic ' : '')}> {componentData.text} </h1>
+            <div onClick={() => { handleClick() }} className="w-2/3 min-h-12">
+                <h1 className={"text-8xl font-inter text-pretty " + (content?.bold ? 'font-bold ' : '') + (content?.italic ? 'italic ' : '')}> {content?.text} </h1>
             </div>
         </>
     )

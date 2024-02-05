@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-export function OptImg({ imgData, setImgData }) {
+export function EditImage({ imgData, setImgData }) {
     const [radiusImg, setRadiusImg] = useState(50);
     const [borderImg, setBorderImg] = useState(1);
 
@@ -59,4 +59,4 @@ export function OptImg({ imgData, setImgData }) {
     )
 }
 
-export default OptImg
+export default EditImage
