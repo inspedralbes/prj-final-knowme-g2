@@ -41,7 +41,6 @@ export function PrototypePortfolio({ componentData, imgData }) {
             updatedComponents.splice(index, 1);
             setPortfolioComponents(updatedComponents);
             if (draggedComponent.type.name == 'TitleComponent'){
-                console.log("hola");
                 setPortfolioComponents([...portfolioComponents, <TitleComponent key={draggedComponent.key} componentData={componentData} pos={item.pos} />]);
             }
             else if (draggedComponent.type.name == 'ImgComponent'){
@@ -64,15 +63,13 @@ export function PrototypePortfolio({ componentData, imgData }) {
         <>
             <div className="h-screen w-3/4 max-w-proses mx-20 bg-white shadow-lg p-8 overflow-hidden overflow-ellipsis whitespace-nowrap" droppable="true" onDragOver={(evt => draggingOver(evt))} onDrop={(evt => onDrop(evt, 1))}>
                 {portfolioComponents.map((component, index) => (
-
-                    <div style={{top: `${component.props.pos[1]}px`, left: `${component.props.pos[0]}px`}} className="absolute group border-2 border-transparent hover:border-2 hover:border-pink-500"  id={component.key} key={component.key} draggable onDragStart={(evt) => startDrag(evt, component.key)}>
+                    <div className="group border-2 border-transparent hover:border-2 hover:border-pink-500"  id={component.key} key={component.key} draggable onDragStart={(evt) => startDrag(evt, component.key)}>
                         {component}
-                        
-                        <div className='relative right-[-16px] z-10 top-0 h-full flex flex-col items-center justify-center'>
-                            <button onClick={() => deleteComponent(index)} className='flex justify-center items-center opacity-0 group-hover:opacity-100 bg-red-600 rounded-full size-[30px] transition-all duration-150 hover:bg-red-700'>
+                        <div className='relative right-[-16px] z-10 h-0 flex flex-col items-end justify-end'>
+                            <button onClick={() => deleteComponent(index)} className='flex justify-center items-center opacity-0 group-hover:opacity-100 bg-red-600 rounded-full w-8 h-10 p-2 transition-all duration-150 hover:bg-red-700'>
                                 <span className="icon-[tabler--trash] text-white"></span>
                             </button>
-                            <button className='flex justify-center items-center mt-1 opacity-0 group-hover:opacity-100 bg-blue-600 rounded-full size-[30px] transition-all duration-150 hover:bg-blue-700'>
+                            <button className='flex justify-center items-center mt-1 opacity-0 group-hover:opacity-100 bg-blue-600 rounded-full w-8 h-10 p-2 transition-all duration-150 hover:bg-blue-700'>
                                 <span className="icon-[tabler--edit] text-white"></span>
                             </button>
                         </div>

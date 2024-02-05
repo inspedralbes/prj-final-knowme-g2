@@ -19,7 +19,7 @@ export function RightSideBar({ componentData, setComponentData, imgData, setImgD
                     <main className="m-10">
                         {type == 'text' ? <EditText /> : null}
                         {type == 'component' ? <EditComponent /> : null}
-                        {type == 'image' ? <EditImage imgData={imgData} setImgData={setImgData} /> : null}
+                        {type == 'image' ? <EditImage /> : null}
 
                     </main>
                 </div>
