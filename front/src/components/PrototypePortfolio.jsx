@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { TitleComponent } from "./PortfolioComponents/TitleComponent.jsx";
 import { ImgComponent } from "./PortfolioComponents/ImgComponent.jsx";
 export function PrototypePortfolio({ componentData, imgData }) {
@@ -63,7 +63,7 @@ export function PrototypePortfolio({ componentData, imgData }) {
                         </div>
                     </div>
                 ))}
-            </div >
+            </div>
         </>
     )
 }

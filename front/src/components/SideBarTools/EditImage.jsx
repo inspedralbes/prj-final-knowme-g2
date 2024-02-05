@@ -1,4 +1,4 @@
-export function OptImg({ imgData, setImgData }) {
+export function EditImage({ imgData, setImgData }) {
     let img = undefined;
     let styles = {
         borderRadius: imgData.radius + "px",
@@ -31,4 +31,4 @@ export function OptImg({ imgData, setImgData }) {
     )
 }
 
-export default OptImg
+export default EditImage

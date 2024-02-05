@@ -1,32 +1,28 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState } from 'react'
+import { useRightSideBarStore } from '../../store/rightSideBarStore.js'
 
-export function EditText({ componentData, setComponentData }) {
+export function EditText() {
+    const { content, setContent } = useRightSideBarStore(state => state);
     const sizes = ['Primary', 'Secondary', 'Tertiary'];
     let [size, setSize] = useState(0);
     let [dropDown, setDropDown] = useState(false);
-
-    function useOutsideAlerter(ref) {
-        useEffect(() => {
-            
-        }, [ref])
-    }
 
     return (
         <>
             <h2 className="text-2xl font-bold">Text</h2>
             <div className="relative mb-2">
                 <textarea
-                    className={"text-lg w-full overflow-hidden h-14 px-2 mt-2 resize-none focus:outline-none rounded-lg bg-[#313131] text-[#E8E9EA] border-2 border-[#E8E9EA] pr-10 " + (componentData.bold ? ' font-bold ' : '') + (componentData.italic ? 'italic ' : '')}
-                    defaultValue={componentData.text}
-                    onChange={(e) => setComponentData({ ...componentData, text: e.target.value })}
+                    className={"text-lg w-full overflow-hidden h-14 px-2 mt-2 resize-none focus:outline-none rounded-lg bg-[#313131] text-[#E8E9EA] border-2 border-[#E8E9EA] pr-10 " + (content?.bold ? ' font-bold ' : '') + (content?.italic ? 'italic ' : '')}
+                    defaultValue={content?.text}
+                    onChange={(e) => setContent({ ...content, text: e.target.value })}
                 ></textarea>
                 <span className="icon-[bi--stars] size-5 absolute top-8 right-1 text-white"></span>
             </div>
             <div className="flex items-center">
-                <button onClick={() => setComponentData({ ...componentData, bold: !componentData.bold })} className={"rounded-full bg-[#454545] w-24 h-10 min-w-10 transition-all duration-100 hover:bg-opacity-80 mr-2 flex justify-center items-center " + (componentData.bold ? 'bg-[#e0ffff] text-[#444444]' : '')}>
+                <button onClick={() => setContent({ ...content, bold: !content?.bold })} className={"rounded-full bg-[#454545] w-24 h-10 min-w-10 transition-all duration-100 hover:bg-opacity-80 mr-2 flex justify-center items-center " + (content?.bold ? 'bg-[#e0ffff] text-[#444444]' : '')}>
                     <span className="icon-[mingcute--bold-fill] text-xl"></span>
                 </button>
-                <button onClick={() => setComponentData({ ...componentData, italic: !componentData.italic })} className={"rounded-full bg-[#454545] w-24 h-10 min-w-10 transition-all duration-100 hover:bg-opacity-80 mr-2 flex justify-center items-center " + (componentData.italic ? 'bg-[#e0ffff] text-[#444444]' : '')}>
+                <button onClick={() => setContent({ ...content, italic: !content?.italic })} className={"rounded-full bg-[#454545] w-24 h-10 min-w-10 transition-all duration-100 hover:bg-opacity-80 mr-2 flex justify-center items-center " + (content?.italic ? 'bg-[#e0ffff] text-[#444444]' : '')}>
                     <span className="icon-[tabler--italic] text-xl"></span>
                 </button>
                 <p className='inline-block ml-6'>Size</p>
