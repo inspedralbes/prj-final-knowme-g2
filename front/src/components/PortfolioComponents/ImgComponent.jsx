@@ -1,10 +1,13 @@
 import { useState, useEffect } from 'react'
 
-export function ImgComponent({ imgData }) {
+export function ImgComponent({ imgData, pos }) {
 
     const styles = {
         border: `${imgData.border}px solid ${imgData.color}`,
-        borderRadius: `${imgData.radius}px`
+        borderRadius: `${imgData.radius}px`,
+        position: 'absolute',
+        top: `${pos[1]}px`,
+        left: `${pos[0]}px`,
     }
     return (
 

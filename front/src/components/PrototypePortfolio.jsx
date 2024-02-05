@@ -16,16 +16,17 @@ export function PrototypePortfolio({ componentData, imgData }) {
     const onDrop = (evt) => {
         const item = {
             id: evt.dataTransfer.getData("itemID"),
-            mode: evt.dataTransfer.getData("itemMode")
+            mode: evt.dataTransfer.getData("itemMode"),
+            pos : [evt.dataTransfer.getData("posX"), evt.dataTransfer.getData("posY")]
         }
 
         if (item.mode == "add") {
             switch (item.id) {
                 case "TitleComponent":
-                    setPortfolioComponents([...portfolioComponents, <TitleComponent key={portfolioComponents.length + 1} componentData={componentData} />]);
+                    setPortfolioComponents([...portfolioComponents, <TitleComponent key={portfolioComponents.length + 1} componentData={componentData} pos={item.pos} />]);
                     break;
                 case "ImgComponent":
-                    setPortfolioComponents([...portfolioComponents, <ImgComponent key={portfolioComponents.length + 1} imgData={imgData} />]);
+                    setPortfolioComponents([...portfolioComponents, <ImgComponent key={portfolioComponents.length + 1} imgData={imgData} pos={item.pos}   />]);
                     break;
             }
         } else if (item.mode == "move") {

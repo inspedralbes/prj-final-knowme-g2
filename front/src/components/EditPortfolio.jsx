@@ -10,7 +10,6 @@ export function EditPortfolio() {
     });
     let [imgData, setImgData] = useState({
         src: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_light_color_272x92dp.png',
-
         border: 1,
         radius: 5,
         color: '#000000'
