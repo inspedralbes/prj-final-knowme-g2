@@ -1,0 +1,1 @@
+L'id dels components estarà composat de tamany_nomGenèric_versió

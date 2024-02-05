@@ -1,0 +1,9 @@
+{
+    "id": 1,
+    "username": "basicUser",
+    "theme": "light",
+    "baseLanguage": "en",
+    "languages": ["en", "es"],
+    "tags": [],
+    "components": []
+}
