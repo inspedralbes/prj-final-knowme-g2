@@ -2,6 +2,8 @@ import { useState } from 'react'
 
 export function EditComponent({ componentData, setComponentData }) {
     const [draggedText, setDraggedText] = useState(null);
+    const [posX, setPosX] = useState(0);
+    const [posY, setPosY] = useState(0);
 
     const startDrag = (evt, id) => {
         evt.dataTransfer.setData("itemID", id);
@@ -12,7 +14,6 @@ export function EditComponent({ componentData, setComponentData }) {
     const startDragImg = (evt, id) => {
         evt.dataTransfer.setData("itemID", id);
         evt.dataTransfer.setData("itemMode", "add");
-
         setDraggedText(id);
     }
     return (
