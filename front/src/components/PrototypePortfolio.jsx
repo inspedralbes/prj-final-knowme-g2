@@ -68,7 +68,7 @@ export function PrototypePortfolio({ componentData, imgData }) {
         setPortfolioComponents(prevComponents => {
             const newComponents = [...prevComponents];
             const key = prevComponents.length + 1;
-            const component = <Component key={key} {...componentData} />;
+            const component = <Component key={key} id={gridIndex.toString() + componentIndex.toString()} {...componentData} />;
 
             if (newComponents[gridIndex][componentIndex].length != 0) {
                 newComponents[gridIndex][componentIndex].push(component);
@@ -78,7 +78,6 @@ export function PrototypePortfolio({ componentData, imgData }) {
 
             return newComponents;
         });
-        console.log("hola: " + gridIndex + ", " + componentIndex);
     };
 
     const deleteComponent = (gridIndex, componentIndex) => {
@@ -107,7 +106,7 @@ export function PrototypePortfolio({ componentData, imgData }) {
                                         )
                                     })}
                                     {component != "" ? (
-                                        <div className='relative right-[-16px] z-10 h-0 flex flex-col items-end justify-end'>
+                                        <div className='relative right-[-16px] z-10 h-0 flex flex-col items-end justify-start'>
                                             <button onClick={() => deleteComponent(gridIndex, componentIndex)} className='flex justify-center items-center opacity-0 group-hover:opacity-100 bg-red-600 rounded-full w-8 h-10 p-2 transition-all duration-150 hover:bg-red-700'>
                                                 <span className="icon-[tabler--trash] text-white"></span>
                                             </button>
@@ -116,6 +115,14 @@ export function PrototypePortfolio({ componentData, imgData }) {
                                             </button>
                                         </div>
                                     ) : (<></>)}
+                                    {component.map((element, elementIndex) => {
+                                        return (
+                                            <div key={elementIndex} className='w-full min-h-24 h-fit bg-green-500 border-2 border-transparent hover:border-pink-500'>
+                                                {element}
+                                            </div>
+                                        )
+                                    })}
+
                                 </div>
                             );
                         })}

@@ -4,7 +4,6 @@ import { useEffect } from 'react';
 export function TitleComponent({ id }) {
     const { setType, content, setContent } = useRightSideBarStore(state => state);
 
-    console.log(id);
     const handleClicked = () => {
         setType('text');
         try {
@@ -16,6 +15,8 @@ export function TitleComponent({ id }) {
     }
 
     useEffect(() => {
+        console.log(id.toString());
+
         content?.text == null ? setContent({ ...content, text: 'Hey, I\'m Loris Crisafo Norte', bold: true }) : null;
     }, []);
 
