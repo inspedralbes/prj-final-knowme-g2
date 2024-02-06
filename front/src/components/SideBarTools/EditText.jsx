@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRightSideBarStore } from '../../store/rightSideBarStore.js'
 
 export function EditText() {
@@ -6,6 +6,10 @@ export function EditText() {
     const sizes = ['Primary', 'Secondary', 'Tertiary'];
     let [size, setSize] = useState(0);
     let [dropDown, setDropDown] = useState(false);
+
+    useEffect(() => {
+        document.getElementById('editText').select();
+    }, []);
 
     return (
         <>
