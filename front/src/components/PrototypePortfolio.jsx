@@ -6,6 +6,7 @@ export function PrototypePortfolio({ componentData, imgData }) {
     const [portfolioComponents, setPortfolioComponents] = useState([[[], [], []], [[], [], []], [[], [], []]]);
     const [draggedOverIndex, setDraggedOverIndex] = useState(null);
 
+
     const draggingOver = (evt, gridIndex, componentIndex) => {
         evt.preventDefault();
         setDraggedOverIndex([gridIndex, componentIndex]);
