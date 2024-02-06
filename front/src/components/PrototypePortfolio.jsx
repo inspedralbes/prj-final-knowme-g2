@@ -61,7 +61,7 @@ export function PrototypePortfolio({ componentData, imgData }) {
 
     return (
         <>
-            <div className="h-screen w-3/4 max-w-proses mx-20 bg-white shadow-lg p-8 overflow-hidden overflow-ellipsis whitespace-nowrap" droppable="true" onDragOver={(evt => draggingOver(evt))} onDrop={(evt => onDrop(evt, 1))}>
+            <div className="h-screen w-3/4 max-w-proses mx-20 bg-white shadow-lg p-8 overflow-hidden overflow-ellipsis whitespace-nowrap overflow-y-visible" droppable="true" onDragOver={(evt => draggingOver(evt))} onDrop={(evt => onDrop(evt, 1))}>
                 {portfolioComponents.map((component, index) => (
                     <div className="group border-2 border-transparent hover:border-2 hover:border-pink-500"  id={component.key} key={component.key} draggable onDragStart={(evt) => startDrag(evt, component.key)}>
                         {component}
