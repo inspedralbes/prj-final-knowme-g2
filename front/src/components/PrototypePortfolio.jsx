@@ -62,7 +62,7 @@ export function PrototypePortfolio({ componentData, imgData }) {
 
     return (
         <>
-            <div className="h-screen w-3/4 max-w-proses mx-20 bg-white shadow-lg p-8 overflow-hidden overflow-ellipsis whitespace-nowrap">
+            <div className="h-screen w-3/4 max-w-proses mx-20 bg-white shadow-lg p-8 overflow-hidden overflow-ellipsis overflow-y-visible whitespace-nowrap">
                 {portfolioComponents.map((gridComponent, gridIndex) => (
                     <div key={gridIndex} className='w-full h-24 bg-red-500 grid grid-cols-3'>
                         {gridComponent.map((component, componentIndex) => {
