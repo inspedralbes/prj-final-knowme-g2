@@ -4,6 +4,7 @@ import AvatarEditor from 'react-avatar-editor'
 
 export function EditImage() {
     const { content, setContent } = useRightSideBarStore(state => state);
+    const [img, setImg] = useState(null);
     let imgUpload = useRef(null);
     let editor = useRef(null);    
     let imgPreview = useRef(null);
@@ -22,18 +23,20 @@ export function EditImage() {
                     output.src = URL.createObjectURL(event.target.files[0])
                     console.log(output.src);
                     imgUpload.current = output.src;
+                    setImg(imgUpload.current);
+                    setContent({ ...content, radius: content.radius })
                 }} className="top-0 left-0 rounded-full opacity-0 bg-slate-500 absolute w-full hover:cursor-pointer" type="file" name="img" id="imatge" accept="image/*" />
             </button>
             <AvatarEditor
                 ref={editor}
-                image={imgUpload.current}
+                image={img}
                 width={250}
                 height={250}
                 border={50}
                 color={[255, 255, 255, 0.6]} // RGBA
                 scale={1.2}
                 rotate={0}
-                
+
             />
 
              <button onClick={() => {
