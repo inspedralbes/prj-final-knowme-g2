@@ -4,7 +4,7 @@ import { CellComponent } from "./CellComponent.jsx";
 import { useRightSideBarStore } from '../store/rightSideBarStore.js'
 
 
-export function PrototypePortfolio() {
+export function PrototypePortfolio({ componentData, imgData }) {
     const [portfolioComponents, setPortfolioComponents] = useState([["", "", ""]]);
     const [draggedOverIndex, setDraggedOverIndex] = useState(null);
     const { setType } = useRightSideBarStore(state => state);
@@ -38,7 +38,7 @@ export function PrototypePortfolio() {
                 case "TitleComponent":
                     setPortfolioComponents(prevComponents => {
                         const newComponents = [...prevComponents];
-                        newComponents[gridIndex][componentIndex] = <TitleComponent key={prevComponents.length + 1} id={componentIndex} />;
+                        newComponents[gridIndex][componentIndex] = <TitleComponent key={prevComponents.length + 1} componentData={componentData} />;
                         return newComponents;
                     });
                     console.log("hola: " + gridIndex + ", " + componentIndex);
@@ -46,7 +46,7 @@ export function PrototypePortfolio() {
                 case "ImgComponent":
                     setPortfolioComponents(prevComponents => {
                         const newComponents = [...prevComponents];
-                        newComponents[gridIndex][componentIndex] = <ImgComponent key={prevComponents.length + 1} />;
+                        newComponents[gridIndex][componentIndex] = <ImgComponent key={prevComponents.length + 1} imgData={imgData} />;
                         return newComponents;
                     });
                     break;
@@ -59,20 +59,42 @@ export function PrototypePortfolio() {
             setPortfolioComponents(prevComponents => {
                 const newComponents = [...prevComponents];
                 const draggedComponent = newComponents[draggedItemGridIndex][draggedItemComponentIndex];
-                const otherComponent = newComponents[gridIndex][componentIndex];
-
-                newComponents[draggedItemGridIndex][draggedItemComponentIndex] = otherComponent;
-                newComponents[gridIndex][componentIndex] = draggedComponent;
+                newComponents[draggedItemGridIndex][draggedItemComponentIndex] = [];
+                if (newComponents[gridIndex][componentIndex].length == 0) {
+                    newComponents[gridIndex][componentIndex] = draggedComponent;
+                } else {
+                    newComponents[gridIndex][componentIndex].push(draggedComponent);
+                }
 
                 return newComponents;
             });
         }
     }
 
+    const updatePortfolioComponent = (Component, componentData, gridIndex, componentIndex) => {
+        setPortfolioComponents(prevComponents => {
+            const newComponents = [...prevComponents];
+            const key = prevComponents.length + 1;
+            const component = <Component key={key} {...componentData} />;
+
+            console.log(newComponents[gridIndex][componentIndex]);
+            console.log(newComponents[gridIndex][componentIndex].length);
+
+            if (newComponents[gridIndex][componentIndex].length != 0) {
+                newComponents[gridIndex][componentIndex].push(component);
+            } else {
+                newComponents[gridIndex][componentIndex] = [component];
+            }
+
+            return newComponents;
+        });
+        console.log("hola: " + gridIndex + ", " + componentIndex);
+    };
+
     const deleteComponent = (gridIndex, componentIndex) => {
         setPortfolioComponents(prevComponents => {
             const newComponents = [...prevComponents];
-            newComponents[gridIndex][componentIndex] = "";
+            newComponents[gridIndex][componentIndex] = [];
             return newComponents;
         });
         setType('component')
@@ -83,10 +105,10 @@ export function PrototypePortfolio() {
         <>
             <div className="h-screen w-3/4 max-w-proses mx-20 bg-white shadow-lg p-8 overflow-hidden overflow-ellipsis overflow-y-visible whitespace-nowrap">
                 {portfolioComponents.map((gridComponent, gridIndex) => (
-                    <div key={gridIndex} className='w-full h-24 bg-red-500 grid grid-cols-3'>
+                    <div key={gridIndex} className='w-full min-h-40 h-fit grid grid-cols-3'>
                         {gridComponent.map((component, componentIndex) => {
                             return (
-                                <div className={`group ${draggedOverIndex && draggedOverIndex[0] == gridIndex && draggedOverIndex[1] == componentIndex ? 'border-2 border-pink-500' : ''}`} droppable="true" draggable key={componentIndex} onDragOver={(evt => draggingOver(evt, gridIndex, componentIndex))} onDragLeave={(evt => draggingLeave(evt))} onDrop={(evt => onDrop(evt, gridIndex, componentIndex))} onDragStart={(evt) => startDrag(evt, gridIndex, componentIndex)}>
+                                <div className={`group hover:border-2 hover:border-pink-500 ${draggedOverIndex && draggedOverIndex[0] == gridIndex && draggedOverIndex[1] == componentIndex ? 'border-2 border-pink-500' : ''}`} droppable="true" draggable key={componentIndex} onDragOver={(evt => draggingOver(evt, gridIndex, componentIndex))} onDragLeave={(evt => draggingLeave(evt))} onDrop={(evt => onDrop(evt, gridIndex, componentIndex))} onDragStart={(evt) => startDrag(evt, gridIndex, componentIndex)}>
                                     <CellComponent key={componentIndex} componentData={component} />
                                     {component != "" ? (
                                         <div className='relative right-[-16px] z-10 h-0 flex flex-col items-end justify-end'>
