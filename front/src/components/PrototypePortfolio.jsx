@@ -18,37 +18,45 @@ export function PrototypePortfolio({ componentData, imgData }) {
         const item = {
             id: evt.dataTransfer.getData("itemID"),
             mode: evt.dataTransfer.getData("itemMode"),
-            posX: componentIndex,
-            posY: gridIndex
         }
 
         if (item.mode == "add") {
             switch (item.id) {
                 case "TitleComponent":
-                    setPortfolioComponents([...portfolioComponents, <TitleComponent key={portfolioComponents.length + 1} componentData={componentData} pos={item.pos} />]);
+                    setPortfolioComponents(prevComponents => {
+                        const newComponents = [...prevComponents];
+                        newComponents[gridIndex][componentIndex] = <TitleComponent key={prevComponents.length + 1} componentData={componentData} />;
+                        return newComponents;
+                    });
+                    console.log("hola: " + gridIndex + ", " + componentIndex);
                     break;
                 case "ImgComponent":
-                    setPortfolioComponents([...portfolioComponents, <ImgComponent key={portfolioComponents.length + 1} imgData={imgData} pos={item.pos} />]);
+                    setPortfolioComponents(prevComponents => {
+                        const newComponents = [...prevComponents];
+                        newComponents[gridIndex][componentIndex] = <ImgComponent key={prevComponents.length + 1} imgData={imgData} />;
+                        return newComponents;
+                    });
                     break;
             }
-        } else if (item.mode == "move") {
-            const dropIndex = evt.target.parentNode.parentNode.id;
-
-            const updatedComponents = portfolioComponents;
-            const draggedComponent = updatedComponents.find((component, index) => component.key == item.id);
-            let index = updatedComponents.indexOf(draggedComponent);
-
-            // Remove component from updatedComponents if key matches item.id
-            updatedComponents.splice(index, 1);
-            setPortfolioComponents(updatedComponents);
-            if (draggedComponent.type.name == 'TitleComponent') {
-                setPortfolioComponents([...portfolioComponents, <TitleComponent key={draggedComponent.key} componentData={componentData} pos={item.pos} />]);
-            }
-            else if (draggedComponent.type.name == 'ImgComponent') {
-                setPortfolioComponents([...portfolioComponents, <ImgComponent key={draggedComponent.key} imgData={imgData} pos={item.pos} />]);
-            }
-
         }
+        // else if (item.mode == "move") {
+        //     const dropIndex = evt.target.parentNode.parentNode.id;
+
+        //     const updatedComponents = portfolioComponents;
+        //     const draggedComponent = updatedComponents.find((component, index) => component.key == item.id);
+        //     let index = updatedComponents.indexOf(draggedComponent);
+
+        //     // Remove component from updatedComponents if key matches item.id
+        //     updatedComponents.splice(index, 1);
+        //     setPortfolioComponents(updatedComponents);
+        //     if (draggedComponent.type.name == 'TitleComponent') {
+        //         setPortfolioComponents([...portfolioComponents, <TitleComponent key={draggedComponent.key} componentData={componentData} pos={item.pos} />]);
+        //     }
+        //     else if (draggedComponent.type.name == 'ImgComponent') {
+        //         setPortfolioComponents([...portfolioComponents, <ImgComponent key={draggedComponent.key} imgData={imgData} pos={item.pos} />]);
+        //     }
+
+        // }
     }
 
     const deleteComponent = (index) => {
@@ -67,7 +75,9 @@ export function PrototypePortfolio({ componentData, imgData }) {
                     <div key={gridIndex} className='w-full h-24 bg-red-500 grid grid-cols-3'>
                         {gridComponent.map((component, componentIndex) => {
                             return (
-                                <CellComponent key={componentIndex} componentData={component} droppable="true" onDragOver={(evt => draggingOver(evt))} onDrop={(evt => onDrop(evt, gridIndex, gridComponent))} />
+                                <div droppable="true" key={componentIndex} onDragOver={(evt => draggingOver(evt))} onDrop={(evt => onDrop(evt, gridIndex, componentIndex))}>
+                                    <CellComponent key={componentIndex} componentData={component} />
+                                </div>
                             );
                         })}
                     </div>
