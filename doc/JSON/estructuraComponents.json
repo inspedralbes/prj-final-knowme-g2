@@ -30,7 +30,13 @@
             "complexity": 2,
             "variant": 1,
             "content": {
-                "text": "About me"
+                "title": {
+                    "componentId": 20,
+                    "text": "About me",
+                    "font-size": "tertiary",
+                    "italic": false,
+                    "bold": false
+                }
             }
         },
         {
@@ -40,42 +46,41 @@
             "complexity": 2,
             "variant": 2,
             "content": {
-                "icon": "icon-[bytesize--portfolio]",
-                "text": "Experiència"
+                "title": {
+                    "componentId": 20,
+                    "text": "Experiència",
+                    "font-size": "tertiary",
+                    "italic": false,
+                    "bold": false
+                },
+                "icon": {
+                    "componentId": 24,
+                    "icon": "classList de la icona"
+                }
             }
         },
         {
             "id": 4,
             "size": 3,
-            "type": "separator",
-            "complexity": 2,
-            "variant": 2,
-            "content": {
-                "icon": "icon-[ri--code-s-slash-fill]",
-                "text": "Projectes"
-            }
-        },
-        {
-            "id": 5,
-            "size": 3,
-            "type": "separator",
-            "complexity": 2,
-            "variant": 2,
-            "content": {
-                "icon": "icon-[material-symbols--mail-outline]",
-                "text": "Contacta'm"
-            }
-        },
-        {
-            "id": 6,
-            "size": 3,
             "type": "sobre_mi",
             "complexity": 2,
             "variant": 1,
             "content": {
-                "icon": "icon-[material-symbols--person-check-outline]",
-                "text": "Lorem ipsum...",
-                "picture": "Route to pic"
+                "icon": {
+                    "componentId": 23,
+                    "icon": "icon-[material-symbols--person-check-outline]"
+                },
+                "text": {
+                    "componentId": 21,
+                    "text": "Lorem ipsum...",
+                    "font-size": "tertiary",
+                    "italic": false,
+                    "bold": false
+                },
+                "picture": {
+                    "componentId": 22,
+                    "picture": "Route to pic"
+                }
             }
         },
         {
@@ -159,9 +164,9 @@
                             "italic": false,
                             "bold": false
                         },
-                        "picture": {
-                            "componentId": 22,
-                            "picture": "Route to pic"
+                        "icon": {
+                            "componentId": 23,
+                            "icon": "classList de la icona de la tecnologia"
                         }
                     }
                 ]
@@ -211,7 +216,7 @@
                 },
                 "Tecnologies": [
                     {
-                        "componentId": 23,
+                        "componentId": 25,
                         "text": "Nom de la tecnologia",
                         "font-size": "tertiary",
                         "italic": false,
@@ -290,13 +295,7 @@
             "complexity": 1,
             "variant": 1,
             "content": {
-                "text": "Nom de la tecnologia",
-                "font-size": "tertiary",
-                "italic": false,
-                "bold": false,
-                "icon": "classList de la icona de la tecnologia",
-                "primaryColor": "FFFFFF",
-                "secondaryColor": "000000"
+                "icon": "classList de la icona del link"
             }
         },
         {
@@ -304,10 +303,26 @@
             "size": 0,
             "type": "icon",
             "complexity": 1,
-            "variant": 1,
+            "variant": 2,
             "content": {
                 "icon": "classList de la icona del link",
                 "link": "Linked resource"
+            }
+        },
+        {
+            "id": 25,
+            "size": 0,
+            "type": "icon",
+            "complexity": 1,
+            "variant": 3,
+            "content": {
+                "text": "Nom de la tecnologia",
+                "font-size": "tertiary",
+                "italic": false,
+                "bold": false,
+                "icon": "classList de la icona de la tecnologia",
+                "primaryColor": "FFFFFF",
+                "secondaryColor": "000000"
             }
         }
     ]
