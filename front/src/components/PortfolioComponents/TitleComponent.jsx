@@ -1,18 +1,14 @@
 import { useRightSideBarStore } from '../../store/rightSideBarStore.js'
 
-export function TitleComponent({pos}) {
+export function TitleComponent() {
     const { setType, content, setContent } = useRightSideBarStore(state => state);
 
     content == null ? setContent({ ...content, text: 'Hey, I\'m Loris Crisafo Norte', bold: true }) : null;
 
     const handleClick = () => {
-        setType('text'); 
+        setType('text');
     }
 
-    const styles = {
-        left: `${pos[0]}px`,
-        top: `${pos[1]}px`,
-    }
     return (
         <>
             <div onClick={() => { handleClick() }} className="w-2/3 min-h-12">

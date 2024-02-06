@@ -1,24 +1,25 @@
 import { useState } from 'react';
 import { TitleComponent } from "./PortfolioComponents/TitleComponent.jsx";
-import { ImgComponent } from "./PortfolioComponents/ImgComponent.jsx";
+import { CellComponent } from "./CellComponent.jsx";
+
 export function PrototypePortfolio({ componentData, imgData }) {
-    const [portfolioComponents, setPortfolioComponents] = useState([]);
+    const [portfolioComponents, setPortfolioComponents] = useState([["", "", ""]]);
 
     const draggingOver = (evt) => {
         evt.preventDefault();
     }
 
-    const startDrag = (evt, key) => {
-        evt.dataTransfer.setData("itemID", key);
-        evt.dataTransfer.setData("itemMode", "move");
-    }
+    // const startDrag = (evt, key) => {
+    //     evt.dataTransfer.setData("itemID", key);
+    //     evt.dataTransfer.setData("itemMode", "move");
+    // }
 
-    const onDrop = (evt) => {
-
+    const onDrop = (evt, gridIndex, componentIndex) => {
         const item = {
             id: evt.dataTransfer.getData("itemID"),
             mode: evt.dataTransfer.getData("itemMode"),
-            pos : [evt.clientX, evt.clientY]
+            posX: componentIndex,
+            posY: gridIndex
         }
 
         if (item.mode == "add") {
@@ -27,7 +28,7 @@ export function PrototypePortfolio({ componentData, imgData }) {
                     setPortfolioComponents([...portfolioComponents, <TitleComponent key={portfolioComponents.length + 1} componentData={componentData} pos={item.pos} />]);
                     break;
                 case "ImgComponent":
-                    setPortfolioComponents([...portfolioComponents, <ImgComponent key={portfolioComponents.length + 1} imgData={imgData} pos={item.pos}   />]);
+                    setPortfolioComponents([...portfolioComponents, <ImgComponent key={portfolioComponents.length + 1} imgData={imgData} pos={item.pos} />]);
                     break;
             }
         } else if (item.mode == "move") {
@@ -36,15 +37,15 @@ export function PrototypePortfolio({ componentData, imgData }) {
             const updatedComponents = portfolioComponents;
             const draggedComponent = updatedComponents.find((component, index) => component.key == item.id);
             let index = updatedComponents.indexOf(draggedComponent);
-       
+
             // Remove component from updatedComponents if key matches item.id
             updatedComponents.splice(index, 1);
             setPortfolioComponents(updatedComponents);
-            if (draggedComponent.type.name == 'TitleComponent'){
+            if (draggedComponent.type.name == 'TitleComponent') {
                 setPortfolioComponents([...portfolioComponents, <TitleComponent key={draggedComponent.key} componentData={componentData} pos={item.pos} />]);
             }
-            else if (draggedComponent.type.name == 'ImgComponent'){
-                setPortfolioComponents([...portfolioComponents, <ImgComponent key={draggedComponent.key} imgData={imgData} pos={item.pos}   />]);
+            else if (draggedComponent.type.name == 'ImgComponent') {
+                setPortfolioComponents([...portfolioComponents, <ImgComponent key={draggedComponent.key} imgData={imgData} pos={item.pos} />]);
             }
 
         }
@@ -61,20 +62,17 @@ export function PrototypePortfolio({ componentData, imgData }) {
 
     return (
         <>
-            <div className="h-screen w-3/4 max-w-proses mx-20 bg-white shadow-lg p-8 overflow-hidden overflow-ellipsis whitespace-nowrap" droppable="true" onDragOver={(evt => draggingOver(evt))} onDrop={(evt => onDrop(evt, 1))}>
-                {portfolioComponents.map((component, index) => (
-                    <div className="group border-2 border-transparent hover:border-2 hover:border-pink-500"  id={component.key} key={component.key} draggable onDragStart={(evt) => startDrag(evt, component.key)}>
-                        {component}
-                        <div className='relative right-[-16px] z-10 h-0 flex flex-col items-end justify-end'>
-                            <button onClick={() => deleteComponent(index)} className='flex justify-center items-center opacity-0 group-hover:opacity-100 bg-red-600 rounded-full w-8 h-10 p-2 transition-all duration-150 hover:bg-red-700'>
-                                <span className="icon-[tabler--trash] text-white"></span>
-                            </button>
-                            <button className='flex justify-center items-center mt-1 opacity-0 group-hover:opacity-100 bg-blue-600 rounded-full w-8 h-10 p-2 transition-all duration-150 hover:bg-blue-700'>
-                                <span className="icon-[tabler--edit] text-white"></span>
-                            </button>
-                        </div>
+            <div className="h-screen w-3/4 max-w-proses mx-20 bg-white shadow-lg p-8 overflow-hidden overflow-ellipsis whitespace-nowrap">
+                {portfolioComponents.map((gridComponent, gridIndex) => (
+                    <div key={gridIndex} className='w-full h-24 bg-red-500 grid grid-cols-3'>
+                        {gridComponent.map((component, componentIndex) => {
+                            return (
+                                <CellComponent key={componentIndex} componentData={component} droppable="true" onDragOver={(evt => draggingOver(evt))} onDrop={(evt => onDrop(evt, gridIndex, gridComponent))} />
+                            );
+                        })}
                     </div>
                 ))}
+
             </div>
         </>
     )
