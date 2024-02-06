@@ -9,6 +9,7 @@ export function PrototypePortfolio({ componentData, imgData }) {
     const [draggedOverIndex, setDraggedOverIndex] = useState(null);
     const { setType } = useRightSideBarStore(state => state);
 
+
     const draggingOver = (evt, gridIndex, componentIndex) => {
         evt.preventDefault();
         setDraggedOverIndex([gridIndex, componentIndex]);
