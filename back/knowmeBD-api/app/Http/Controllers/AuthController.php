@@ -72,9 +72,32 @@ class AuthController extends Controller
         ];
     }
 
-    public function update(Request $request, $id){
-        $user = UserApi::find($id);
-        $user->update($request->all());
+    public function updatePersonalData(Request $request, $id){
+
+        $fields = $request->validate([
+            'user' => 'string',
+            'name' => 'string',
+            'surnames' => 'string',
+        ]);
+
+        $user = UserApi::update([
+            'user'=> $fields['user'],
+            'name'=> $fields['name'],
+            'surnames'=> $fields['surnames'],
+            'email'=> $fields['email'],
+            'password'=> bcrypt($fields['password'])
+        ]);
+
+        // $user = UserApi::find($id);
+        // $user->update($request->all());
         return $user;
+    }
+
+    public function deleteUser(Request $request, $id){
+        $user = UserApi::find($id);
+        $user->delete();
+        return  [
+            'message'=> 'User deleted!'
+        ];
     }
 }
