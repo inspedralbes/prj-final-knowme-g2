@@ -1,10 +1,13 @@
 import { useState } from 'react';
 import { TitleComponent } from "./PortfolioComponents/TitleComponent.jsx";
 import { CellComponent } from "./CellComponent.jsx";
+import { useRightSideBarStore } from '../store/rightSideBarStore.js'
 
-export function PrototypePortfolio({ componentData, imgData }) {
+
+export function PrototypePortfolio() {
     const [portfolioComponents, setPortfolioComponents] = useState([["", "", ""]]);
     const [draggedOverIndex, setDraggedOverIndex] = useState(null);
+    const { setType } = useRightSideBarStore(state => state);
 
     const draggingOver = (evt, gridIndex, componentIndex) => {
         evt.preventDefault();
@@ -35,7 +38,7 @@ export function PrototypePortfolio({ componentData, imgData }) {
                 case "TitleComponent":
                     setPortfolioComponents(prevComponents => {
                         const newComponents = [...prevComponents];
-                        newComponents[gridIndex][componentIndex] = <TitleComponent key={prevComponents.length + 1} componentData={componentData} />;
+                        newComponents[gridIndex][componentIndex] = <TitleComponent key={prevComponents.length + 1} id={componentIndex} />;
                         return newComponents;
                     });
                     console.log("hola: " + gridIndex + ", " + componentIndex);
@@ -43,7 +46,7 @@ export function PrototypePortfolio({ componentData, imgData }) {
                 case "ImgComponent":
                     setPortfolioComponents(prevComponents => {
                         const newComponents = [...prevComponents];
-                        newComponents[gridIndex][componentIndex] = <ImgComponent key={prevComponents.length + 1} imgData={imgData} />;
+                        newComponents[gridIndex][componentIndex] = <ImgComponent key={prevComponents.length + 1} />;
                         return newComponents;
                     });
                     break;
@@ -72,6 +75,8 @@ export function PrototypePortfolio({ componentData, imgData }) {
             newComponents[gridIndex][componentIndex] = "";
             return newComponents;
         });
+        setType('component')
+
     }
 
     return (
@@ -81,7 +86,7 @@ export function PrototypePortfolio({ componentData, imgData }) {
                     <div key={gridIndex} className='w-full h-24 bg-red-500 grid grid-cols-3'>
                         {gridComponent.map((component, componentIndex) => {
                             return (
-                                <div className={`group hover:border-2 hover:border-pink-500 ${draggedOverIndex && draggedOverIndex[0] == gridIndex && draggedOverIndex[1] == componentIndex ? 'border-2 border-pink-500' : ''}`} droppable="true" draggable key={componentIndex} onDragOver={(evt => draggingOver(evt, gridIndex, componentIndex))} onDragLeave={(evt => draggingLeave(evt))} onDrop={(evt => onDrop(evt, gridIndex, componentIndex))} onDragStart={(evt) => startDrag(evt, gridIndex, componentIndex)}>
+                                <div className={`group ${draggedOverIndex && draggedOverIndex[0] == gridIndex && draggedOverIndex[1] == componentIndex ? 'border-2 border-pink-500' : ''}`} droppable="true" draggable key={componentIndex} onDragOver={(evt => draggingOver(evt, gridIndex, componentIndex))} onDragLeave={(evt => draggingLeave(evt))} onDrop={(evt => onDrop(evt, gridIndex, componentIndex))} onDragStart={(evt) => startDrag(evt, gridIndex, componentIndex)}>
                                     <CellComponent key={componentIndex} componentData={component} />
                                     {component != "" ? (
                                         <div className='relative right-[-16px] z-10 h-0 flex flex-col items-end justify-end'>

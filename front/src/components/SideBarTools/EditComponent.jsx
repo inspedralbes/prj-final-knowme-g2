@@ -1,5 +1,3 @@
-import { useState } from 'react'
-
 export function EditComponent() {
     const startDrag = (evt, id) => {
         evt.dataTransfer.setData("itemID", id);
