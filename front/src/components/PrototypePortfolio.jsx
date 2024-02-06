@@ -9,10 +9,11 @@ export function PrototypePortfolio({ componentData, imgData }) {
         evt.preventDefault();
     }
 
-    // const startDrag = (evt, key) => {
-    //     evt.dataTransfer.setData("itemID", key);
-    //     evt.dataTransfer.setData("itemMode", "move");
-    // }
+    const startDrag = (evt, gridIndex, componentIndex) => {
+        evt.dataTransfer.setData("itemMode", "move");
+        evt.dataTransfer.setData("gridIndex", gridIndex);
+        evt.dataTransfer.setData("componentIndex", componentIndex);
+    }
 
     const onDrop = (evt, gridIndex, componentIndex) => {
         const item = {
@@ -38,25 +39,22 @@ export function PrototypePortfolio({ componentData, imgData }) {
                     });
                     break;
             }
+        } else if (item.mode === "move") {
+            const draggedItemGridIndex = parseInt(evt.dataTransfer.getData("gridIndex"));
+            const draggedItemComponentIndex = parseInt(evt.dataTransfer.getData("componentIndex"));
+            console.log(draggedItemComponentIndex, " ", draggedItemGridIndex);
+
+            setPortfolioComponents(prevComponents => {
+                const newComponents = [...prevComponents];
+                const draggedComponent = newComponents[draggedItemGridIndex][draggedItemComponentIndex];
+                const otherComponent = newComponents[gridIndex][componentIndex];
+
+                newComponents[draggedItemGridIndex][draggedItemComponentIndex] = otherComponent;
+                newComponents[gridIndex][componentIndex] = draggedComponent;
+
+                return newComponents;
+            });
         }
-        // else if (item.mode == "move") {
-        //     const dropIndex = evt.target.parentNode.parentNode.id;
-
-        //     const updatedComponents = portfolioComponents;
-        //     const draggedComponent = updatedComponents.find((component, index) => component.key == item.id);
-        //     let index = updatedComponents.indexOf(draggedComponent);
-
-        //     // Remove component from updatedComponents if key matches item.id
-        //     updatedComponents.splice(index, 1);
-        //     setPortfolioComponents(updatedComponents);
-        //     if (draggedComponent.type.name == 'TitleComponent') {
-        //         setPortfolioComponents([...portfolioComponents, <TitleComponent key={draggedComponent.key} componentData={componentData} pos={item.pos} />]);
-        //     }
-        //     else if (draggedComponent.type.name == 'ImgComponent') {
-        //         setPortfolioComponents([...portfolioComponents, <ImgComponent key={draggedComponent.key} imgData={imgData} pos={item.pos} />]);
-        //     }
-
-        // }
     }
 
     const deleteComponent = (index) => {
@@ -75,7 +73,7 @@ export function PrototypePortfolio({ componentData, imgData }) {
                     <div key={gridIndex} className='w-full h-24 bg-red-500 grid grid-cols-3'>
                         {gridComponent.map((component, componentIndex) => {
                             return (
-                                <div droppable="true" key={componentIndex} onDragOver={(evt => draggingOver(evt))} onDrop={(evt => onDrop(evt, gridIndex, componentIndex))}>
+                                <div droppable="true" draggable key={componentIndex} onDragOver={(evt => draggingOver(evt))} onDrop={(evt => onDrop(evt, gridIndex, componentIndex))} onDragStart={(evt) => startDrag(evt, gridIndex, componentIndex)}>
                                     <CellComponent key={componentIndex} componentData={component} />
                                 </div>
                             );
