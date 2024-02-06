@@ -12,7 +12,7 @@ export function EditText() {
     }, []);
 
     return (
-        <>
+        <div className='transition-all duration-200'>
             <h2 className="text-2xl font-bold">Text</h2>
             <div className="relative mb-2">
                 <textarea
@@ -53,7 +53,7 @@ export function EditText() {
             </div>
             <hr className='h-0.5 my-5 bg-[#4e4e4e] border-0'></hr>
 
-        </>
+        </div>
     )
 }
 

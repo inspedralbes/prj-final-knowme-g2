@@ -17,7 +17,7 @@ export function EditImage() {
                     let output = document.getElementById('preview');
                     output.src = URL.createObjectURL(event.target.files[0])
                     setContent({ ...content, src: output.src })
-                }} className="top-0 left-0 rounded-full opacity-0 bg-slate-500 absolute w-full hover:cursor-pointer" type="file" name="img" id="imatge" accept="image/*" />
+                }} className="top-0 left-0 rounded-full opacity-0 bg-slate-500 absolute size-full hover:cursor-pointer" type="file" name="img" id="imatge" accept="image/*" />
             </button>
 
             <div className="flex items-center justify-center gap-4 mb-4 mt-4">
