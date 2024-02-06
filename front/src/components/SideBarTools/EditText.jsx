@@ -12,6 +12,7 @@ export function EditText() {
             <h2 className="text-2xl font-bold">Text</h2>
             <div className="relative mb-2">
                 <textarea
+                    id='editText'
                     className={"text-lg w-full overflow-hidden h-14 px-2 mt-2 resize-none focus:outline-none rounded-lg bg-[#313131] text-[#E8E9EA] border-2 border-[#E8E9EA] pr-10 " + (content?.bold ? ' font-bold ' : '') + (content?.italic ? 'italic ' : '')}
                     defaultValue={content?.text}
                     onChange={(e) => setContent({ ...content, text: e.target.value })}

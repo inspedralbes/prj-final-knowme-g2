@@ -1,6 +1,5 @@
 import { useRightSideBarStore } from '../../store/rightSideBarStore.js'
 
-
 export function EditImage() {
     const { content, setContent } = useRightSideBarStore(state => state);
 
