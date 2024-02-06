@@ -4,11 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Domain;
+use App\Models\UserApi;
+use Illuminate\Support\Facades\Auth;
 
 class DomainController extends Controller
 {
     
     public function create(Request $request){
+        $user = auth()->user();
+
         $fields = $request->validate([
             'webURL' => 'required|string',
             'content' => 'required|string',
@@ -17,6 +21,7 @@ class DomainController extends Controller
         ]);
 
         $domain = Domain::create([
+            'id'=> $user->id,
             'webURL'=> $fields['webURL'],
             'content'=> $fields['content'],
             'category'=> $fields['category'],
@@ -24,7 +29,8 @@ class DomainController extends Controller
         ]);
 
         $response = [
-            'domain' => $domain
+            'domain' => $domain,
+            'user' => $user
         ];
 
         return response($response, 201);
