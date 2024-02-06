@@ -1,9 +1,12 @@
+import { useState, useRef } from 'react'
 import { useRightSideBarStore } from '../../store/rightSideBarStore.js'
-
+import AvatarEditor from 'react-avatar-editor'
 
 export function EditImage() {
     const { content, setContent } = useRightSideBarStore(state => state);
-
+    let imgUpload = useRef(null);
+    let editor = useRef(null);    
+    let imgPreview = useRef(null);
     const styles = {
         border: `${content?.border}px solid black`,
         borderRadius: `${content?.radius}%`,
@@ -17,9 +20,32 @@ export function EditImage() {
                 <input onInput={(event) => {
                     let output = document.getElementById('preview');
                     output.src = URL.createObjectURL(event.target.files[0])
-                    setContent({ ...content, src: output.src })
+                    console.log(output.src);
+                    imgUpload.current = output.src;
                 }} className="top-0 left-0 rounded-full opacity-0 bg-slate-500 absolute w-full hover:cursor-pointer" type="file" name="img" id="imatge" accept="image/*" />
             </button>
+            <AvatarEditor
+                ref={editor}
+                image={imgUpload.current}
+                width={250}
+                height={250}
+                border={50}
+                color={[255, 255, 255, 0.6]} // RGBA
+                scale={1.2}
+                rotate={0}
+                
+            />
+
+             <button onClick={() => {
+                    
+                        const canvas = editor.current.getImage();
+                        imgPreview.current = canvas.toDataURL();
+                        console.log(imgPreview.current);
+
+                        setContent({ ...content, src: imgPreview.current })
+                }
+            }>Save</button>
+            <img src={ imgPreview.current } alt="preview" />
 
             <div className="flex items-center justify-center gap-4 mb-4 mt-4">
                 <label htmlFor="radius" className="text-lg font-bold text-gray-100">Radius</label>
