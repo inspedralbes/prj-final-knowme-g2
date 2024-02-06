@@ -14,9 +14,10 @@ use App\Http\Controllers\DomainController;
 //protected routes
 Route::group(['middleware' => ['auth:sanctum']], function () {
     //users
-    // Route::put('/users/{id}', [AuthController::class, 'update']);
-    // Route::delete('/users/{id}', [AuthController::class, 'delete']);
     Route::post('/logout', [AuthController::class,'logout']);
+    Route::put('/users/update', [AuthController::class, 'update']);
+    Route::put('/users/changePassword', [AuthController::class, 'changePassword']);
+    Route::delete('/users/delete', [AuthController::class, 'delete']);
     //domains
     // Route::get('/users/{id}/domains', [DomainController::class, 'show']);
     // Route::post('/users/{id}/domains', [DomainController::class, 'create']);

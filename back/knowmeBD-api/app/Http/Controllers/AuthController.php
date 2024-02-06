@@ -72,7 +72,7 @@ class AuthController extends Controller
         ];
     }
 
-    public function updatePersonalData(Request $request, $id){
+    public function update(Request $request){
 
         $fields = $request->validate([
             'user' => 'string',
@@ -80,22 +80,45 @@ class AuthController extends Controller
             'surnames' => 'string',
         ]);
 
-        $user = UserApi::update([
-            'user'=> $fields['user'],
-            'name'=> $fields['name'],
-            'surnames'=> $fields['surnames'],
-            'email'=> $fields['email'],
+        $user = auth()->user();
+        $user->update($fields);
+
+        $response = [
+            'user' => $user,
+            'message'=> 'User updated!'
+        ];
+
+        return response($response, 201);
+    }
+
+    public function changePassword(Request $request){
+        $fields = $request->validate([
+            'oldPassword'=> 'required|string',
+            'password'=> 'required|string|confirmed'
+        ]);
+
+        $user = auth()->user();
+        
+        if (!Hash::check($fields['oldPassword'], $user->password)){
+            return response([
+                'message' => 'Old password incorrect'
+            ], 401);
+        }
+
+        $user->update([
             'password'=> bcrypt($fields['password'])
         ]);
 
-        // $user = UserApi::find($id);
-        // $user->update($request->all());
-        return $user;
+        return  [
+            'message'=> 'Password updated!'
+        ];
     }
 
-    public function deleteUser(Request $request, $id){
-        $user = UserApi::find($id);
+    public function delete(Request $request){
+        $user = auth()->user();
         $user->delete();
+        $user->tokens()->delete();
+
         return  [
             'message'=> 'User deleted!'
         ];
