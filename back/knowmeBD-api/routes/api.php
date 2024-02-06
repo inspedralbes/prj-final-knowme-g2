@@ -19,8 +19,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::put('/users/changePassword', [AuthController::class, 'changePassword']);
     Route::delete('/users/delete', [AuthController::class, 'delete']);
     //domains
-    // Route::get('/users/{id}/domains', [DomainController::class, 'show']);
-    // Route::post('/users/{id}/domains', [DomainController::class, 'create']);
+    Route::post('/domains', [DomainController::class, 'create']);
+    // Route::get('/users/{id}/domains', [DomainController::class, 'show']);    
     // Route::get('/users/{id}/domains/{domain_id}', [DomainController::class, 'find']);
     // Route::put('/users/{id}/domains/{domain_id}', [DomainController::class, 'update']);
     // Route::delete('/users/{id}/domains/{domain_id}', [DomainController::class, 'delete']);
