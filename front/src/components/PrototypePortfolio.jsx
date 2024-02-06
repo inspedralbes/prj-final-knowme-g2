@@ -5,7 +5,7 @@ import { useRightSideBarStore } from '../store/rightSideBarStore.js'
 
 
 export function PrototypePortfolio({ componentData, imgData }) {
-    const [portfolioComponents, setPortfolioComponents] = useState([[[],[],[]],[[],[],[]],[[],[],[]]]);
+    const [portfolioComponents, setPortfolioComponents] = useState([[[], [], []], [[], [], []], [[], [], []]]);
     const [draggedOverIndex, setDraggedOverIndex] = useState(null);
     const { setType } = useRightSideBarStore(state => state);
 
@@ -20,13 +20,14 @@ export function PrototypePortfolio({ componentData, imgData }) {
         setDraggedOverIndex(null);
     }
 
-    const startDrag = (evt, gridIndex, componentIndex) => {
+    const startDrag = (evt, gridIndex, componentIndex, elementIndex) => {
         evt.dataTransfer.setData("itemMode", "move");
         evt.dataTransfer.setData("gridIndex", gridIndex);
         evt.dataTransfer.setData("componentIndex", componentIndex);
+        evt.dataTransfer.setData("elementIndex", elementIndex);
     }
 
-    const onDrop = (evt, gridIndex, componentIndex) => {
+    const onDrop = (evt, gridIndex, componentIndex, elementIndex) => {
         setDraggedOverIndex(null);
 
         const item = {
@@ -39,21 +40,21 @@ export function PrototypePortfolio({ componentData, imgData }) {
                 case "TitleComponent":
                     updatePortfolioComponent(TitleComponent, componentData, gridIndex, componentIndex);
                     break;
-                case "ImgComponent":                    
+                case "ImgComponent":
                     updatePortfolioComponent(ImgComponent, imgData, gridIndex, componentIndex);
                     break;
             }
         } else if (item.mode === "move") {
             const draggedItemGridIndex = parseInt(evt.dataTransfer.getData("gridIndex"));
             const draggedItemComponentIndex = parseInt(evt.dataTransfer.getData("componentIndex"));
-            console.log(draggedItemComponentIndex, " ", draggedItemGridIndex);
+            const draggedItemElementIndex = parseInt(evt.dataTransfer.getData("elementIndex"));
 
             setPortfolioComponents(prevComponents => {
                 const newComponents = [...prevComponents];
-                const draggedComponent = newComponents[draggedItemGridIndex][draggedItemComponentIndex];
-                newComponents[draggedItemGridIndex][draggedItemComponentIndex] = [];
+                const draggedComponent = newComponents[draggedItemGridIndex][draggedItemComponentIndex][draggedItemElementIndex];
+                newComponents[draggedItemGridIndex][draggedItemComponentIndex].splice(draggedItemElementIndex, 1);
                 if (newComponents[gridIndex][componentIndex].length == 0) {
-                    newComponents[gridIndex][componentIndex] = draggedComponent;
+                    newComponents[gridIndex][componentIndex] = [draggedComponent];
                 } else {
                     newComponents[gridIndex][componentIndex].push(draggedComponent);
                 }
@@ -68,9 +69,6 @@ export function PrototypePortfolio({ componentData, imgData }) {
             const newComponents = [...prevComponents];
             const key = prevComponents.length + 1;
             const component = <Component key={key} {...componentData} />;
-
-            console.log(newComponents[gridIndex][componentIndex]);
-            console.log(newComponents[gridIndex][componentIndex].length);
 
             if (newComponents[gridIndex][componentIndex].length != 0) {
                 newComponents[gridIndex][componentIndex].push(component);
@@ -100,10 +98,10 @@ export function PrototypePortfolio({ componentData, imgData }) {
                     <div key={gridIndex} className='w-full min-h-40 h-fit grid grid-cols-3'>
                         {gridComponent.map((component, componentIndex) => {
                             return (
-                                <div className={`group hover:border-2 hover:border-pink-500 ${draggedOverIndex && draggedOverIndex[0] == gridIndex && draggedOverIndex[1] == componentIndex ? 'border-2 border-pink-500' : ''} bg-blue-400`} droppable="true" draggable key={componentIndex} onDragOver={(evt => draggingOver(evt, gridIndex, componentIndex))} onDragLeave={(evt => draggingLeave(evt))} onDrop={(evt => onDrop(evt, gridIndex, componentIndex))} onDragStart={(evt) => startDrag(evt, gridIndex, componentIndex)}>
+                                <div className={`group hover:border-2 hover:border-pink-500 ${draggedOverIndex && draggedOverIndex[0] == gridIndex && draggedOverIndex[1] == componentIndex ? 'border-2 border-pink-500' : ''} bg-blue-400`} droppable="true" key={componentIndex} onDragOver={(evt => draggingOver(evt, gridIndex, componentIndex))} onDragLeave={(evt => draggingLeave(evt))} onDrop={(evt => onDrop(evt, gridIndex, componentIndex))}>
                                     {component.map((element, elementIndex) => {
                                         return (
-                                            <div key={elementIndex} className='w-full min-h-24 h-fit bg-green-500 hover:border-2 hover:border-pink-500'>
+                                            <div key={elementIndex} className='w-full min-h-24 h-fit bg-green-500 hover:border-2 hover:border-pink-500' draggable onDragStart={(evt) => startDrag(evt, gridIndex, componentIndex, elementIndex)}>
                                                 {element}
                                             </div>
                                         )
