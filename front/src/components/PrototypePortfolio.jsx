@@ -5,7 +5,7 @@ import { useRightSideBarStore } from '../store/rightSideBarStore.js'
 
 
 export function PrototypePortfolio({ componentData, imgData }) {
-    const [portfolioComponents, setPortfolioComponents] = useState([["", "", ""]]);
+    const [portfolioComponents, setPortfolioComponents] = useState([[[],[],[]],[[],[],[]],[[],[],[]]]);
     const [draggedOverIndex, setDraggedOverIndex] = useState(null);
     const { setType } = useRightSideBarStore(state => state);
 
@@ -36,19 +36,10 @@ export function PrototypePortfolio({ componentData, imgData }) {
         if (item.mode == "add") {
             switch (item.id) {
                 case "TitleComponent":
-                    setPortfolioComponents(prevComponents => {
-                        const newComponents = [...prevComponents];
-                        newComponents[gridIndex][componentIndex] = <TitleComponent key={prevComponents.length + 1} componentData={componentData} />;
-                        return newComponents;
-                    });
-                    console.log("hola: " + gridIndex + ", " + componentIndex);
+                    updatePortfolioComponent(TitleComponent, componentData, gridIndex, componentIndex);
                     break;
-                case "ImgComponent":
-                    setPortfolioComponents(prevComponents => {
-                        const newComponents = [...prevComponents];
-                        newComponents[gridIndex][componentIndex] = <ImgComponent key={prevComponents.length + 1} imgData={imgData} />;
-                        return newComponents;
-                    });
+                case "ImgComponent":                    
+                    updatePortfolioComponent(ImgComponent, imgData, gridIndex, componentIndex);
                     break;
             }
         } else if (item.mode === "move") {
@@ -108,8 +99,14 @@ export function PrototypePortfolio({ componentData, imgData }) {
                     <div key={gridIndex} className='w-full min-h-40 h-fit grid grid-cols-3'>
                         {gridComponent.map((component, componentIndex) => {
                             return (
-                                <div className={`group hover:border-2 hover:border-pink-500 ${draggedOverIndex && draggedOverIndex[0] == gridIndex && draggedOverIndex[1] == componentIndex ? 'border-2 border-pink-500' : ''}`} droppable="true" draggable key={componentIndex} onDragOver={(evt => draggingOver(evt, gridIndex, componentIndex))} onDragLeave={(evt => draggingLeave(evt))} onDrop={(evt => onDrop(evt, gridIndex, componentIndex))} onDragStart={(evt) => startDrag(evt, gridIndex, componentIndex)}>
-                                    <CellComponent key={componentIndex} componentData={component} />
+                                <div className={`group hover:border-2 hover:border-pink-500 ${draggedOverIndex && draggedOverIndex[0] == gridIndex && draggedOverIndex[1] == componentIndex ? 'border-2 border-pink-500' : ''} bg-blue-400`} droppable="true" draggable key={componentIndex} onDragOver={(evt => draggingOver(evt, gridIndex, componentIndex))} onDragLeave={(evt => draggingLeave(evt))} onDrop={(evt => onDrop(evt, gridIndex, componentIndex))} onDragStart={(evt) => startDrag(evt, gridIndex, componentIndex)}>
+                                    {component.map((element, elementIndex) => {
+                                        return (
+                                            <div key={elementIndex} className='w-full min-h-24 h-fit bg-green-500 hover:border-2 hover:border-pink-500'>
+                                                {element}
+                                            </div>
+                                        )
+                                    })}
                                     {component != "" ? (
                                         <div className='relative right-[-16px] z-10 h-0 flex flex-col items-end justify-end'>
                                             <button onClick={() => deleteComponent(gridIndex, componentIndex)} className='flex justify-center items-center opacity-0 group-hover:opacity-100 bg-red-600 rounded-full w-8 h-10 p-2 transition-all duration-150 hover:bg-red-700'>
