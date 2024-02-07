@@ -65,8 +65,8 @@ export function PrototypePortfolio() {
 
             setPortfolioComponents(prevComponents => {
                 const newComponents = [...prevComponents];
-                const draggedComponent = newComponents[draggedItemGridIndex][draggedItemComponentIndex][draggedItemElementIndex];
-                newComponents[draggedItemGridIndex][draggedItemComponentIndex].splice(draggedItemElementIndex, 1);
+                const draggedComponent = newComponents[draggedItemGridIndex].components[draggedItemComponentIndex][draggedItemElementIndex];
+                newComponents[draggedItemGridIndex].components[draggedItemComponentIndex].splice(draggedItemElementIndex, 1);
                 if (newComponents[gridIndex].components[componentIndex].length == 0) {
                     newComponents[gridIndex].components[componentIndex] = [draggedComponent];
                 } else {
