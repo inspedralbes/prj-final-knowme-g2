@@ -4,7 +4,7 @@ import AvatarEditor from 'react-avatar-editor'
 
 export function EditImage() {
     const { content, setContent } = useRightSideBarStore(state => state);
-    const [img, setImg] = useState(null);
+    const [img, setImg] = useState(content?.src);
     const [variables, setVariables] = useState({ "zoom": 100, "rotate": 0, "border": 0, "radius": 0, "width": 250, "height": 250 });
     const [firstTime, setFirstTime] = useState(true);
     let styles = {
@@ -14,6 +14,10 @@ export function EditImage() {
     }
 
     let editor = useRef(null);
+    const handlerUpload = () => {
+        const canvas = editor.current.getImage();
+        setContent({ ...content, src: canvas.toDataURL(), width: variables?.width, height: variables?.height })
+    }
     const handlerChange = (e) => {
         console.log(e);
         if (!firstTime) {
@@ -22,6 +26,7 @@ export function EditImage() {
             setContent({ ...content, src: canvas.toDataURL(), width: variables?.width, height: variables?.height })
         } else {
             setFirstTime(false);
+            console.log("hola")
             setTimeout(() => {
                 const canvas = editor.current.getImage();
                 setContent({ ...content, src: canvas.toDataURL(), width: variables?.width, height: variables?.height })
@@ -101,7 +106,7 @@ export function EditImage() {
                             scale={variables?.zoom / 100}
                             rotate={variables?.rotate}
                             onImageChange={handlerChange}
-
+                            onImageReady={handlerUpload}
                         />
                     </div>
                 </div> : ""}
