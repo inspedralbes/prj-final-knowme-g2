@@ -1,0 +1,31 @@
+services:
+
+  
+  node:
+    build: ./node
+    ports:
+      - 8080:8080
+
+  front:
+    build: ./front
+    ports:
+      - 4321:4321
+    depends_on:
+      - node
+      
+  db:
+    image: mysql:8.2.0
+    container_name: db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: persones
+      MYSQL_USER: user
+      MYSQL_PASSWORD: user
+    ports:
+      - 3306:3306
+    volumes:
+      # Per guardar les dades de forma persistent
+      - ./mysql/mysql_data:/var/lib/mysql
+      # Per crear algunes taules al primer inici
+      - ./mysql/dades.sql:/docker-entrypoint-initdb.d/dades.sql

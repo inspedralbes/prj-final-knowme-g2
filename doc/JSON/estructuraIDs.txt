@@ -1,0 +1,1 @@
+Els icones estaran escrits de manera que el contingut d'aquests ha d'estar dins del className

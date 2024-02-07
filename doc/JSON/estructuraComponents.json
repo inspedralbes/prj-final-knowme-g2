@@ -1,0 +1,329 @@
+{
+    "components": [
+        {
+            "id": 1,
+            "size": 3,
+            "type": "title",
+            "complexity": 2,
+            "variant": 1,
+            "content": {
+                "title": {
+                    "componentId": 20,
+                    "text": "Arnau",
+                    "font-size": "primary",
+                    "italic": false,
+                    "bold": false
+                },
+                "occupation": {
+                    "componentId": 21,
+                    "text": "FullStack Developer",
+                    "font-size": "secondary",
+                    "italic": false,
+                    "bold": false
+                }
+            }
+        },
+        {
+            "id": 2,
+            "size": 3,
+            "type": "separator",
+            "complexity": 2,
+            "variant": 1,
+            "content": {
+                "title": {
+                    "componentId": 20,
+                    "text": "About me",
+                    "font-size": "tertiary",
+                    "italic": false,
+                    "bold": false
+                }
+            }
+        },
+        {
+            "id": 3,
+            "size": 3,
+            "type": "separator",
+            "complexity": 2,
+            "variant": 2,
+            "content": {
+                "title": {
+                    "componentId": 20,
+                    "text": "Experiència",
+                    "font-size": "tertiary",
+                    "italic": false,
+                    "bold": false
+                },
+                "icon": {
+                    "componentId": 24,
+                    "icon": "classList de la icona"
+                }
+            }
+        },
+        {
+            "id": 4,
+            "size": 3,
+            "type": "sobre_mi",
+            "complexity": 2,
+            "variant": 1,
+            "content": {
+                "icon": {
+                    "componentId": 23,
+                    "icon": "icon-[material-symbols--person-check-outline]"
+                },
+                "text": {
+                    "componentId": 21,
+                    "text": "Lorem ipsum...",
+                    "font-size": "tertiary",
+                    "italic": false,
+                    "bold": false
+                },
+                "picture": {
+                    "componentId": 22,
+                    "picture": "Route to pic"
+                }
+            }
+        },
+        {
+            "id": 6,
+            "size": 3,
+            "type": "sobre_mi",
+            "complexity": 2,
+            "variant": 2,
+            "content": {
+                "icon": "icon-[material-symbols--person-check-outline]",
+                "text": {
+                    "componentId": 21,
+                    "text": "Lorem ipsum...",
+                    "font-size": "tertiary",
+                    "italic": false,
+                    "bold": false
+                },
+                "picture": {
+                    "componentId": 22,
+                    "picture": "Route to pic"
+                }
+            }
+        },
+        {
+            "id": 7,
+            "size": 3,
+            "type": "contact",
+            "complexity": 2,
+            "variant": 1
+        },
+        {
+            "id": 8,
+            "size": 3,
+            "type": "ocupation",
+            "complexity": 2,
+            "variant": 1,
+            "content": {
+                "start": {
+                    "componentId": 21,
+                    "text": "Data Inicial",
+                    "font-size": "tertiary",
+                    "italic": false,
+                    "bold": false
+                },
+                "end": {
+                    "componentId": 21,
+                    "text": "Data Final",
+                    "font-size": "tertiary",
+                    "italic": false,
+                    "bold": false
+                },
+                "Name of ocupation": {
+                    "componentId": 21,
+                    "text": "Nom de l'ocupació",
+                    "font-size": "secondary",
+                    "italic": false,
+                    "bold": false
+                },
+                "Description": {
+                    "componentId": 21,
+                    "text": "Descripción de l'ocupació",
+                    "font-size": "tertiary",
+                    "italic": false,
+                    "bold": false
+                }
+            }
+        },
+        {
+            "id": 9,
+            "size": 3,
+            "type": "Abilities",
+            "complexity": 2,
+            "variant": 1,
+            "content": {
+                "technologies": [
+                    {
+                        "name": {
+                            "componentId": 21,
+                            "text": "Nom de la tecnologia",
+                            "font-size": "secondary",
+                            "italic": false,
+                            "bold": false
+                        },
+                        "icon": {
+                            "componentId": 23,
+                            "icon": "classList de la icona de la tecnologia"
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            "id": 10,
+            "size": 3,
+            "type": "Abilities",
+            "complexity": 2,
+            "variant": 2,
+            "content": {
+                "technologies": [
+                    {
+                        "name": {
+                            "componentId": 21,
+                            "text": "Nom de la tecnologia",
+                            "font-size": "secondary",
+                            "italic": false,
+                            "bold": false
+                        },
+                        "icon": "classList de la icona de la tecnologia"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 11,
+            "size": 1,
+            "type": "Projecte",
+            "complexity": 2,
+            "variant": 1,
+            "content": {
+                "Títol": {
+                    "componentId": 20,
+                    "text": "Títol del projecte",
+                    "font-size": "secondary",
+                    "italic": false,
+                    "bold": false
+                },
+                "Descripció": {
+                    "componentId": 21,
+                    "text": "Descripció del projecte",
+                    "font-size": "tertiary",
+                    "italic": false,
+                    "bold": false
+                },
+                "Tecnologies": [
+                    {
+                        "componentId": 25,
+                        "text": "Nom de la tecnologia",
+                        "font-size": "tertiary",
+                        "italic": false,
+                        "bold": false,
+                        "icon": "classList de la icona de la tecnologia",
+                        "primaryColor": "FFFFFF",
+                        "secondaryColor": "000000"
+                    }
+                ],
+                "Imatge": {
+                    "componentId": 22,
+                    "picture": "Route to pic"
+                }
+            }
+        },
+        {
+            "id": 12,
+            "size": 1,
+            "type": "linkedPicture",
+            "complexity": 2,
+            "variant": 1,
+            "content": {
+                "image": {
+                    "componentId": 22,
+                    "picture": "Route to pic"
+                },
+                "links": [
+                    {
+                        "componentId": 24,
+                        "icon": "classList de la icona del link",
+                        "link": "Linked resource"
+                    }
+                ]
+            }
+        },
+        {
+            "id": 20,
+            "size": 2,
+            "type": "title",
+            "complexity": 1,
+            "variant": 1,
+            "content": {
+                "text": "Arnau",
+                "font-size": "secondary",
+                "italic": false,
+                "bold": false
+            }
+        },
+        {
+            "id": 21,
+            "size": 1,
+            "type": "text",
+            "complexity": 1,
+            "variant": 1,
+            "content": {
+                "text": "FullStack Developer",
+                "font-size": "tertiary",
+                "italic": false,
+                "bold": false
+            }
+        },
+        {
+            "id": 22,
+            "size": 1,
+            "type": "picture",
+            "complexity": 1,
+            "variant": 1,
+            "content": {
+                "picture": "Route to pic"
+            }
+        },
+        {
+            "id": 23,
+            "size": 0,
+            "type": "icon",
+            "complexity": 1,
+            "variant": 1,
+            "content": {
+                "icon": "classList de la icona del link"
+            }
+        },
+        {
+            "id": 24,
+            "size": 0,
+            "type": "icon",
+            "complexity": 1,
+            "variant": 2,
+            "content": {
+                "icon": "classList de la icona del link",
+                "link": "Linked resource"
+            }
+        },
+        {
+            "id": 25,
+            "size": 0,
+            "type": "icon",
+            "complexity": 1,
+            "variant": 3,
+            "content": {
+                "text": "Nom de la tecnologia",
+                "font-size": "tertiary",
+                "italic": false,
+                "bold": false,
+                "icon": "classList de la icona de la tecnologia",
+                "primaryColor": "FFFFFF",
+                "secondaryColor": "000000"
+            }
+        }
+    ]
+}
