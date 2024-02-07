@@ -5,7 +5,20 @@ import { useRightSideBarStore } from '../store/rightSideBarStore.js'
 
 
 export function PrototypePortfolio() {
-    const [portfolioComponents, setPortfolioComponents] = useState([[[], [], []], [[], [], []], [[], [], []]]);
+    const [portfolioComponents, setPortfolioComponents] = useState([
+        {
+            components: [[], [], []],
+            style: "1fr 1fr 1fr"
+        },
+        {
+            components: [[], [], []],
+            style: "1fr 1fr 1fr"
+        },
+        {
+            components: [[], [], []],
+            style: "1fr 1fr 1fr"
+        },
+    ]);
     const [draggedOverIndex, setDraggedOverIndex] = useState(null);
     const { setType } = useRightSideBarStore(state => state);
 
@@ -53,11 +66,11 @@ export function PrototypePortfolio() {
                 const newComponents = [...prevComponents];
                 const draggedComponent = newComponents[draggedItemGridIndex][draggedItemComponentIndex][draggedItemElementIndex];
                 newComponents[draggedItemGridIndex][draggedItemComponentIndex].splice(draggedItemElementIndex, 1);
-                if (newComponents[gridIndex][componentIndex].length == 0) {
-                    newComponents[gridIndex][componentIndex] = [draggedComponent];
+                if (newComponents[gridIndex].components[componentIndex].length == 0) {
+                    newComponents[gridIndex].components[componentIndex] = [draggedComponent];
                 } else {
                     const elementIndex = evt.target.parentNode.parentNode.dataset.key;
-                    newComponents[gridIndex][componentIndex].splice(elementIndex, 0, draggedComponent);
+                    newComponents[gridIndex].components[componentIndex].splice(elementIndex, 0, draggedComponent);
                 }
 
                 return newComponents;
@@ -71,10 +84,10 @@ export function PrototypePortfolio() {
             const key = prevComponents.length + 1;
             const component = <Component key={key} id={gridIndex.toString() + componentIndex.toString()} />;
 
-            if (newComponents[gridIndex][componentIndex].length != 0) {
-                newComponents[gridIndex][componentIndex].push(component);
+            if (newComponents[gridIndex].components[componentIndex].length != 0) {
+                newComponents[gridIndex].components[componentIndex].push(component);
             } else {
-                newComponents[gridIndex][componentIndex] = [component];
+                newComponents[gridIndex].components[componentIndex] = [component];
             }
 
             return newComponents;
@@ -84,7 +97,7 @@ export function PrototypePortfolio() {
     const deleteComponent = (gridIndex, componentIndex, elementIndex) => {
         setPortfolioComponents(prevComponents => {
             const newComponents = [...prevComponents];
-            newComponents[gridIndex][componentIndex].splice(elementIndex, 1);
+            newComponents[gridIndex].components[componentIndex].splice(elementIndex, 1);
             return newComponents;
         });
         setType('component')
@@ -94,8 +107,8 @@ export function PrototypePortfolio() {
         <>
             <div className="h-screen w-3/4 max-w-proses mx-20 bg-white shadow-lg p-8 overflow-hidden overflow-ellipsis overflow-y-visible whitespace-nowrap">
                 {portfolioComponents.map((gridComponent, gridIndex) => (
-                    <div key={gridIndex} className='w-full min-h-[33%] grid grid-cols-3'>
-                        {gridComponent.map((component, componentIndex) => {
+                    <div key={gridIndex} className='w-full min-h-[33%] grid grid-cols-3' style={{ gridTemplateColumns: gridComponent.style }}>
+                        {gridComponent.components.map((component, componentIndex) => {
                             return (
                                 <div className={`border-2  hover:border-transparent ${draggedOverIndex && draggedOverIndex[0] == gridIndex && draggedOverIndex[1] == componentIndex ? 'border-2 border-pink-500' : ''} `} droppable="true" key={componentIndex} onDragOver={(evt => draggingOver(evt, gridIndex, componentIndex))} onDragLeave={(evt => draggingLeave(evt))} onDrop={(evt => onDrop(evt, gridIndex, componentIndex))}>
                                     {component.map((element, elementIndex) => {
