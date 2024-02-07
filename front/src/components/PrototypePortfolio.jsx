@@ -27,21 +27,22 @@ export function PrototypePortfolio() {
         evt.dataTransfer.setData("elementIndex", elementIndex);
     }
 
-    const onDrop = (evt, gridIndex, componentIndex, elementIndex) => {
+    const onDrop = (evt, gridIndex, componentIndex) => {
         setDraggedOverIndex(null);
 
         const item = {
             id: evt.dataTransfer.getData("itemID"),
             mode: evt.dataTransfer.getData("itemMode"),
+            key: evt.dataTransfer.getData("itemComponentId"),
         }
 
         if (item.mode == "add") {
             switch (item.id) {
                 case "TitleComponent":
-                    updatePortfolioComponent(TitleComponent, gridIndex, componentIndex);
+                    updatePortfolioComponent(TitleComponent, gridIndex, componentIndex, item.key);
                     break;
                 case "ImgComponent":
-                    updatePortfolioComponent(ImgComponent, gridIndex, componentIndex);
+                    updatePortfolioComponent(ImgComponent, gridIndex, componentIndex, item.key);
                     break;
             }
         } else if (item.mode === "move") {
@@ -64,11 +65,11 @@ export function PrototypePortfolio() {
         }
     }
 
-    const updatePortfolioComponent = (Component, gridIndex, componentIndex) => {
+    const updatePortfolioComponent = (Component, gridIndex, componentIndex, key) => {
         setPortfolioComponents(prevComponents => {
             const newComponents = [...prevComponents];
             const key = prevComponents.length + 1;
-            const component = <Component key={key} id={gridIndex.toString() + componentIndex.toString()} />;
+            const component = <Component key={key} id={key.toString()} />;
 
             if (newComponents[gridIndex][componentIndex].length != 0) {
                 newComponents[gridIndex][componentIndex].push(component);
@@ -113,13 +114,11 @@ export function PrototypePortfolio() {
                                             </div>
                                         )
                                     })}
-
                                 </div>
                             );
                         })}
                     </div>
                 ))}
-
             </div>
         </>
     )
