@@ -136,7 +136,7 @@ export function PrototypePortfolio() {
                         {gridComponent.components.map((component, componentIndex) => {
                             return (
                                 <div className={`border-2  hover:border-transparent ${draggedOverIndex && draggedOverIndex[0] == gridIndex && draggedOverIndex[1] == componentIndex ? 'border-2 border-pink-500' : ''} `} droppable="true" key={componentIndex} onDragOver={(evt => draggingOver(evt, gridIndex, componentIndex))} onDragLeave={(evt => draggingLeave(evt))} onDrop={(evt => onDrop(evt, gridIndex, componentIndex))}>
-                                    <div className='absolute z-10 h-0 flex flex-col items-end justify-start'>
+                                    <div className='absolute z-10 h-12 flex flex-col items-end justify-start'>
                                         <input type="range" min="0" max="2" step="0.05" value={portfolioComponents[gridIndex].style.sizes[componentIndex]} onChange={(e) => setSizeGrid(gridIndex, componentIndex, e.target.value)}
                                             className="w-full h-1 transition-opacity duration-[0.2s] rounded-[5px]"
                                         />
