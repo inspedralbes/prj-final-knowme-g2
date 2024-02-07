@@ -27,7 +27,7 @@ export function PrototypePortfolio() {
         evt.dataTransfer.setData("elementIndex", elementIndex);
     }
 
-    const onDrop = (evt, gridIndex, componentIndex, elementIndex) => {
+    const onDrop = (evt, gridIndex, componentIndex) => {
         setDraggedOverIndex(null);
 
         const item = {
@@ -56,7 +56,8 @@ export function PrototypePortfolio() {
                 if (newComponents[gridIndex][componentIndex].length == 0) {
                     newComponents[gridIndex][componentIndex] = [draggedComponent];
                 } else {
-                    newComponents[gridIndex][componentIndex].push(draggedComponent);
+                    const elementIndex = evt.target.parentNode.parentNode.dataset.key;
+                    newComponents[gridIndex][componentIndex].splice(elementIndex, 0, draggedComponent);
                 }
 
                 return newComponents;
@@ -80,14 +81,13 @@ export function PrototypePortfolio() {
         });
     };
 
-    const deleteComponent = (gridIndex, componentIndex) => {
+    const deleteComponent = (gridIndex, componentIndex, elementIndex) => {
         setPortfolioComponents(prevComponents => {
             const newComponents = [...prevComponents];
-            newComponents[gridIndex][componentIndex] = [];
+            newComponents[gridIndex][componentIndex].splice(elementIndex, 1);
             return newComponents;
         });
         setType('component')
-
     }
 
     return (
@@ -97,10 +97,10 @@ export function PrototypePortfolio() {
                     <div key={gridIndex} className='w-full min-h-[33%] grid grid-cols-3'>
                         {gridComponent.map((component, componentIndex) => {
                             return (
-                                <div className={`group border-2  hover:border-transparent ${draggedOverIndex && draggedOverIndex[0] == gridIndex && draggedOverIndex[1] == componentIndex ? 'border-2 border-pink-500' : ''} `} droppable="true" key={componentIndex} onDragOver={(evt => draggingOver(evt, gridIndex, componentIndex))} onDragLeave={(evt => draggingLeave(evt))} onDrop={(evt => onDrop(evt, gridIndex, componentIndex))}>
+                                <div className={`border-2  hover:border-transparent ${draggedOverIndex && draggedOverIndex[0] == gridIndex && draggedOverIndex[1] == componentIndex ? 'border-2 border-pink-500' : ''} `} droppable="true" key={componentIndex} onDragOver={(evt => draggingOver(evt, gridIndex, componentIndex))} onDragLeave={(evt => draggingLeave(evt))} onDrop={(evt => onDrop(evt, gridIndex, componentIndex))}>
                                     {component.map((element, elementIndex) => {
                                         return (
-                                            <div key={elementIndex} className='w-full h-fit border-2 border-transparent hover:border-pink-500' draggable onDragStart={(evt) => startDrag(evt, gridIndex, componentIndex, elementIndex)}>
+                                            <div key={elementIndex} data-key={elementIndex} className='group w-full h-fit border-2 border-transparent hover:border-pink-500' draggable onDragStart={(evt) => startDrag(evt, gridIndex, componentIndex, elementIndex)}>
                                                 {element}
                                                 <div className='relative right-[-16px] z-10 h-0 flex flex-col items-end justify-start'>
                                                     <button onClick={() => deleteComponent(gridIndex, componentIndex, elementIndex)} className='flex justify-center items-center opacity-0 group-hover:opacity-100 bg-red-600 rounded-full w-8 h-10 p-2 transition-all duration-150 hover:bg-red-700'>
