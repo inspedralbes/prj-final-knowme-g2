@@ -44,14 +44,14 @@ export function EditImage() {
                 <div className="flex items-center justify-center gap-4 mb-4 ">
                     <label htmlFor="radius" className="text-lg text-gray-100">Radius</label>
                     <input type="number" min="0" max="50" value={content?.radius} onChange={(e) => setContent({ ...content, radius: e.target.value })} name="border" id="border"
-                        className=" h-7 w-12 p-1 right-0 border rounded-md focus:outline-none text-right focus:border-blue-500 text-slate-700"
+                        className=" h-7 w-12 p-1 right-0 border rounded-xl focus:outline-none text-right focus:border-blue-500 text-slate-700"
                     />
                 </div>
 
                 <div className="mb-4 ml-10 flex items-center">
                     <label htmlFor="border" className="text-lg text-gray-100 mr-2">Border</label>
                     <input type="number" min="0" max="100" value={content?.border} onChange={(e) => setContent({ ...content, border: e.target.value })} name="border" id="border"
-                        className=" h-7 w-12 p-1 right-0 border rounded-md focus:outline-none text-right focus:border-blue-500 text-slate-700"
+                        className=" h-7 w-12 p-1 right-0 border rounded-xl focus:outline-none text-right focus:border-blue-500 text-slate-700"
                     />
                 </div>
             </div>
@@ -79,13 +79,13 @@ export function EditImage() {
                             <div className="flex items-center justify-center gap-2 mb-4 mr-4">
                                 <label htmlFor='width' className="text-lg font-bold text-gray-100">Width</label>
                                 <input type="number" min="0" max="1000" value={variables?.width} onChange={(e) => setVariables({ ...variables, width: parseInt(e.target.value) })} name="width" id="width"
-                                     className=" h-7 w-16 p-1 right-0 border rounded-md focus:outline-none text-right focus:border-blue-500 text-slate-700"
+                                     className=" h-7 w-16 p-1 right-0 border rounded-xl focus:outline-none text-right focus:border-blue-500 text-slate-700"
                                 />
                             </div>
                             <div className="flex items-center justify-center gap-2 mb-4 ">
                                 <label htmlFor='height' className="text-lg font-bold text-gray-100">Height</label>
                                 <input type="number" min="0" max="1000" value={variables?.height} onChange={(e) => setVariables({ ...variables, height: parseInt(e.target.value) })} name="height" id="height"
-                                     className=" h-7  w-16 p-1 right-0 border rounded-md focus:outline-none text-right focus:border-blue-500 text-slate-700"
+                                     className=" h-7  w-16 p-1 right-0 border rounded-xl focus:outline-none text-right focus:border-blue-500 text-slate-700"
                                 />
                             </div>
 
