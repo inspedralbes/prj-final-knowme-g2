@@ -1,14 +1,16 @@
 import { useRightSideBarStore } from '../../store/rightSideBarStore.js'
-
+import { useEffect } from 'react';
 
 export function ImgComponent() {
     const { setType, content, setContent } = useRightSideBarStore(state => state);
-    
-    content?.src == undefined ? setContent({ ...content, src: 'https://via.placeholder.com/150' }) : null
-    content?.border == undefined ? setContent({ ...content, border: '3' }) : null
-    content?.radius == undefined ? setContent({ ...content, radius: '50' }) : null
-    content?.width == undefined ? setContent({ ...content, width: '250' }) : null
-    content?.height == undefined ? setContent({ ...content, height: '250' }) : null
+
+    useEffect(() => {
+        content?.src == undefined ? setContent({ ...content, src: 'https://via.placeholder.com/150' }) : null
+        content?.border == undefined ? setContent({ ...content, border: '3' }) : null
+        content?.radius == undefined ? setContent({ ...content, radius: '50' }) : null
+        content?.width == undefined ? setContent({ ...content, width: '250' }) : null
+        content?.height == undefined ? setContent({ ...content, height: '250' }) : null
+    });
 
     const styles = {
         border: `${content?.border}px solid black`,

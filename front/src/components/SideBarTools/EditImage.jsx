@@ -18,7 +18,7 @@ export function EditImage() {
                     let src = URL.createObjectURL(event.target.files[0])
                     console.log(src);
                     setImg(src);
-                }} className="top-0 left-0 rounded-full opacity-0 bg-slate-500 absolute w-full hover:cursor-pointer" type="file" name="img" id="imatge" accept="image/*" />
+                }} className="top-0 left-0 rounded-full opacity-0 bg-slate-500 absolute size-full hover:cursor-pointer" type="file" name="img" id="imatge" accept="image/*" />
             </button>
             <div className={img ? "" : "hidden"}>
                 <AvatarEditor

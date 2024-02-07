@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { useRightSideBarStore } from '../../store/rightSideBarStore.js'
 
 export function EditText() {
@@ -7,11 +7,16 @@ export function EditText() {
     let [size, setSize] = useState(0);
     let [dropDown, setDropDown] = useState(false);
 
+    useEffect(() => {
+        document.getElementById('editText').select();
+    }, []);
+
     return (
-        <>
+        <div className='transition-all duration-200'>
             <h2 className="text-2xl font-bold">Text</h2>
             <div className="relative mb-2">
                 <textarea
+                    id='editText'
                     className={"text-lg w-full overflow-hidden h-14 px-2 mt-2 resize-none focus:outline-none rounded-lg bg-[#313131] text-[#E8E9EA] border-2 border-[#E8E9EA] pr-10 " + (content?.bold ? ' font-bold ' : '') + (content?.italic ? 'italic ' : '')}
                     defaultValue={content?.text}
                     onChange={(e) => setContent({ ...content, text: e.target.value })}
@@ -48,7 +53,7 @@ export function EditText() {
             </div>
             <hr className='h-0.5 my-5 bg-[#4e4e4e] border-0'></hr>
 
-        </>
+        </div>
     )
 }
 

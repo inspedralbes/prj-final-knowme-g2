@@ -1,78 +1,135 @@
 import { useState } from 'react';
 import { TitleComponent } from "./PortfolioComponents/TitleComponent.jsx";
 import { ImgComponent } from "./PortfolioComponents/ImgComponent.jsx";
-export function PrototypePortfolio({ componentData, imgData }) {
-    const [portfolioComponents, setPortfolioComponents] = useState([]);
+import { useRightSideBarStore } from '../store/rightSideBarStore.js'
 
-    const draggingOver = (evt) => {
+
+export function PrototypePortfolio() {
+    const [portfolioComponents, setPortfolioComponents] = useState([
+        {
+            components: [[], [], []],
+            style: "1fr 1fr 1fr"
+        },
+        {
+            components: [[], [], []],
+            style: "1fr 1fr 1fr"
+        },
+        {
+            components: [[], [], []],
+            style: "1fr 1fr 1fr"
+        },
+    ]);
+    const [draggedOverIndex, setDraggedOverIndex] = useState(null);
+    const { setType } = useRightSideBarStore(state => state);
+
+
+    const draggingOver = (evt, gridIndex, componentIndex) => {
         evt.preventDefault();
+        setDraggedOverIndex([gridIndex, componentIndex]);
     }
 
-    const startDrag = (evt, key) => {
-        evt.dataTransfer.setData("itemID", key);
+    const draggingLeave = (evt) => {
+        evt.preventDefault();
+        setDraggedOverIndex(null);
+    }
+
+    const startDrag = (evt, gridIndex, componentIndex, elementIndex) => {
         evt.dataTransfer.setData("itemMode", "move");
+        evt.dataTransfer.setData("gridIndex", gridIndex);
+        evt.dataTransfer.setData("componentIndex", componentIndex);
+        evt.dataTransfer.setData("elementIndex", elementIndex);
     }
 
-    const onDrop = (evt) => {
+    const onDrop = (evt, gridIndex, componentIndex) => {
+        setDraggedOverIndex(null);
 
         const item = {
             id: evt.dataTransfer.getData("itemID"),
             mode: evt.dataTransfer.getData("itemMode"),
-            pos : [evt.clientX, evt.clientY]
+            key: evt.dataTransfer.getData("itemComponentId"),
         }
 
         if (item.mode == "add") {
             switch (item.id) {
                 case "TitleComponent":
-                    setPortfolioComponents([...portfolioComponents, <TitleComponent key={portfolioComponents.length + 1} componentData={componentData} pos={item.pos} />]);
+                    updatePortfolioComponent(TitleComponent, gridIndex, componentIndex, item.key);
                     break;
                 case "ImgComponent":
-                    setPortfolioComponents([...portfolioComponents, <ImgComponent key={portfolioComponents.length + 1} imgData={imgData} pos={item.pos}   />]);
+                    updatePortfolioComponent(ImgComponent, gridIndex, componentIndex, item.key);
                     break;
             }
-        } else if (item.mode == "move") {
-            const dropIndex = evt.target.parentNode.parentNode.id;
+        } else if (item.mode === "move") {
+            const draggedItemGridIndex = parseInt(evt.dataTransfer.getData("gridIndex"));
+            const draggedItemComponentIndex = parseInt(evt.dataTransfer.getData("componentIndex"));
+            const draggedItemElementIndex = parseInt(evt.dataTransfer.getData("elementIndex"));
 
-            const updatedComponents = portfolioComponents;
-            const draggedComponent = updatedComponents.find((component, index) => component.key == item.id);
-            let index = updatedComponents.indexOf(draggedComponent);
-       
-            // Remove component from updatedComponents if key matches item.id
-            updatedComponents.splice(index, 1);
-            setPortfolioComponents(updatedComponents);
-            if (draggedComponent.type.name == 'TitleComponent'){
-                setPortfolioComponents([...portfolioComponents, <TitleComponent key={draggedComponent.key} componentData={componentData} pos={item.pos} />]);
-            }
-            else if (draggedComponent.type.name == 'ImgComponent'){
-                setPortfolioComponents([...portfolioComponents, <ImgComponent key={draggedComponent.key} imgData={imgData} pos={item.pos}   />]);
-            }
+            setPortfolioComponents(prevComponents => {
+                const newComponents = [...prevComponents];
+                const draggedComponent = newComponents[draggedItemGridIndex].components[draggedItemComponentIndex][draggedItemElementIndex];
+                newComponents[draggedItemGridIndex].components[draggedItemComponentIndex].splice(draggedItemElementIndex, 1);
+                if (newComponents[gridIndex].components[componentIndex].length == 0) {
+                    newComponents[gridIndex].components[componentIndex] = [draggedComponent];
+                } else {
+                    const elementIndex = evt.target.parentNode.parentNode.dataset.key;
+                    newComponents[gridIndex].components[componentIndex].splice(elementIndex, 0, draggedComponent);
+                }
 
+                return newComponents;
+            });
         }
     }
 
-    const deleteComponent = (index) => {
-        const updatedComponents = [...portfolioComponents];
-        const draggedComponent = updatedComponents.find((component, index) => component.key == index);
-        let indexDel = updatedComponents.indexOf(draggedComponent);
-        updatedComponents.splice(indexDel, 1);
+    const updatePortfolioComponent = (Component, gridIndex, componentIndex, ItemKey) => {
+        setPortfolioComponents(prevComponents => {
+            const newComponents = [...prevComponents];
+            const key = prevComponents.length + 1;
+            const component = <Component key={key} id={ItemKey.toString()} />;
 
-        setPortfolioComponents(updatedComponents);
+            if (newComponents[gridIndex].components[componentIndex].length != 0) {
+                newComponents[gridIndex].components[componentIndex].push(component);
+            } else {
+                newComponents[gridIndex].components[componentIndex] = [component];
+            }
+
+            return newComponents;
+        });
+    };
+
+    const deleteComponent = (gridIndex, componentIndex, elementIndex) => {
+        setPortfolioComponents(prevComponents => {
+            const newComponents = [...prevComponents];
+            newComponents[gridIndex].components[componentIndex].splice(elementIndex, 1);
+            return newComponents;
+        });
+        setType('component')
     }
 
     return (
         <>
-            <div className="h-screen w-3/4 max-w-proses mx-20 bg-white shadow-lg p-8 overflow-hidden overflow-ellipsis whitespace-nowrap" droppable="true" onDragOver={(evt => draggingOver(evt))} onDrop={(evt => onDrop(evt, 1))}>
-                {portfolioComponents.map((component, index) => (
-                    <div className="group border-2 border-transparent hover:border-2 hover:border-pink-500"  id={component.key} key={component.key} draggable onDragStart={(evt) => startDrag(evt, component.key)}>
-                        {component}
-                        <div className='relative right-[-16px] z-10 h-0 flex flex-col items-end justify-end'>
-                            <button onClick={() => deleteComponent(index)} className='flex justify-center items-center opacity-0 group-hover:opacity-100 bg-red-600 rounded-full w-8 h-10 p-2 transition-all duration-150 hover:bg-red-700'>
-                                <span className="icon-[tabler--trash] text-white"></span>
-                            </button>
-                            <button className='flex justify-center items-center mt-1 opacity-0 group-hover:opacity-100 bg-blue-600 rounded-full w-8 h-10 p-2 transition-all duration-150 hover:bg-blue-700'>
-                                <span className="icon-[tabler--edit] text-white"></span>
-                            </button>
-                        </div>
+            <div className="h-screen w-3/4 max-w-proses mx-20 bg-white shadow-lg p-8 overflow-hidden overflow-ellipsis overflow-y-visible whitespace-nowrap">
+                {portfolioComponents.map((gridComponent, gridIndex) => (
+                    <div key={gridIndex} className='w-full min-h-[33%] grid grid-cols-3' style={{ gridTemplateColumns: gridComponent.style }}>
+                        {gridComponent.components.map((component, componentIndex) => {
+                            return (
+                                <div className={`border-2  hover:border-transparent ${draggedOverIndex && draggedOverIndex[0] == gridIndex && draggedOverIndex[1] == componentIndex ? 'border-2 border-pink-500' : ''} `} droppable="true" key={componentIndex} onDragOver={(evt => draggingOver(evt, gridIndex, componentIndex))} onDragLeave={(evt => draggingLeave(evt))} onDrop={(evt => onDrop(evt, gridIndex, componentIndex))}>
+                                    {component.map((element, elementIndex) => {
+                                        return (
+                                            <div key={elementIndex} data-key={elementIndex} className='group w-full h-fit border-2 border-transparent hover:border-pink-500' draggable onDragStart={(evt) => startDrag(evt, gridIndex, componentIndex, elementIndex)}>
+                                                {element}
+                                                <div className='relative right-[-16px] z-10 h-0 flex flex-col items-end justify-start'>
+                                                    <button onClick={() => deleteComponent(gridIndex, componentIndex, elementIndex)} className='flex justify-center items-center opacity-0 group-hover:opacity-100 bg-red-600 rounded-full w-8 h-10 p-2 transition-all duration-150 hover:bg-red-700'>
+                                                        <span className="icon-[tabler--trash] text-white"></span>
+                                                    </button>
+                                                    <button className='flex justify-center items-center mt-1 opacity-0 group-hover:opacity-100  rounded-full w-8 h-10 p-2 transition-all duration-150 hover:bg-blue-700'>
+                                                        <span className="icon-[tabler--edit] text-white"></span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        )
+                                    })}
+                                </div>
+                            );
+                        })}
                     </div>
                 ))}
             </div>
