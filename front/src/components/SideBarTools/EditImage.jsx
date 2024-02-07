@@ -7,10 +7,7 @@ export function EditImage() {
     const [img, setImg] = useState(null);
     const [variables, setVariables] = useState({ "zoom": 100, "rotate": 0, "border": 0, "radius": 0, "showGrid": true, "width": 250, "height": 250});
     let editor = useRef(null);
-    const styles = {
-        border: `${content?.border}px solid black`,
-        borderRadius: `${content?.radius}%`,
-    }
+
 
     return (
         <>

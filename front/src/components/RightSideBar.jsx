@@ -15,7 +15,7 @@ export function RightSideBar({ componentData, setComponentData, imgData, setImgD
 
         <>
             <div className="h-screen w-1/4  min-w-fit bg-[#2d2d2d] flex text-[#E8E9EA]">
-                <div className="h-full w-96 bg-[#2d2d2d]  text-[#E8E9EA]">
+                <div className="h-full min-w-96 bg-[#2d2d2d]  text-[#E8E9EA]">
                     <main className="m-10">
                         {type == 'text' ? <EditText /> : null}
                         {type == 'component' ? <EditComponent /> : null}
