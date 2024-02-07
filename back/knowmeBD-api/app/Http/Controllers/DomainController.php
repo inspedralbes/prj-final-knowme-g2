@@ -20,7 +20,7 @@ class DomainController extends Controller
         }
 
         $fields = $request->validate([
-            'webURL' => 'required|string',
+            'webURL' => 'required|string|unique:domains,webURL',
             'content' => 'required|string',
             'category' => 'required|string',
             'isPublic' => 'required|boolean'
