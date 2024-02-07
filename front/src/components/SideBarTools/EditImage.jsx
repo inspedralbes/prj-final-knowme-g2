@@ -5,7 +5,7 @@ import AvatarEditor from 'react-avatar-editor'
 export function EditImage() {
     const { content, setContent } = useRightSideBarStore(state => state);
     const [img, setImg] = useState(null);
-    const [variables, setVariables] = useState({ "zoom": 100, "rotate": 0, "border": 0, "radius": 0, "showGrid": true, "width": 250, "height": 250});
+    const [variables, setVariables] = useState({ "zoom": 100, "rotate": 0, "border": 0, "radius": 0, "width": 250, "height": 250});
     let editor = useRef(null);
 
 
@@ -26,7 +26,6 @@ export function EditImage() {
                     image={img}
                     width={variables?.width}
                     height={variables?.height}
-                    showGrid={variables?.showGrid}
                     borderRadius={variables?.radius}
                     border={variables?.border}
                     color={[255, 255, 255, 0.6]} // RGBA
@@ -36,15 +35,15 @@ export function EditImage() {
                 />
                 <div className="flex items-center justify-center gap-4 mb-4 mt-4">
                     <label htmlFor="zoom" className="text-lg font-bold text-gray-100">Zoom</label>
-                    <input type="range" min="20" max="400" value={variables?.zoom} onChange={(e) => setVariables({ ...variables, zoom: e.target.value })}
-                        className="w-full h-1 opacity-70 transition-opacity duration-[0.2s] rounded-[5px]"
+                    <input type="range" id='zoom' min="40" max="400" value={variables?.zoom} onChange={(e) => setVariables({ ...variables, zoom: e.target.value })}
+                        className=" w-full h-1 opacity-100 transition-opacity duration-[0.2s] rounded-[5px] "
                     />
                     <p className="font-semibold">{variables?.zoom}%</p>
                 </div>
                 <div className="flex items-center justify-center gap-4 mb-4 mt-4">
                     <label htmlFor="rotate" className="text-lg font-bold text-gray-100">Rotate</label>
-                    <input type="range" min="0" max="360" value={variables?.rotate} onChange={(e) => setVariables({ ...variables, rotate: e.target.value })}
-                        className="w-full h-1 opacity-70 transition-opacity duration-[0.2s] rounded-[5px]"
+                    <input type="range" id='rotate' min="0" max="360" value={variables?.rotate} onChange={(e) => setVariables({ ...variables, rotate: e.target.value })}
+                        className="w-full h-1 opacity-100 transition-opacity duration-[0.2s] rounded-[5px]"
                     />
                     <p className="font-semibold">{variables?.rotate}</p>
                 </div>
@@ -75,7 +74,7 @@ export function EditImage() {
             <div className="flex items-center justify-center gap-4 mb-4 mt-4">
                 <label htmlFor="radius" className="text-lg font-bold text-gray-100">Radius</label>
                 <input type="range" min="0" max="50" value={content?.radius} onChange={(e) => setContent({ ...content, radius: e.target.value })}
-                    className="w-full h-1 opacity-70 transition-opacity duration-[0.2s] rounded-[5px]"
+                    className="w-full h-1  transition-opacity duration-[0.2s] rounded-[5px]"
                 />
                 <p className="font-semibold">{content?.radius}%</p>
             </div>
@@ -87,9 +86,10 @@ export function EditImage() {
                 />
             </div>
 
-
+            
 
         </>
+        
     )
 }
 
