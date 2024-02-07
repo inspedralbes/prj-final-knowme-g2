@@ -91,4 +91,27 @@ class DomainController extends Controller
 
         return response(['message' => 'Portfoli eliminat!'], 201);
     }
+
+    public function index(){
+        $domains = Domain::where('isPublic', true)->get();
+
+        return response($domains, 200);
+    }
+
+    public function show($web){
+        $domain = Domain::where('webURL', $web)->first();
+
+        if(!$domain){
+            return response(['error' => 'No s\'ha trobat el portfoli'], 404);
+        } else if ($domain->isPublic == false){
+            return response(['error' => 'Aquest portfoli és privat!'], 403);
+        }
+
+        $response = [
+            'domain_content' => $domain->content
+        ];
+
+        return response($response, 200);
+    }
+
 }
