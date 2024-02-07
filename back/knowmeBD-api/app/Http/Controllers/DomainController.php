@@ -91,5 +91,4 @@ class DomainController extends Controller
 
         return response(['message' => 'Portfoli eliminat!'], 201);
     }
-
 }
