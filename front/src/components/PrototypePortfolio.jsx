@@ -79,11 +79,11 @@ export function PrototypePortfolio() {
         }
     }
 
-    const updatePortfolioComponent = (Component, gridIndex, componentIndex, key) => {
+    const updatePortfolioComponent = (Component, gridIndex, componentIndex, ItemKey) => {
         setPortfolioComponents(prevComponents => {
             const newComponents = [...prevComponents];
             const key = prevComponents.length + 1;
-            const component = <Component key={key} id={key.toString()} />;
+            const component = <Component key={key} id={ItemKey.toString()} />;
 
             if (newComponents[gridIndex].components[componentIndex].length != 0) {
                 newComponents[gridIndex].components[componentIndex].push(component);
