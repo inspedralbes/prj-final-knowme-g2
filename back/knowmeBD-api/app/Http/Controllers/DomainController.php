@@ -13,6 +13,12 @@ class DomainController extends Controller
     public function create(Request $request){
         $user = auth()->user();
 
+        if(!$user){
+            return response(['error' => 'Unauthorized'], 401);
+        } else if (Domain::where('id_user', $user->id)->count() >= 1){
+            return response(['error' => 'Ja tens un portfoli creat!'], 403);
+        }
+
         $fields = $request->validate([
             'webURL' => 'required|string',
             'content' => 'required|string',
@@ -21,7 +27,7 @@ class DomainController extends Controller
         ]);
 
         $domain = Domain::create([
-            'id'=> $user->id,
+            'id_user'=> $user->id,
             'webURL'=> $fields['webURL'],
             'content'=> $fields['content'],
             'category'=> $fields['category'],
@@ -30,14 +36,23 @@ class DomainController extends Controller
 
         $response = [
             'domain' => $domain,
-            'user' => $user
+            'user' => $user,
+            'id_user' => $user->id,
         ];
 
         return response($response, 201);
     }
 
     public function update(Request $request){
+        $user = auth()->user();
+
+        if(!$user){
+            return response(['error' => 'Unauthorized'], 401);
+        } else if (Domain::where('id_user', $user->id)->count() == 0){
+            return response(['error' => 'No tens cap portfoli creat!'], 403);
+        }
         
+
     }
 
 }

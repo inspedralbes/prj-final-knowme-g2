@@ -17,7 +17,7 @@ class AuthController extends Controller
             'name' => 'required|string',
             'surnames' => 'required|string',
             'email'=> 'required|string|unique:users_api,email',
-            'password'=> 'required|string|confirmed'
+            'password'=> 'required|string|min:8|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/|confirmed'
         ]);
 
         $user = UserApi::create([

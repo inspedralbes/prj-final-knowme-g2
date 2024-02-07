@@ -15,6 +15,7 @@ class Domain extends Model
     protected $table = 'domains';
 
     protected $fillable = [
+        'id_user',
         'webURL',
         'content',
         'category',

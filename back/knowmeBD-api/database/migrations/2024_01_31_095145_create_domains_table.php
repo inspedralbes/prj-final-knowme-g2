@@ -12,7 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('domains', function (Blueprint $table) {
-            $table->id();
+            $table->id()->autoIncrement();
+            $table->bigInteger('id_user')->unsigned();
             $table->string('webURL', 100);
             $table->string('content');
             $table->string('category', 100);
