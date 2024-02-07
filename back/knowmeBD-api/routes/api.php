@@ -9,7 +9,9 @@ use App\Http\Controllers\DomainController;
     //users
     Route::post('/register', [AuthController::class, 'register']);
     Route::post('/login', [AuthController::class, 'login']);
-
+    //domains
+    // Route::get('/domains', [DomainController::class, 'index']);
+    // Route::get('/domains/{id}', [DomainController::class, 'show']);
 
 //protected routes
 Route::group(['middleware' => ['auth:sanctum']], function () {
@@ -20,10 +22,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::delete('/users/delete', [AuthController::class, 'delete']);
     //domains
     Route::post('/domains', [DomainController::class, 'create']);
-    // Route::get('/users/{id}/domains', [DomainController::class, 'show']);    
-    // Route::get('/users/{id}/domains/{domain_id}', [DomainController::class, 'find']);
-    // Route::put('/users/{id}/domains/{domain_id}', [DomainController::class, 'update']);
-    // Route::delete('/users/{id}/domains/{domain_id}', [DomainController::class, 'delete']);
+    Route::put('/domains/update', [DomainController::class, 'update']);
+    Route::delete('/domains/delete', [DomainController::class, 'delete']);
 });
 
 // Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

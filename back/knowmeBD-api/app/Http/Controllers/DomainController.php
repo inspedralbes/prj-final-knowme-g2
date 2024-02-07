@@ -45,14 +45,51 @@ class DomainController extends Controller
 
     public function update(Request $request){
         $user = auth()->user();
-
+        
         if(!$user){
             return response(['error' => 'Unauthorized'], 401);
         } else if (Domain::where('id_user', $user->id)->count() == 0){
             return response(['error' => 'No tens cap portfoli creat!'], 403);
         }
-        
 
+        $fields = $request->validate([
+            'webURL' => 'string',
+            'content' => 'string',
+            'category' => 'string',
+            'isPublic' => 'boolean'
+        ]);
+
+        $domain = Domain::where('id_user', $user->id)->first();
+
+        $domain->update([
+            'webURL'=> $fields['webURL'],
+            'content'=> $fields['content'],
+            'category'=> $fields['category'],
+            'isPublic'=> $fields['isPublic']
+        ]);
+
+        $response = [
+            'domain' => $domain,
+            'user' => $user
+        ];
+
+        return response($response, 201);
+    }
+
+    public function delete(Request $request){
+        $user = auth()->user();
+        
+        if(!$user){
+            return response(['error' => 'Unauthorized'], 401);
+        } else if (Domain::where('id_user', $user->id)->count() == 0){
+            return response(['error' => 'No tens cap portfoli creat!'], 403);
+        }
+
+        $domain = Domain::where('id_user', $user->id)->first();
+
+        $domain->delete();
+
+        return response(['message' => 'Portfoli eliminat!'], 201);
     }
 
 }
