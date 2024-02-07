@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('domains', function (Blueprint $table) {
             $table->id()->autoIncrement();
             $table->bigInteger('id_user')->unsigned();
-            $table->string('webURL', 100);
+            $table->string('webURL', 100)->unique();
             $table->string('content');
             $table->string('category', 100);
             $table->boolean('isPublic')->default(false);
