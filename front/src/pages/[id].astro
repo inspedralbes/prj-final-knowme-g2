@@ -1,0 +1,21 @@
+---
+import { getProbes } from "../../communicationManager.js";
+
+export async function getStaticPaths() {
+  const data = await getProbes();
+
+    return data.map((route) => {
+    return {
+      params: { id: route.id },
+      props: { route },
+    };
+  });
+}
+
+const { id } = Astro.params;
+console.log(id);
+const  propsA  = Astro.props;
+console.log(propsA);
+
+---
+<div>{propsA.route.attributes.example} {propsA.route.attributes.proba}, you are number {id}!</div>
