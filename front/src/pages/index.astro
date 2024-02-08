@@ -2,10 +2,37 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
+
+
 <Layout title="KnowMe">
 	<main>
 		<div class="flex items-center justify-center">
 			<a href="/portfolio-playground" class="flex items-center justify-center font-bold text-lg w-64 h-12 rounded-full bg-[#69b4ff] text-[#ffffff] hover:opacity-90 transition-all duration-100">Create your new Portfolio</a>
+			<script>
+				import { registerUser } from '../services/communicationManager.js';
+				import { loginUser } from '../services/communicationManager.js';
+
+				// const user = {
+				// 	user: 'johndoe',
+				// 	name: 'John Doe',
+				// 	surnames: 'Doe',
+				// 	email: 'doe@gmail.com',
+				// 	password: '12345678vL',
+				// 	password_confirmation: '12345678vL'
+				// };
+				// console.log('Registering user');
+				// console.log(user);
+				// registerUser(user);
+
+				const user = {
+					user: 'johndoe',
+					password: '12345678vL'
+				}
+
+				console.log('Logging in user');
+				console.log(user);
+				loginUser(user);
+			</script>
 		</div>
 	</main>
 </Layout>
