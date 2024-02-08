@@ -1,0 +1,12 @@
+---
+import EditPortfolioLayout from "../layouts/EditPortfolioLayout.astro";
+import EditPortfolio from "../components/EditPortfolio.jsx";
+---
+
+<EditPortfolioLayout title="KnowMe Playground">
+	<main class="h-max w-screen">
+		<div class="flex">
+			<EditPortfolio client:visible/>
+		</div>
+	</main>
+</EditPortfolioLayout>
