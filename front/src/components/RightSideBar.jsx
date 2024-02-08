@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { useRightSideBarStore } from '../store/rightSideBarStore.js'
 import { MenuBar } from "./MenuBar.jsx";
 import { EditImage } from "./SideBarTools/EditImage.jsx";
-
+import { Share } from "./SideBarTools/Share.jsx";
 export function RightSideBar() {
     let [selected, setSelected] = useState(null);
     const { type } = useRightSideBarStore();
@@ -23,6 +23,10 @@ export function RightSideBar() {
                         <div className={`transition-all duration-700 ease-in-out overflow-hidden ${type == 'component' ? 'opacity-100 max-h-screen' : 'opacity-0 max-h-0'}`}>
                             <EditComponent />
                         </div>
+                        <div className={`transition-all duration-700 ease-in-out overflow-hidden ${type == 'share' ? 'opacity-100 max-h-screen' : 'opacity-0 max-h-0'}`}>
+                            <Share />
+                        </div>
+                        
                     </main>
                 </div>
                 <nav className="h-full w-14 bg-[#4e4e4e] top-0  text-[#E8E9EA]">
