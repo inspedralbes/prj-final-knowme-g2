@@ -18,7 +18,6 @@ services:
 # S'ha de fer un npm install per instal·lar les dependències ABANS
 # d'engegar-ho tot
 # El Dockerfile és totalment autocontingut
-
   node:
     image: node:20-buster-slim
     volumes:
@@ -51,7 +50,6 @@ services:
 # Si esborreu la carpeta, la BBDD estarà buida i podreu començar des de 0 
 # També crearà una BBBDD "persones" pq. la imatge de mysql executa els fitxers
 # que hi hagi a la carpeta "docker-entrypoint-initdb.d" al primer inici
-
   db:
     image: mysql:8.2.0
     container_name: db
@@ -67,32 +65,47 @@ services:
       # Per guardar les dades de forma persistent
       - ./mysql/mysql_data:/var/lib/mysql
       # Per crear algunes taules al primer inici
-      - ./mysql/dades.sql:/docker-entrypoint-initdb.d/dades.sql
-
+      - ./mysql/dades.sql:/docker-entrypoint-initdb.d/dades.sql      
+  
   phpmyadmin:
-    image: phpmyadmin
-    container_name: pma
-    links:
-      - db
-    environment:
-      PMA_HOST: db
-      PMA_PORT: 3306
-      PMA_ARBITRARY: 1
-    restart: always
-    ports:
-      - 8081:80
-    depends_on: 
-      - db
-
-
+      image: phpmyadmin
+      container_name: pma
+      links:
+        - db
+      environment:
+        PMA_HOST: db
+        PMA_PORT: 3306
+        PMA_ARBITRARY: 1
+      restart: always
+      ports:
+        - 8081:80
+      depends_on: 
+        - db 
   web:
-    image: php:7.2-apache
+    build: 
+      dockerfile: ./apache.DockerFile
+      context: ./sites-available
     container_name: docker-php
     ports:
       - "82:80"
     volumes:
       - ./front:/var/www/html
+      - ./laravel:/var/www/html/laravel
     links:
       - db
     depends_on:
       - node
+    working_dir: /var/www/html/laravel
+
+  composer.test:
+    image: composer/composer
+    links:
+      - db
+    ports:
+      - "9001:9000"
+    volumes:
+      - "./laravel:/composer"
+    container_name: composer.test
+    working_dir: /composer
+    command: bash -c "composer install"
+  
