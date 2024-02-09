@@ -41,13 +41,11 @@ export function EditImage() {
                     if (content[contentIndex]?.zoom < 400) {
                         setContent({ zoom: content[contentIndex]?.zoom + 10, id: contentIndex })
                     }
-                    console.log('scrolling up');
                 }
                 else if (event.deltaY > 0) {
                     if (content[contentIndex]?.zoom > 40) {
                         setContent({ zoom: content[contentIndex]?.zoom - 10, id: contentIndex })
                     }
-                    console.log('scrolling down');
                 }
             }
         }
@@ -55,11 +53,9 @@ export function EditImage() {
 
     useEffect(() => {
         if (onCanvas) {
-            console.log('add')
             window.addEventListener('keydown', keyDownEvent, false);
             window.addEventListener('wheel', wheelEvent, { passive: false })
         } else {
-            console.log('remove')
             window.removeEventListener('keydown', keyDownEvent, false);
             window.removeEventListener('wheel', wheelEvent, { passive: false })
         }
@@ -76,14 +72,12 @@ export function EditImage() {
         setFirstTime(false);
     }
     const handlerChange = (e) => {
-        console.log(cambiadoZoom)
         if (!firstTime) {
             const canvas = editor.current.getImage();
             setContent({ src: canvas.toDataURL(), width: content[contentIndex]?.width, zoom: content[contentIndex]?.zoom, rotate: content[contentIndex]?.rotate, height: content[contentIndex]?.height, id: contentIndex })
         }
     }
     const handleZoom = (value) => {
-        console.log(value)
         setOnCanvas(value)
     }
 
