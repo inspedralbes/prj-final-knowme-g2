@@ -89,30 +89,15 @@ export function PrototypePortfolio() {
         setType('component')
     }
 
-    const setSizeGrid = (gridIndex, componentIndex, value) => {
-        const newComponents = [...portfolioComponents];
-        newComponents[gridIndex].style.sizes[componentIndex] = value;
-        let styleString = newComponents[gridIndex].style.string.split(" ");
-        styleString[componentIndex] = "minmax(40px," + value + "fr)";
-        let style = styleString[0] + " " + styleString[1] + " " + styleString[2];
-        newComponents[gridIndex].style.string = style;
-
-        setPortfolioComponents(newComponents);
-    }
-
     return (
         <>
             <div className="h-screen w-3/4 max-w-proses mx-20 bg-white shadow-lg p-8 overflow-hidden overflow-ellipsis overflow-y-visible whitespace-nowrap">
+                <button onClick={() => setType("layout")}>EditLayout</button>
                 {portfolioComponents && portfolioComponents.map((gridComponent, gridIndex) => (
                     <div key={gridIndex} className='w-full max-w-full min-h-[33%] grid relative' style={{ gridTemplateColumns: gridComponent.style.string }}>
                         {gridComponent.components.map((component, componentIndex) => {
                             return (
                                 <div className={`border-2 hover:border-transparent ${draggedOverIndex && draggedOverIndex[0] == gridIndex && draggedOverIndex[1] == componentIndex ? ' border-pink-500' : ''} `} droppable="true" key={componentIndex} onDragOver={(evt => draggingOver(evt, gridIndex, componentIndex))} onDragLeave={(evt => draggingLeave(evt))} onDrop={(evt => onDrop(evt, gridIndex, componentIndex))}>
-                                    <div className='absolute z-10 h-12 flex flex-col items-end justify-start'>
-                                        <input type="range" min="0" max="2" step="0.05" value={portfolioComponents[gridIndex].style.sizes[componentIndex]} onChange={(e) => setSizeGrid(gridIndex, componentIndex, e.target.value)}
-                                            className="w-full h-1 transition-opacity duration-[0.2s] rounded-[5px]"
-                                        />
-                                    </div>
                                     {component.map((element, elementIndex) => {
                                         return (
                                             <div key={elementIndex} data-key={elementIndex} className='group w-full h-fit border-2 border-dashed border-transparent hover:border-pink-500' draggable onDragStart={(evt) => startDrag(evt, gridIndex, componentIndex, elementIndex)}>
