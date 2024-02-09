@@ -5,8 +5,8 @@ export function TitleComponent({ id }) {
     const { setType, content, addContent, setContentIndex } = useRightSideBarStore(state => state);
     let contentIndex = content.findIndex(item => item.id === id);
     const handleClick = () => {
-        setType('text');
         setContentIndex(contentIndex)
+        setType('text');
         try {
             document.getElementById('editText').select();
         } catch (error) {}

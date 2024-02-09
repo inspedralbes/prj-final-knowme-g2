@@ -15,13 +15,13 @@ export function RightSideBar() {
                 <div className="h-full overflow-y-auto w-96 bg-[#2d2d2d] text-[#E8E9EA]">
                     <main className="m-10">
                         <div className={`transition-all duration-700 ease-in-out overflow-hidden ${type == 'image' ? 'opacity-100 max-h-screen' : 'opacity-0 max-h-0'}`}>
-                            <EditImage />
+                            {type == 'image' ? <EditImage />:''}
                         </div>
                         <div className={`transition-all duration-700 ease-in-out overflow-hidden ${type == 'text' ? 'opacity-100 max-h-screen' : 'opacity-0 max-h-0'}`}>
-                            <EditText />
+                        {type == 'text' ? <EditText />:''}
                         </div>
                         <div className={`transition-all duration-700 ease-in-out overflow-hidden ${type == 'component' ? 'opacity-100 max-h-screen' : 'opacity-0 max-h-0'}`}>
-                            <EditComponent />
+                        {type == 'component' ? <EditComponent />:''}
                         </div>
                     </main>
                 </div>

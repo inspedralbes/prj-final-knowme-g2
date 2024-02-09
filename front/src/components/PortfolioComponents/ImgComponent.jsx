@@ -4,14 +4,14 @@ import { useEffect } from 'react';
 export function ImgComponent({ id }) {
     const { setType, content, setContentIndex, addContent } = useRightSideBarStore(state => state);
     let contentIndex = content.findIndex(item => item.id === id);
-
+   
     useEffect(() => {
-        addContent({ ...content, src: 'https://via.placeholder.com/150',srcOrig: 'https://via.placeholder.com/150', border: '3', radius: '50', width: 250, height: 250, rotate: 0, zoom: 100, zoomOrig: 100, id: id });
+        addContent({ ...content, src: 'https://via.placeholder.com/150', srcOrig: 'https://via.placeholder.com/150', border: 3, radius: 50, width: 250, height: 250, rotate: 0, zoom: 100, id: id });
     }, []);
 
     const handleClick = () => {
-        setType('image')
         setContentIndex(contentIndex)
+        setType('image')
     }
 
     const styles = {
