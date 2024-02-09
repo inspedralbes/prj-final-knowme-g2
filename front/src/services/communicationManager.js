@@ -8,7 +8,7 @@ export function registerUser(user) {
             body: JSON.stringify(user)
         }).then( response => {
             if (response.status == 201) {
-                console.log('Usuari registrat');
+                // console.log('Usuari registrat');
                 // Parsear la respuesta JSON
                 return response.json();
             } else {
@@ -35,20 +35,119 @@ export function loginUser(user) {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(user)
-        }).then (response => {
+        }).then( response => {
             if (response.status == 201) {
                 console.log('Usuari loguejat');
+                return response.json();
             } else if (response.status == 401) {
                 reject('Credencials incorrectes');
             } else {
                 reject('Error al loguejar-se');
             }
-        }).then (data => {   
+        }).then( data => {   
             resolve(data);         
-            console.log(data.user);
-            console.log(data.token);
+            // console.log(data.user);
+            // console.log(data.token);
         }).catch(error => {
             reject(error);
         });
     });
 }
+
+export function logoutUser(token) {
+    console.log(token);
+    return new Promise((resolve, reject) => {
+        fetch('http://localhost:8000/api/logout', {
+            method: 'POST',
+            headers: { 
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token
+            },
+            
+        }).then( response => {
+            if (response.status == 200) {
+                // console.log('Usuari desloguejat');
+                resolve('Usuari desloguejat');
+            } else {
+                reject('Error al desloguejar-se');
+            }
+        }).catch(error => {
+            reject(error);
+        });
+    });
+}
+
+export function updateUser(user, token) {
+    return new Promise((resolve, reject) => {
+        fetch('http://localhost:8000/api/users/update', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token
+            },
+            body: JSON.stringify(user)
+        }).then( response => {
+            if (response.status == 201) {
+                // console.log('Usuari actualitzat');
+                return response.json();
+            } else {
+                reject('Error al actualitzar usuari');
+            }
+        }).then(data => {
+            resolve(data);
+            // console.log(data);
+        }).catch(error => {
+            reject(error);
+        });
+    });
+}
+
+export function changePassword(password, token) {
+    return new Promise((resolve, reject) => {
+        fetch('http://localhost:8000/api/users/changePassword', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token
+            },
+            body: JSON.stringify(password)
+        }).then( response => {
+            if (response.status == 200) {
+                // console.log('Contrasenya canviada');
+                return response.json();
+            } else {
+                reject('Error al canviar contrasenya');
+            }
+        }).then(data => {
+            resolve(data);
+            // console.log(data.message);
+        }).catch(error => {
+            reject(error);
+        });
+    });
+}
+
+export function deleteUser(token) {
+    return new Promise((resolve, reject) => {
+        fetch('http://localhost:8000/api/users/delete', {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token
+            }
+        }).then( response => {
+            if (response.status == 200) {
+                // console.log('Usuari eliminat');
+                return response.json();
+            } else {
+                reject('Error al eliminar usuari');
+            }
+        }).then(data => {
+            resolve(data);
+            // console.log(data.message);
+        }).catch(error => {
+            reject(error);
+        });
+    });
+}
+

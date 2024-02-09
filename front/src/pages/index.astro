@@ -11,7 +11,13 @@ import Layout from '../layouts/Layout.astro';
 			<script>
 				import { registerUser } from '../services/communicationManager.js';
 				import { loginUser } from '../services/communicationManager.js';
+				import {logoutUser} from '../services/communicationManager.js';
+				import {updateUser} from '../services/communicationManager.js';
+				import {changePassword} from '../services/communicationManager.js';
+				import {deleteUser} from '../services/communicationManager.js';
 
+
+				// Register, update and change password user
 				// const user = {
 				// 	user: 'johndoe',
 				// 	name: 'John Doe',
@@ -22,16 +28,59 @@ import Layout from '../layouts/Layout.astro';
 				// };
 				// console.log('Registering user');
 				// console.log(user);
-				// registerUser(user);
 
-				const user = {
-					user: 'johndoe',
-					password: '12345678vL'
-				}
+				// registerUser(user).then(data => {
+				// 		console.log(data);
+				// 		const token = data.token;
+				// 		const userUpdate = {
+				// 			user: 'jonyelPuto',
+				// 			name: 'Johny',
+				// 			surnames: 'VILELLA',
+				// 		};
+				// 		console.log('Updating user');
+				// 		console.log(userUpdate);
+				// 		updateUser(userUpdate, token).then(data => {
+				// 				console.log(data);
+				// 				const userChangePass = {
+				// 					oldPassword: '12345678vL',
+				// 					password: '987654321vL',
+				// 					password_confirmation: '987654321vL'
+				// 				};	
+				// 				console.log('Changing password');
+				// 				console.log(userChangePass);
+				// 				changePassword(userChangePass, token).then(data => console.log(data));		
+				// 		});
+				// });
 
-				console.log('Logging in user');
-				console.log(user);
-				loginUser(user);
+				// Login and logout user
+				// const userLog = {
+				// 	user: 'johndoe',
+				// 	password: '12345678vL'
+				// }
+
+				// console.log('Logging in user');
+				// console.log(userLog);
+				// loginUser(userLog).then(data => 
+				// {
+				// 	console.log(data);
+				// 	const token = data.token;
+				// 	console.log('Logout user');
+				// 	logoutUser(token);
+				// });
+
+				//Login and delete user
+				// const userDelete = {
+				// 		user: 'jonyelPuto',
+				// 		password: '987654321vL'
+				// 	}
+				// console.log('Logging in user');
+				// console.log(userDelete);
+				// loginUser(userDelete).then(data => {
+				// 		console.log(data);
+				// 		const token = data.token;
+				// 		console.log('Deleting user');
+				// 		deleteUser(token).then(data => console.log(data.message));
+				// });
 			</script>
 		</div>
 	</main>
