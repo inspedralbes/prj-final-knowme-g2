@@ -2,28 +2,24 @@ import { useRightSideBarStore } from '../../store/rightSideBarStore.js'
 import { useEffect } from 'react';
 
 export function TitleComponent({ id }) {
-    const { setType, content, setContent } = useRightSideBarStore(state => state);
-
+    const { setType, content, addContent, setContentIndex } = useRightSideBarStore(state => state);
+    let contentIndex = content.findIndex(item => item.id === id);
     const handleClick = () => {
         setType('text');
+        setContentIndex(contentIndex)
         try {
             document.getElementById('editText').select();
-        } catch (error) {
-
-        }
-
+        } catch (error) {}
     }
 
     useEffect(() => {
-        console.log(id.toString());
-
-        content?.text == null ? setContent({ ...content, text: 'Hey, I\'m Loris Crisafo Norte', bold: true }) : null;
+        addContent({ ...content, text: 'Hey, I\'m Loris Crisafo Norte', bold: true, id: id });
     }, []);
 
     return (
         <>
-            <div onClick={() => handleClick()} className="w-full min-h-12">
-                <h1 className={"text-8xl font-inter text-pretty hover:cursor-text " + (content?.bold ? 'font-bold ' : '') + (content?.italic ? 'italic ' : '')}> {content?.text} </h1>
+            <div onClick={() => handleClick()} className="w-2/3 min-w-96 min-h-12">
+                <h1 className={"text-8xl transition-all duration-75 font-inter text-pretty hover:cursor-text " + (content[contentIndex]?.bold ? 'font-bold ' : '') + (content[contentIndex]?.italic ? 'italic ' : '')}> {content[contentIndex]?.text} </h1>
             </div>
         </>
     )
