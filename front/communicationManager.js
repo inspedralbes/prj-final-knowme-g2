@@ -1,6 +1,6 @@
 
 export async function getProbes() {
-    const response = await fetch('http://localhost:1337/api/tests',{
+    const response = await fetch('http://127.0.0.1:1337/api/tests',{
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -8,6 +8,8 @@ export async function getProbes() {
         },
 
     });
+    
     const data = await response.json();
+    console.log("Demanat");
     return data.data;
 }

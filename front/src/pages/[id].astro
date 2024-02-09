@@ -1,21 +1,25 @@
 ---
 import { getProbes } from "../../communicationManager.js";
+export const prerender = true;
+
+// A docker compose dona error de connexió si es proba amb el Strapi
 
 export async function getStaticPaths() {
   const data = await getProbes();
 
-    return data.map((route) => {
+  return data.map((info) => {
     return {
-      params: { id: route.id },
-      props: { route },
+      params: { id: info.id },
+      props: { info },
     };
   });
 }
 
 const { id } = Astro.params;
-console.log(id);
-const  propsA  = Astro.props;
-console.log(propsA);
-
+const propsA = Astro.props;
 ---
-<div>{propsA.route.attributes.example} {propsA.route.attributes.proba}, you are number {id}!</div>
+
+<div>
+  {propsA.info.attributes.example}
+  {propsA.info.attributes.proba}, you are number {id}!
+</div>
