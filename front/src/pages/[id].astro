@@ -25,7 +25,7 @@ export async function getStaticPaths() {
 }
 ---
 
-<EditPortfolioLayout title="KnowMe Playground">
+<EditPortfolioLayout title={jsonData.attributes.proba}>
   <main class="h-max w-screen">
     <div class="flex">
       {jsonData.attributes.example}
