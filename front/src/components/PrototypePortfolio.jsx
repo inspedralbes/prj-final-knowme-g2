@@ -10,21 +10,21 @@ export function PrototypePortfolio() {
             components: [[], [], []],
             style: {
                 sizes: [1, 1, 1],
-                string: "minmax(20px,1fr) minmax(20px,1fr) minmax(20px,1fr)"
+                string: "minmax(40px,1fr) minmax(40px,1fr) minmax(40px,1fr)"
             }
         },
         {
             components: [[], [], []],
             style: {
                 sizes: [1, 1, 1],
-                string: "minmax(20px,1fr) minmax(20px,1fr) minmax(20px,1fr)"
+                string: "minmax(40px,1fr) minmax(40px,1fr) minmax(40px,1fr)"
             }
         },
         {
             components: [[], [], []],
             style: {
                 sizes: [1, 1, 1],
-                string: "minmax(20px,1fr) minmax(20px,1fr) minmax(20px,1fr)"
+                string: "minmax(40px,1fr) minmax(40px,1fr) minmax(40px,1fr)"
             }
         },
     ]);
@@ -119,7 +119,7 @@ export function PrototypePortfolio() {
             const newComponents = [...prevComponents];
             newComponents[gridIndex].style.sizes[componentIndex] = value;
             let styleString = newComponents[gridIndex].style.string.split(" ");
-            styleString[componentIndex] = "minmax(20px," + value + "fr)";
+            styleString[componentIndex] = "minmax(40px," + value + "fr)";
             let style = styleString[0] + " " + styleString[1] + " " + styleString[2];
             newComponents[gridIndex].style.string = style;
             return newComponents;
