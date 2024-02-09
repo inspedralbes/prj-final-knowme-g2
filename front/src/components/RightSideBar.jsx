@@ -1,5 +1,6 @@
 import { EditText } from "./SideBarTools/EditText.jsx";
 import { EditComponent } from "./SideBarTools/EditComponent.jsx";
+import { EditLayout } from "./SideBarTools/EditLayout.jsx";
 import { useState } from 'react'
 import { useRightSideBarStore } from '../store/rightSideBarStore.js'
 import { MenuBar } from "./MenuBar.jsx";
@@ -22,6 +23,9 @@ export function RightSideBar() {
                         </div>
                         <div className={`transition-all duration-700 ease-in-out overflow-hidden ${type == 'component' ? 'opacity-100 max-h-screen' : 'opacity-0 max-h-0'}`}>
                             <EditComponent />
+                        </div>
+                        <div className={`transition-all duration-700 ease-in-out overflow-hidden ${type == 'layout' ? 'opacity-100 max-h-screen' : 'opacity-0 max-h-0'}`}>
+                            <EditLayout />
                         </div>
                     </main>
                 </div>
