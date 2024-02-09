@@ -11,7 +11,7 @@ export function RightSideBar() {
 
     return (
         <>
-            <div className="h-screen w-1/4 min-w-fit bg-[#2d2d2d] flex text-[#E8E9EA]">
+            <div className="h-screen w-1/4 min-w-fit  bg-[#2d2d2d] flex text-[#E8E9EA]">
                 <div className="h-full overflow-y-auto w-96 bg-[#2d2d2d] text-[#E8E9EA]">
                     <main className="m-10">
                         <div className={`transition-all duration-700 ease-in-out overflow-hidden ${type == 'image' ? 'opacity-100 max-h-screen' : 'opacity-0 max-h-0'}`}>
