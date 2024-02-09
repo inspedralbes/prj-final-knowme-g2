@@ -1,3 +1,4 @@
+// functions USERS
 export function registerUser(user) {
     return new Promise((resolve, reject) => {
         fetch('http://localhost:8000/api/register', {
@@ -151,3 +152,29 @@ export function deleteUser(token) {
     });
 }
 
+// functions DOMAINS
+export function createDomain(domain, token) {
+    return new Promise((resolve, reject) => {
+        fetch('http://localhost:8000/api/domains', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token
+            },
+            body: JSON.stringify(domain)
+        }).then( response => {
+            if (response.status == 201) {
+                console.log('Domini creat');
+                return response.json();
+            } else {
+                console.log(response.error);
+                reject('Error al crear domini');
+            }
+        }).then(data => {
+            resolve(data);
+            console.log(data);
+        }).catch(error => {
+            reject(error);
+        });
+    });
+}
