@@ -1,17 +1,69 @@
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect, useCallback } from 'react'
 import { useRightSideBarStore } from '../../store/rightSideBarStore.js'
 import AvatarEditor from 'react-avatar-editor'
 
 export function EditImage() {
-    const { content, setContent, contentIndex } = useRightSideBarStore(state => state);
+    const { content, setContent, contentIndex, type } = useRightSideBarStore(state => state);
     const [firstTime, setFirstTime] = useState(true);
+    const [onCanvas, setOnCanvas] = useState(false);
     let styles = {
         border: `${content[contentIndex]?.border}px solid`,
         borderRadius: `${content[contentIndex]?.radius}%`,
         borderColor: 'white',
     }
 
+
     let editor = useRef(null);
+    const keyDownEvent = useCallback((event) => {
+        if (event.keyCode == 107 && event.ctrlKey) {
+            event.preventDefault();
+            if (content[contentIndex]?.zoom < 400) {
+                setContent({ zoom: content[contentIndex]?.zoom + 10, id: contentIndex })
+            }
+        }
+        if (event.keyCode == 109 && event.ctrlKey) {
+            event.preventDefault();
+            if (content[contentIndex]?.zoom > 40) {
+                setContent({ zoom: content[contentIndex]?.zoom - 10, id: contentIndex })
+            }
+        }
+    }, [onCanvas, setContent, contentIndex, content[contentIndex]?.zoom]);
+
+
+    const wheelEvent = useCallback((event) => {
+        const { ctrlKey } = event;
+        if (onCanvas) {
+            if (ctrlKey) {
+                event.preventDefault();
+                if (event.deltaY < 0) {
+                    if (content[contentIndex]?.zoom < 400) {
+                        setContent({ zoom: content[contentIndex]?.zoom + 10, id: contentIndex })
+                    }
+                }
+                else if (event.deltaY > 0) {
+                    if (content[contentIndex]?.zoom > 40) {
+                        setContent({ zoom: content[contentIndex]?.zoom - 10, id: contentIndex })
+                    }
+                }
+            }
+        }
+    }, [onCanvas, setContent, contentIndex, content[contentIndex]?.zoom]);
+
+    useEffect(() => {
+        if (onCanvas) {
+            window.addEventListener('keydown', keyDownEvent, false);
+            window.addEventListener('wheel', wheelEvent, { passive: false })
+        } else {
+            window.removeEventListener('keydown', keyDownEvent, false);
+            window.removeEventListener('wheel', wheelEvent, { passive: false })
+        }
+
+        // Cleanup function
+        return () => {
+            window.removeEventListener('keydown', keyDownEvent, false);
+            window.removeEventListener('wheel', wheelEvent, { passive: false })
+        }
+    }, [onCanvas, keyDownEvent, wheelEvent]);
     const handlerUpload = () => {
         const canvas = editor.current.getImage();
         setContent({ src: canvas.toDataURL(), width: content[contentIndex]?.width, zoom: content[contentIndex]?.zoom, rotate: content[contentIndex]?.rotate, height: content[contentIndex]?.height, id: contentIndex })
@@ -23,6 +75,9 @@ export function EditImage() {
             console.log(canvas)
             setContent({ src: canvas.toDataURL(), width: content[contentIndex]?.width, zoom: content[contentIndex]?.zoom, rotate: content[contentIndex]?.rotate, height: content[contentIndex]?.height, id: contentIndex })
         }
+    }
+    const handleZoom = (value) => {
+        setOnCanvas(value)
     }
 
     return (
@@ -84,17 +139,17 @@ export function EditImage() {
                                 />
                             </div>
                         </div>
-                        <h1 className='text-xl font-bold'>Preview</h1>
-                        <AvatarEditor style={styles} className=" max-w-64 max-h-64 ml-auto mr-auto border-2 border-gray-100 rounded-md overflow-hidden mt-4 mb-4 w-3/4 h-3/4"
+                        <h1 className='text-xl font-bold'>Preview {onCanvas}</h1>
+                        <AvatarEditor id="canvas" onMouseOver={() => { handleZoom(true) }} onMouseLeave={() => { handleZoom(false) }} style={styles} className=" max-w-64 max-h-64 ml-auto mr-auto border-2 border-gray-100 rounded-md overflow-hidden mt-4 mb-4 w-3/4 h-3/4"
                             ref={editor}
                             image={content[contentIndex]?.srcOrig}
-                            width={Number.isFinite(content[contentIndex]?.width) ? content[contentIndex]?.width : 250}
-                            height={Number.isFinite(content[contentIndex]?.height) ? content[contentIndex]?.height : 250}
-                            borderRadius={Number.isFinite(parseInt(content[contentIndex]?.radius)) ? parseInt(content[contentIndex]?.radius) : 0}
-                            border={Number.isFinite(parseInt(content[contentIndex]?.border)) ? parseInt(content[contentIndex]?.border) : 0}
-                            color={[255, 255, 255, 0.6]}
-                            scale={Number.isFinite(content[contentIndex]?.zoom / 100) ? content[contentIndex]?.zoom / 100 : 1}
-                            rotate={Number.isFinite(parseInt(content[contentIndex]?.rotate)) ? parseInt(content[contentIndex]?.rotate) : 0}
+                            width={content[contentIndex]?.width}
+                            height={content[contentIndex]?.height}
+                            borderRadius={parseInt(content[contentIndex]?.radius)}
+                            border={parseInt(content[contentIndex]?.border)}
+                            color={[255, 255, 255, 0.6]} // RGBA
+                            scale={content[contentIndex]?.zoom / 100}
+                            rotate={parseInt(content[contentIndex]?.rotate)}
                             onImageChange={handlerChange}
                             onImageReady={handlerUpload}
                         />
