@@ -1,0 +1,10 @@
+{
+    "id": 1,
+    "username": "basicUser",
+    "email": "example@gmail.com",
+    "theme": "light",
+    "baseLanguage": "en",
+    "languages": ["en", "es"],
+    "tags": [],
+    "components": []
+}
