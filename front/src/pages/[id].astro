@@ -1,7 +1,7 @@
 ---
 import EditPortfolioLayout from "../layouts/EditPortfolioLayout.astro";
 import { ShowPortfolio } from "../components/ShowPortfolio.jsx";
-import { getDomains, showDomain } from "../services/communicationManager.js";
+import { getDomains, showDomain, getProbes, getProba } from "../services/communicationManager.js";
 
 
 export const prerender = true;
@@ -12,13 +12,13 @@ const { id } = Astro.params;
 let jsonData;
 
 if (id) {
-  jsonData = await showDomain(id);
+  jsonData = await getProba(id);
 }
 
 console.log(jsonData);
 
 export async function getStaticPaths() {
-  const data = await getDomains();
+  const data = await getProbes();
 
   return data.map((info) => {
     return {
