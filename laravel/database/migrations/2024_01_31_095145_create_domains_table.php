@@ -15,7 +15,9 @@ return new class extends Migration
             $table->id()->autoIncrement();
             $table->bigInteger('id_user')->unsigned();
             $table->string('webURL', 100)->unique();
-            $table->string('content');
+            $table->json('content');
+            $table->json('portfolioComponents')->nullable();
+
             $table->string('category', 100);
             $table->boolean('isPublic')->default(false);
         });

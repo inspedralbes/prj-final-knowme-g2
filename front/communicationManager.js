@@ -1,6 +1,6 @@
 
 export async function getProbes() {
-    const response = await fetch('http://127.0.0.1:1337/api/tests',{
+    const response = await fetch('http://127.0.0.1:1337/api/tests', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -13,7 +13,7 @@ export async function getProbes() {
 }
 
 export async function getProba(id) {
-    const response = await fetch(`http://127.0.0.1:1337/api/tests/${id}`,{
+    const response = await fetch(`http://127.0.0.1:1337/api/tests/${id}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -23,4 +23,24 @@ export async function getProba(id) {
     });
     const data = await response.json();
     return data.data;
+}
+
+export async function crearDomini(content, portfolioComponents,link) {
+    let token = '1|QmhqYCGLuVme7EO91aQd9VTnnutNjuSHl0H63DQdfe65bdc1';
+    let formData = new FormData();
+    formData.append('content', JSON.stringify(content));
+    formData.append('portfolioComponents', JSON.stringify(portfolioComponents));
+    formData.append('webURL', link);
+    console.log(formData)
+    const response = await fetch('http://localhost:8000/api/domains', {
+        method: 'POST',
+        body: formData,
+        headers: {
+            Authorization: `Bearer ${token}`,
+            'Access-Control-Allow-Origin': '*'
+        },
+        
+    });
+    let data = await response.json();
+    console.log(data);
 }
