@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
+import { useRightSideBarStore } from '../../store/rightSideBarStore.js'
 
 export function EditComponent() {
-    const [idComponent, setIdComponent] = useState(0);
+    const { setComponentItem, componentItem } = useRightSideBarStore();
+
 
     const startDrag = (evt, id) => {
         evt.dataTransfer.setData("itemID", id);
-        evt.dataTransfer.setData("itemComponentId", idComponent);
+        setComponentItem({key: componentItem.key == undefined ? 0 : componentItem.key + 1, id: id, mode: "add"});
+        evt.dataTransfer.setData("itemComponentId", componentItem.key == undefined ? 0 : componentItem.key + 1);
         evt.dataTransfer.setData("itemMode", "add");
-        setIdComponent(idComponent + 1);
     }
 
     return (
@@ -21,14 +22,14 @@ export function EditComponent() {
                         <span className="icon-[tabler--square-plus-2] size-6"></span>
                     </div>
                 </div>
-                <div id="ImgComponent" className="p-2 rounded-md bg-slate-100 text-slate-900 h-32 mb-4 font-bold relative group"
+                <div id="ImgComponent" className="p-2 rounded-md bg-slate-100 text-slate-900 h-32 mb-4 font-bold relative group cursor-grab target:cursor-grabbing"
                     draggable onDragStart={(evt) => startDrag(evt, "ImgComponent")}>
                     <h1>Image</h1>
                     <div className="transition-all opacity-0 rounded-md group-hover:opacity-100 absolute inset-0 bg-gray-400 bg-opacity-80 flex items-center justify-center">
                         <span className="icon-[tabler--square-plus-2] size-6"></span>
                     </div>
                 </div>
-                <div id="TitleComponent" className="p-2 rounded-md bg-slate-100 text-slate-900 h-32 mb-4 font-bold relative group"
+                <div id="TitleComponent" className="p-2 rounded-md bg-slate-100 text-slate-900 h-32 mb-4 font-bold relative group cursor-grab target:cursor-grabbing"
                     draggable onDragStart={(evt) => startDrag(evt, "SocialComponent")}>
                     <h1>Social Media</h1>
                     <div className="transition-all opacity-0 rounded-md group-hover:opacity-100 absolute inset-0 bg-gray-400 bg-opacity-80 flex items-center justify-center">

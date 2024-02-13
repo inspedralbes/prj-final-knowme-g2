@@ -8,13 +8,14 @@ export function EditText() {
     const [dropDown, setDropDown] = useState(false);
 
     useEffect(() => {
+        console.log(contentIndex);
         document.getElementById('editText').select();
     }, []);
 
     const updateContent = (newText) => {
         setContent({ text: newText, id: contentIndex })
     }
-    
+
     return (
         <>
             <h2 className="text-2xl font-bold">Text</h2>
@@ -28,7 +29,7 @@ export function EditText() {
                 <span className="icon-[bi--stars] size-5 absolute top-8 right-1 text-white"></span>
             </div>
             <div className="flex items-center">
-                <button onClick={() => setContent({ bold: !content[contentIndex]?.bold, id: contentIndex })} className={"rounded-full bg-[#454545] text-[#E8E9EA] w-24 h-10 min-w-10 transition-all duration-100 hover:bg-opacity-80 mr-2 flex justify-center items-center " + (content[contentIndex]?.bold ? 'bg-[#e0ffff] text-[#444444]' : '')}>
+                <button onClick={() => setContent({ bold: !content[contentIndex]?.bold, id: contentIndex })} className={"rounded-full bg-[#454545] w-24 h-10 min-w-10 transition-all duration-100 hover:bg-opacity-80 mr-2 flex justify-center items-center " + (content[contentIndex]?.bold ? 'bg-[#e0ffff] text-[#444444]' : '')}>
                     <span className="icon-[mingcute--bold-fill] text-xl"></span>
                 </button>
                 <button onClick={() => setContent({ italic: !content[contentIndex]?.italic, id: contentIndex })} className={"rounded-full bg-[#454545] w-24 h-10 min-w-10 transition-all duration-100 hover:bg-opacity-80 mr-2 flex justify-center items-center " + (content[contentIndex]?.italic ? 'bg-[#e0ffff] text-[#444444]' : '')}>
@@ -56,6 +57,17 @@ export function EditText() {
                 </div>
             </div>
             <hr className='h-0.5 my-5 bg-[#4e4e4e] border-0'></hr>
+            <div className="flex items-center w-1/2">
+                <button onClick={() => setContent({ align: 'left', id: contentIndex })} className={"rounded-md bg-[#454545] w-24 h-10 min-w-10 transition-all duration-100 hover:bg-opacity-80 mr-2 flex justify-center items-center " + (content[contentIndex]?.align == 'left' ? 'bg-[#e0ffff] text-[#444444]' : '')}>
+                    <span className="icon-[clarity--align-left-text-line] text-2xl"></span>
+                </button>
+                <button onClick={() => setContent({ align: 'center', id: contentIndex })} className={"rounded-md bg-[#454545] w-24 h-10 min-w-10 transition-all duration-100 hover:bg-opacity-80 mr-2 flex justify-center items-center " + (content[contentIndex]?.align == 'center' ? 'bg-[#e0ffff] text-[#444444]' : '')}>
+                    <span className="icon-[clarity--center-text-line] text-2xl"></span>
+                </button>
+                <button onClick={() => setContent({ align: 'right', id: contentIndex })} className={"rounded-md bg-[#454545] w-24 h-10 min-w-10 transition-all duration-100 hover:bg-opacity-80 mr-2 flex justify-center items-center " + (content[contentIndex]?.align == 'right' ? 'bg-[#e0ffff] text-[#444444]' : '')}>
+                    <span className="icon-[clarity--align-right-text-line] text-2xl"></span>
+                </button>
+            </div>
 
         </>
     )

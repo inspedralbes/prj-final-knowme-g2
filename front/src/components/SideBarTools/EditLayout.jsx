@@ -48,7 +48,7 @@ export function EditLayout() {
                         <div className='flex mt-2'>
                             <div className="flex items-center justify-center gap-4 mb-4">
                                 {portfolioComponents[grid] && portfolioComponents[grid].components.map((component, index) => (
-                                    <div className='h-12 flex flex-col items-end justify-start'>
+                                    <div className='h-12 flex flex-col items-end justify-start' key={index}>
                                         <input type="range" min="0" max="2" step="0.05" value={portfolioComponents[grid].style.sizes[index]} onChange={(e) => setSizeGrid(grid, index, e.target.value)}
                                             className="w-full h-1 transition-opacity duration-[0.2s] rounded-[5px]"
                                         />

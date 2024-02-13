@@ -1,6 +1,7 @@
 import { EditText } from "./SideBarTools/EditText.jsx";
 import { EditComponent } from "./SideBarTools/EditComponent.jsx";
 import { EditLayout } from "./SideBarTools/EditLayout.jsx";
+import { SaveData } from "./SideBarTools/SaveData.jsx";
 import { useState } from 'react'
 import { useRightSideBarStore } from '../store/rightSideBarStore.js'
 import { MenuBar } from "./MenuBar.jsx";
@@ -16,16 +17,19 @@ export function RightSideBar() {
                 <div className="h-full overflow-y-auto w-96 bg-[#2d2d2d] text-[#E8E9EA]">
                     <main className="m-10">
                         <div className={`transition-all duration-700 ease-in-out overflow-hidden ${type == 'image' ? 'opacity-100 max-h-screen' : 'opacity-0 max-h-0'}`}>
-                            {type == 'image' ? <EditImage />:''}
+                            {type == 'image' ? <EditImage /> : ''}
                         </div>
                         <div className={`transition-all duration-700 ease-in-out overflow-hidden ${type == 'text' ? 'opacity-100 max-h-screen' : 'opacity-0 max-h-0'}`}>
-                        {type == 'text' ? <EditText />:''}
+                            {type == 'text' ? <EditText /> : ''}
                         </div>
                         <div className={`transition-all duration-700 ease-in-out overflow-hidden ${type == 'component' ? 'opacity-100 max-h-screen' : 'opacity-0 max-h-0'}`}>
-                        {type == 'component' ? <EditComponent />:''}
+                            {type == 'component' ? <EditComponent /> : ''}
                         </div>
                         <div className={`transition-all duration-700 ease-in-out overflow-hidden ${type == 'layout' ? 'opacity-100 max-h-screen' : 'opacity-0 max-h-0'}`}>
                             <EditLayout />
+                        </div>
+                        <div className={`transition-all duration-700 ease-in-out overflow-hidden ${type == 'save' ? 'opacity-100 max-h-screen' : 'opacity-0 max-h-0'}`}>
+                            <SaveData />
                         </div>
                     </main>
                 </div>
