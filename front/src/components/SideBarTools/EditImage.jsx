@@ -79,7 +79,6 @@ export function EditImage() {
         setOnCanvas(value)
     }
     const handlerPositionChange = (e) => {
-        console.log(e)
         setContent({ position: e, id: contentIndex })
     }
 
