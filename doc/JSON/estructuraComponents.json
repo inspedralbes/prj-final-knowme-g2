@@ -6,6 +6,8 @@
             "type": "title",
             "complexity": 2,
             "variant": 1,
+            "row": 0,
+            "column": 0,
             "content": {
                 "title": {
                     "componentId": 20,
@@ -29,6 +31,8 @@
             "type": "separator",
             "complexity": 2,
             "variant": 1,
+            "row": 0,
+            "column": 0,
             "content": {
                 "title": {
                     "componentId": 20,
@@ -45,6 +49,8 @@
             "type": "separator",
             "complexity": 2,
             "variant": 2,
+            "row": 0,
+            "column": 0,
             "content": {
                 "title": {
                     "componentId": 20,
@@ -65,6 +71,8 @@
             "type": "sobre_mi",
             "complexity": 2,
             "variant": 1,
+            "row": 0,
+            "column": 0,
             "content": {
                 "icon": {
                     "componentId": 23,
@@ -89,6 +97,8 @@
             "type": "sobre_mi",
             "complexity": 2,
             "variant": 2,
+            "row": 0,
+            "column": 0,
             "content": {
                 "icon": "icon-[material-symbols--person-check-outline]",
                 "text": {
@@ -109,7 +119,9 @@
             "size": 3,
             "type": "contact",
             "complexity": 2,
-            "variant": 1
+            "variant": 1,
+            "row": 0,
+            "column": 0
         },
         {
             "id": 8,
@@ -117,6 +129,8 @@
             "type": "ocupation",
             "complexity": 2,
             "variant": 1,
+            "row": 0,
+            "column": 0,
             "content": {
                 "start": {
                     "componentId": 21,
@@ -154,6 +168,8 @@
             "type": "Abilities",
             "complexity": 2,
             "variant": 1,
+            "row": 0,
+            "column": 0,
             "content": {
                 "technologies": [
                     {
@@ -178,6 +194,8 @@
             "type": "Abilities",
             "complexity": 2,
             "variant": 2,
+            "row": 0,
+            "column": 0,
             "content": {
                 "technologies": [
                     {
@@ -199,6 +217,8 @@
             "type": "Projecte",
             "complexity": 2,
             "variant": 1,
+            "row": 0,
+            "column": 0,
             "content": {
                 "Títol": {
                     "componentId": 20,
@@ -238,6 +258,8 @@
             "type": "linkedPicture",
             "complexity": 2,
             "variant": 1,
+            "row": 0,
+            "column": 0,
             "content": {
                 "image": {
                     "componentId": 22,
@@ -258,6 +280,8 @@
             "type": "title",
             "complexity": 1,
             "variant": 1,
+            "row": 0,
+            "column": 0,
             "content": {
                 "text": "Arnau",
                 "font-size": "secondary",
@@ -271,6 +295,8 @@
             "type": "text",
             "complexity": 1,
             "variant": 1,
+            "row": 0,
+            "column": 0,
             "content": {
                 "text": "FullStack Developer",
                 "font-size": "tertiary",
@@ -284,6 +310,8 @@
             "type": "picture",
             "complexity": 1,
             "variant": 1,
+            "row": 0,
+            "column": 0,
             "content": {
                 "picture": "Route to pic"
             }
@@ -294,6 +322,8 @@
             "type": "icon",
             "complexity": 1,
             "variant": 1,
+            "row": 0,
+            "column": 0,
             "content": {
                 "icon": "classList de la icona del link"
             }
@@ -304,6 +334,8 @@
             "type": "icon",
             "complexity": 1,
             "variant": 2,
+            "row": 0,
+            "column": 0,
             "content": {
                 "icon": "classList de la icona del link",
                 "link": "Linked resource"
@@ -315,6 +347,8 @@
             "type": "icon",
             "complexity": 1,
             "variant": 3,
+            "row": 0,
+            "column": 0,
             "content": {
                 "text": "Nom de la tecnologia",
                 "font-size": "tertiary",

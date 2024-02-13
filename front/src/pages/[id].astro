@@ -1,0 +1,35 @@
+---
+import EditPortfolioLayout from "../layouts/EditPortfolioLayout.astro";
+import { getProbes, getProba } from "../../communicationManager.js";
+
+
+export const prerender = true;
+
+// A docker compose dona error de connexió si es proba amb el Strapi
+const { id } = Astro.params;
+
+let jsonData;
+
+if (id) {
+  jsonData = await getProba(id);
+}
+
+export async function getStaticPaths() {
+  const data = await getProbes();
+
+  return data.map((info) => {
+    return {
+      params: { id: info.id },
+    };
+  });
+}
+---
+
+<EditPortfolioLayout title="KnowMe Playground">
+  <main class="h-max w-screen">
+    <div class="flex">
+      {jsonData.attributes.example}
+      {jsonData.attributes.proba}, you are number {id}!
+    </div>
+  </main>
+</EditPortfolioLayout>
