@@ -1,13 +1,8 @@
 import { useRightSideBarStore } from '../../store/rightSideBarStore.js'
-import { useEffect } from 'react';
 
 export function ImgComponent({ id }) {
-    const { setType, content, setContentIndex, addContent } = useRightSideBarStore(state => state);
+    const { setType, content, setContentIndex } = useRightSideBarStore(state => state);
     let contentIndex = content.findIndex(item => item.id === id);
-
-    useEffect(() => {
-        addContent({ src: 'https://via.placeholder.com/150', srcOrig: 'https://via.placeholder.com/150', border: 3, radius: 50, width: 250, height: 250, rotate: 0, zoom: 100, align: 'left', id: id });
-    }, []);
 
     const handleClick = () => {
         setType('image')
