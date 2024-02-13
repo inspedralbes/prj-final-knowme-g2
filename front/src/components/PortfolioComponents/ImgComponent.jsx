@@ -6,7 +6,7 @@ export function ImgComponent({ id }) {
     let contentIndex = content.findIndex(item => item.id === id);
    
     useEffect(() => {
-        addContent({ ...content, src: 'https://via.placeholder.com/150', srcOrig: 'https://via.placeholder.com/150', border: 3, radius: 50, width: 250, height: 250, rotate: 0, zoom: 100, align: 'left', id: id });
+        addContent({ ...content, src: 'https://via.placeholder.com/150', srcOrig: 'https://via.placeholder.com/150', border: 3, radius: 50, width: 250, height: 250, rotate: 0, zoom: 100, position : {x: 0.5, y:0.5}, align: 'left', id: id });
     }, []);
 
     const handleClick = () => {

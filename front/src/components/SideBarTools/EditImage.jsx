@@ -78,6 +78,10 @@ export function EditImage() {
     const handleZoom = (value) => {
         setOnCanvas(value)
     }
+    const handlerPositionChange = (e) => {
+        console.log(e)
+        setContent({ position: e, id: contentIndex })
+    }
 
     return (
         <>
@@ -143,6 +147,7 @@ export function EditImage() {
                             image={content[contentIndex]?.srcOrig}
                             width={content[contentIndex]?.width}
                             height={content[contentIndex]?.height}
+                            position={content[contentIndex]?.position}
                             borderRadius={parseInt(content[contentIndex]?.radius)}
                             border={parseInt(content[contentIndex]?.border)}
                             color={[255, 255, 255, 0.6]} // RGBA
@@ -150,6 +155,7 @@ export function EditImage() {
                             rotate={parseInt(content[contentIndex]?.rotate)}
                             onImageChange={handlerChange}
                             onImageReady={handlerUpload}
+                            onPositionChange={ (e) => handlerPositionChange(e)}
                         />
                         <div className="flex items-center justify-center gap-4 mb-4 mt-4">
                             <label htmlFor="zoom" className="text-lg font-bold text-gray-100">Zoom</label>
