@@ -166,13 +166,67 @@ export function createDomain(domain, token) {
             if (response.status == 201) {
                 console.log('Domini creat');
                 return response.json();
+            } else if (response.status == 403) {
+                reject('Ja tens un portfoli creat!');
             } else {
-                console.log(response.error);
                 reject('Error al crear domini');
             }
         }).then(data => {
             resolve(data);
+            // console.log(data);
+        }).catch(error => {
+            reject(error);
+        });
+    });
+}
+
+export function updateDomain(domain, token) {
+    return new Promise((resolve, reject) => {
+        fetch('http://localhost:8000/api/domains/update', {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token
+            },
+            body: JSON.stringify(domain)
+        }).then( response => {
+            if (response.status == 201) {
+                console.log('Domini actualitzat');
+                return response.json();
+            } else if (response.status == 403) {
+                reject('No tens cap portfoli creat!');
+            } else {
+                reject('Error al actualitzar domini');
+            }
+        }).then(data => {
+            resolve(data);
             console.log(data);
+        }).catch(error => {
+            reject(error);
+        });
+    });
+}
+
+export function deleteDomain(token) {
+    return new Promise((resolve, reject) => {
+        fetch('http://localhost:8000/api/domains/delete', {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + token
+            }
+        }).then( response => {
+            if (response.status == 200) {
+                console.log('Domini eliminat');
+                return response.json();
+            } else if (response.status == 403) {
+                reject('No tens cap portfoli creat!');
+            } else {
+                reject('Error al eliminar domini');
+            }
+        }).then(data => {
+            resolve(data);
+            console.log(data.message);
         }).catch(error => {
             reject(error);
         });
