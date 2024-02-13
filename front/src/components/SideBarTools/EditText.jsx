@@ -8,7 +8,6 @@ export function EditText() {
     const [dropDown, setDropDown] = useState(false);
 
     useEffect(() => {
-        console.log(contentIndex);
         document.getElementById('editText').select();
     }, []);
 
