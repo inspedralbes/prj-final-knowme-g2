@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('domains', function (Blueprint $table) {
+        Schema::create('domain_tag', function (Blueprint $table) {
             $table->id()->autoIncrement();
-            $table->foreignId('id_user')->references('id')->on('users_api');
-            $table->string('webURL', 100)->unique();
-            $table->string('content');
-            $table->string('category', 100);
-            $table->boolean('isPublic')->default(false);
+
+            $table->foreignId('domain_id')->references('id')->on('domains');
+            $table->foreignId('tag_id')->references('id')->on('tags');
+
+            $table->timestamps();
         });
     }
 
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('domains');
+        Schema::dropIfExists('domain_tag');
     }
 };
