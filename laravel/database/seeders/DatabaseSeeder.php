@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Domain;
 use App\Models\Tag;
+use App\Models\UserApi;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,19 +15,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        Domain::factory(10)->create();
-        Tag::factory(5)->create()->each( function($tag){
-            $tag->domains()->sync( 
+        UserApi::factory(15)->create()->each(function ($user) {
+            Domain::factory()->create(['id_user' => $user->id]);
+        });
+
+        Tag::factory()->times(7)->create()->each(function ($tag) {
+            $tag->domains()->sync(
                 Domain::all()->random(3)
             );
         });
-        
-
-        // \App\Models\User::factory(10)->create();
-
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
     }
 }

@@ -12,12 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('domain_tag', function (Blueprint $table) {
-            $table->id()->autoIncrement();
-
-            $table->foreignId('domain_id')->references('id')->on('domains');
-            $table->foreignId('tag_id')->references('id')->on('tags');
-
-            $table->timestamps();
+            $table->foreignId('domain_id')->references('id')->on('domains')->onDelete('cascade');
+            $table->foreignId('tag_id')->references('id')->on('tags')->onDelete('cascade');
         });
     }
 
