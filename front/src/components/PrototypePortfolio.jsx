@@ -6,7 +6,7 @@ import { useRightSideBarStore } from '../store/rightSideBarStore.js'
 
 export function PrototypePortfolio() {
     const [draggedOverIndex, setDraggedOverIndex] = useState(null);
-    const { setType, portfolioComponents, setPortfolioComponents, componentItem, setComponentItem } = useRightSideBarStore(state => state);
+    const { setType, portfolioComponents, setPortfolioComponents, componentItem, setComponentItem, addContent } = useRightSideBarStore(state => state);
 
     const draggingOver = (evt, gridIndex, componentIndex) => {
         evt.preventDefault();
@@ -29,9 +29,11 @@ export function PrototypePortfolio() {
             switch (componentItem.id) {
                 case "TitleComponent":
                     updatePortfolioComponent(TitleComponent, gridIndex, componentIndex, componentItem.key, evt);
+                    addContent({ text: 'Hey, I\'m Loris Crisafo Norte', bold: true, id: parseInt(componentItem.key), align: 'left' });
                     break;
                 case "ImgComponent":
                     updatePortfolioComponent(ImgComponent, gridIndex, componentIndex, componentItem.key, evt);
+                    addContent({ src: 'https://via.placeholder.com/150', srcOrig: 'https://via.placeholder.com/150', border: 3, radius: 50, width: 250, height: 250, rotate: 0, zoom: 100, align: 'left', id: parseInt(componentItem.key) });
                     break;
             }
 
