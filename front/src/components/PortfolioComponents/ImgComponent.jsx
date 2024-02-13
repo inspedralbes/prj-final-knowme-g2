@@ -1,28 +1,30 @@
 import { useRightSideBarStore } from '../../store/rightSideBarStore.js'
 import { useEffect } from 'react';
 
-export function ImgComponent() {
-    const { setType, content, setContent } = useRightSideBarStore(state => state);
-
+export function ImgComponent({ id }) {
+    const { setType, content, setContentIndex, addContent } = useRightSideBarStore(state => state);
+    let contentIndex = content.findIndex(item => item.id === id);
+   
     useEffect(() => {
-        content?.src == undefined ? setContent({ ...content, src: 'https://via.placeholder.com/150' }) : null
-        content?.border == undefined ? setContent({ ...content, border: 3 }) : null
-        content?.radius == undefined ? setContent({ ...content, radius: 50 }) : null
-        content?.width == undefined ? setContent({ ...content, width: 250 }) : null
-        content?.height == undefined ? setContent({ ...content, height: 250 }) : null
-    });
+        addContent({ ...content, src: 'https://via.placeholder.com/150', srcOrig: 'https://via.placeholder.com/150', border: 3, radius: 50, width: 250, height: 250, rotate: 0, zoom: 100, align: 'left', id: id });
+    }, []);
+
+    const handleClick = () => {
+        setType('image')
+        setContentIndex(contentIndex)
+    }
 
     const styles = {
-        border: `${content?.border}px solid black`,
-        borderRadius: `${content?.radius}%`,
-        width: `${content?.width}px`,
-        height: `${content?.height}px`
+        border: `${content[contentIndex]?.border}px solid black`,
+        borderRadius: `${content[contentIndex]?.radius}%`,
+        width: `${content[contentIndex]?.width}px`,
+        height: `${content[contentIndex]?.height}px`
     }
     return (
 
         <>
-            <div className="min-h-12">
-                <img onClick={() => setType('image')} className='size-52' alt="" style={styles} src={content?.src} id="preview" />
+            <div onClick={() => handleClick()} className={"min-h-12 items-center flex " + (content[contentIndex]?.align == 'left' ? "justify-start" : content[contentIndex]?.align == 'center' ? "justify-center" : "justify-end")}>
+                <img className='size-52' alt="" style={styles} src={content[contentIndex]?.src} id="preview" />
             </div>
         </>
     )
