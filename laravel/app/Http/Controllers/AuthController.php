@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Domain;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
@@ -118,6 +119,7 @@ class AuthController extends Controller
 
     public function delete(Request $request){
         $user = auth()->user();
+        Domain::where('user_id', $user->id)->delete();
         $user->delete();
         $user->tokens()->delete();
 
