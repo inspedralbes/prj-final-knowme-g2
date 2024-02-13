@@ -209,7 +209,7 @@ export function updateDomain(domain, token) {
 
 export function deleteDomain(token) {
     return new Promise((resolve, reject) => {
-        fetch('http://localhost:8000/api/domains/delete', {
+        fetch('http://laravel:8000/api/domains/delete', {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
@@ -235,7 +235,7 @@ export function deleteDomain(token) {
 
 export function getDomains() {
     return new Promise((resolve, reject) => {
-        fetch('http://localhost:8000/api/domains', {
+        fetch('http://laravel:8000/api/domains', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -257,7 +257,7 @@ export function getDomains() {
 
 export function showDomain(id) {
     return new Promise((resolve, reject) => {
-        fetch(`http://localhost:8000/api/domains/${id}`, {
+        fetch(`http://laravel:8000/api/domains/${id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'

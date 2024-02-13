@@ -13,6 +13,11 @@ export function SaveData() {
                 });
             });
         });
+        const data = {
+            content: baseContent,
+            portfolioComponents: basePortfolioComponents
+        }
+        
         console.log(baseContent);
         console.log(basePortfolioComponents);
     }
