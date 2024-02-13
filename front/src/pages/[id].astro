@@ -1,5 +1,6 @@
 ---
 import EditPortfolioLayout from "../layouts/EditPortfolioLayout.astro";
+import { ShowPortfolio } from "../components/ShowPortfolio.jsx";
 import { getProbes, getProba } from "../../communicationManager.js";
 
 
@@ -25,11 +26,10 @@ export async function getStaticPaths() {
 }
 ---
 
-<EditPortfolioLayout title="KnowMe Playground">
+<EditPortfolioLayout title={jsonData.attributes.proba}>
   <main class="h-max w-screen">
     <div class="flex">
-      {jsonData.attributes.example}
-      {jsonData.attributes.proba}, you are number {id}!
+      <ShowPortfolio jsonData={jsonData}/>
     </div>
   </main>
 </EditPortfolioLayout>
