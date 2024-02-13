@@ -19,16 +19,16 @@ export function PrototypePortfolio() {
     }
 
     const startDrag = (evt, gridIndex, componentIndex, elementIndex) => {
+        console.log(portfolioComponents);
         setComponentItem({ elementIndex: elementIndex, componentIndex: componentIndex, gridIndex: gridIndex, mode: "move", key: componentItem.key });
     }
 
     const onDrop = (evt, gridIndex, componentIndex) => {
         setDraggedOverIndex(null);
-
         if (componentItem.mode == "add") {
             switch (componentItem.id) {
                 case "TitleComponent":
-                    updatePortfolioComponent(TitleComponent, gridIndex, componentIndex, componentItem.key, evt);
+                    updatePortfolioComponent(TitleComponent, gridIndex, componentIndex, evt);
                     console.log(componentItem.key);
                     addContent({ text: 'Hey, I\'m Loris Crisafo Norte', bold: true, id: parseInt(componentItem.key), align: 'left' });
                     break;
@@ -58,10 +58,10 @@ export function PrototypePortfolio() {
         }
     }
 
-    const updatePortfolioComponent = (Component, gridIndex, componentIndex, ItemKey, evt) => {
+    const updatePortfolioComponent = (Component, gridIndex, componentIndex, evt) => {
         const newComponents = [...portfolioComponents];
         const key = newComponents.length + 1;
-        const component = <Component key={key} id={parseInt(ItemKey)} />;
+        const component = <Component key={key} id={parseInt(componentItem.key)} />;
 
         if (newComponents[gridIndex].components[componentIndex].length != 0) {
             const elementIndex = evt.target.parentNode.parentNode.dataset.key;

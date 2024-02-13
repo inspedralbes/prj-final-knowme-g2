@@ -3,7 +3,6 @@ import EditPortfolioLayout from "../layouts/EditPortfolioLayout.astro";
 import { ShowPortfolio } from "../components/ShowPortfolio.jsx";
 import { getDomains, showDomain } from "../services/communicationManager.js";
 
-
 export const prerender = true;
 
 // A docker compose dona error de connexió si es proba amb el Strapi
@@ -12,11 +11,33 @@ const { id } = Astro.params;
 let jsonData;
 
 if (id) {
-  jsonData = await showDomain(id);
+  jsonData = [
+    {
+      components: [[], [4], []],
+      style: {
+        sizes: [1, 1, 1],
+        string: "minmax(40px,1fr) minmax(40px,1fr) minmax(40px,1fr)",
+      },
+    },
+    {
+      components: [[], [], []],
+      style: {
+        sizes: [1, 1, 1],
+        string: "minmax(40px,1fr) minmax(40px,1fr) minmax(40px,1fr)",
+      },
+    },
+    {
+      components: [[], [], []],
+      style: {
+        sizes: [1, 1, 1],
+        string: "minmax(40px,1fr) minmax(40px,1fr) minmax(40px,1fr)",
+      },
+    },
+  ];
 }
 
 export async function getStaticPaths() {
-  const data = await getDomains();
+  const data = [{ id: 1 }];
 
   return data.map((info) => {
     return {
@@ -26,10 +47,10 @@ export async function getStaticPaths() {
 }
 ---
 
-<EditPortfolioLayout title={jsonData.attributes.proba}>
+<EditPortfolioLayout title={"hola"}>
   <main class="h-max w-screen">
     <div class="flex">
-      <ShowPortfolio jsonData={jsonData}/>
+      <ShowPortfolio jsonData={jsonData} />
     </div>
   </main>
 </EditPortfolioLayout>

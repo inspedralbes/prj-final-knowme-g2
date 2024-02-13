@@ -1,4 +1,6 @@
 import { useRightSideBarStore } from '../../store/rightSideBarStore.js'
+import { motion } from "framer-motion";
+
 
 export function ImgComponent({ id }) {
     const { setType, content, setContentIndex } = useRightSideBarStore(state => state);
@@ -7,6 +9,7 @@ export function ImgComponent({ id }) {
     const handleClick = () => {
         setType('image')
         setContentIndex(contentIndex)
+        console.log(id);
     }
 
     const styles = {
@@ -18,13 +21,13 @@ export function ImgComponent({ id }) {
     return (
 
         <>
-            <div onClick={() => handleClick()} className={"min-h-12 items-center flex " +
+            <motion.div layoutId={id + 1} onClick={() => handleClick()} className={"min-h-12 items-center flex " +
                 (content[contentIndex]?.align == 'left' ?
                     "justify-start" : content[contentIndex]?.align == 'center' ?
                         "justify-center" : content[contentIndex]?.align == 'right' ?
                             "justify-end" : "")}>
                 <img className='size-52' alt="" style={styles} src={content[contentIndex]?.src} id="preview" />
-            </div>
+            </motion.div>
         </>
     )
 }
