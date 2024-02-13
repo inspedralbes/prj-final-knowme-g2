@@ -1,20 +1,28 @@
-				import { registerUser } from '../services/communicationManager.js';
+import { registerUser } from '../services/communicationManager.js';
 				import { loginUser } from '../services/communicationManager.js';
-				import {logoutUser} from '../services/communicationManager.js';
-				import {updateUser} from '../services/communicationManager.js';
-				import {changePassword} from '../services/communicationManager.js';
-				import {deleteUser} from '../services/communicationManager.js';
-				import {createDomain} from '../services/communicationManager.js';
-				import {updateDomain} from '../services/communicationManager.js';
-				import {deleteDomain} from '../services/communicationManager.js';
+				import { logoutUser } from '../services/communicationManager.js';
+				import { updateUser } from '../services/communicationManager.js';
+				import { changePassword } from '../services/communicationManager.js';
+				import { deleteUser } from '../services/communicationManager.js';
+				import { createDomain } from '../services/communicationManager.js';
+				import { updateDomain } from '../services/communicationManager.js';
+				import { deleteDomain } from '../services/communicationManager.js';
+				import { getDomains } from '../services/communicationManager.js';
+				import { showDomain } from '../services/communicationManager.js';
 
+
+				// Get domains
+				// getDomains().then(data => console.log(data));
+
+				// Show domain
+				// showDomain(1).then(data => console.log(data));
 
 				// Register user and create domain
 				// const user = {
 				// 		user: 'juls',
 				// 		name: 'John Doe',
 				// 		surnames: 'Doe',
-				// 		email: 'jul@gmail.com',
+				// 		email: 'villegas@gmail.com',
 				// 		password: '12345678vL',
 				// 		password_confirmation: '12345678vL'
 				// };
@@ -24,10 +32,10 @@
 				// 		console.log(data);
 				// 		const token = data.token;
 				// 		const domain = {
-				// 				webURL: 'doe.com',
-				// 				content: 'This is the domain of John Doe',
+				// 				webURL: 'vill.com',
+				// 				content: 'This is the domain of Julie Villegas',
 				// 			    category: 'Personal Assitant',
-				// 				isPublic: 0,
+				// 				isPublic: 1,
 				// 			};
 				// 			console.log('Creating domain');
 				// 			console.log(domain);
