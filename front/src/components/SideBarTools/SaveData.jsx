@@ -5,8 +5,16 @@ export function SaveData() {
     const { content, portfolioComponents } = useRightSideBarStore(state => state);
 
     const handleClick = () => {
-        console.log(content);
-        console.log(portfolioComponents);
+        const baseContent = content;
+        const basePortfolioComponents = portfolioComponents.map((line) => {
+            return line.components.map((component) => {
+                return component.map((element) => {
+                    return element.props.id;
+                });
+            });
+        });
+        console.log(baseContent);
+        console.log(basePortfolioComponents);
     }
 
     return (

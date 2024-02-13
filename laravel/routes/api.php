@@ -11,7 +11,7 @@ use App\Http\Controllers\DomainController;
     Route::post('/login', [AuthController::class, 'login']);
     //domains
     Route::get('/domains', [DomainController::class, 'index']);
-    Route::get('/domains/{web}', [DomainController::class, 'show']);
+    Route::get('/domains/{id}', [DomainController::class, 'show']);
 
 //protected routes
 Route::group(['middleware' => ['auth:sanctum']], function () {

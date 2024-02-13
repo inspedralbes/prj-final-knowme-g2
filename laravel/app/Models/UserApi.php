@@ -24,7 +24,6 @@ class UserApi extends Authenticatable
     public $timestamps = false;
     
     protected $hidden = [
-        'password',
-        'remember_token',
+        'password'
     ];
 }
