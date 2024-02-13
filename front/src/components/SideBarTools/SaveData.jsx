@@ -17,9 +17,15 @@ export function SaveData() {
             content: baseContent,
             portfolioComponents: basePortfolioComponents
         }
-        
-        console.log(baseContent);
-        console.log(basePortfolioComponents);
+
+        const body = {
+            id_user: 1,
+            webURL: 'loris-crisafo',
+            content: JSON.stringify(data),
+            isPublic: true
+        }
+
+        console.log(JSON.stringify(body));
     }
 
     return (
