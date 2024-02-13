@@ -4,6 +4,30 @@ export const useRightSideBarStore = create((set) => ({
     type: 'component',
     content: [],
     contentIndex: 0,
+    componentItem: {},
+    portfolioComponents: [
+        {
+            components: [[], [], []],
+            style: {
+                sizes: [1, 1, 1],
+                string: "minmax(40px,1fr) minmax(40px,1fr) minmax(40px,1fr)"
+            }
+        },
+        {
+            components: [[], [], []],
+            style: {
+                sizes: [1, 1, 1],
+                string: "minmax(40px,1fr) minmax(40px,1fr) minmax(40px,1fr)"
+            }
+        },
+        {
+            components: [[], [], []],
+            style: {
+                sizes: [1, 1, 1],
+                string: "minmax(40px,1fr) minmax(40px,1fr) minmax(40px,1fr)"
+            }
+        },
+    ],
     setType: (value) => set({ type: value }),
     setContent: (newContent) => set(prevState => ({
         ...prevState,
@@ -14,4 +38,6 @@ export const useRightSideBarStore = create((set) => ({
         content: [...prevState.content, newContent]
     })),
     setContentIndex: (value) => set({ contentIndex: value }),
+    setPortfolioComponents: (newContent) => set({ portfolioComponents: newContent }),
+    setComponentItem: (newComponentItem) => set({ componentItem: newComponentItem }),
 }));

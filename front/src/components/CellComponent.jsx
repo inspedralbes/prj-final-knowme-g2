@@ -1,7 +1,3 @@
-import { useState } from 'react';
-import { TitleComponent } from "./PortfolioComponents/TitleComponent.jsx";
-import { ImgComponent } from "./PortfolioComponents/ImgComponent.jsx";
-
 export function CellComponent({ componentData }) {
     return (
         <>
