@@ -12,12 +12,12 @@ const { id } = Astro.params;
 let jsonData;
 
 if (id) {
-  jsonData = await getProba(id);
+  jsonData = await showDomain(id);
 }
 
 console.log(jsonData);
 
-export async function getStaticPaths() {
+export async function getDomains() {
   const data = await getProbes();
 
   return data.map((info) => {
