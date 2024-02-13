@@ -20,6 +20,7 @@ class Domain extends Model
         'content',
         'category',
         'isPublic',
+        'portfolioComponents'
     ];
 
     public $timestamps = false;

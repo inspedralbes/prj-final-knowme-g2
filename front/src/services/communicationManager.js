@@ -7,7 +7,7 @@ export function registerUser(user) {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(user)
-        }).then( response => {
+        }).then(response => {
             if (response.status == 201) {
                 // console.log('Usuari registrat');
                 // Parsear la respuesta JSON
@@ -36,7 +36,7 @@ export function loginUser(user) {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify(user)
-        }).then( response => {
+        }).then(response => {
             if (response.status == 201) {
                 console.log('Usuari loguejat');
                 return response.json();
@@ -45,8 +45,8 @@ export function loginUser(user) {
             } else {
                 reject('Error al loguejar-se');
             }
-        }).then( data => {   
-            resolve(data);         
+        }).then(data => {
+            resolve(data);
             // console.log(data.user);
             // console.log(data.token);
         }).catch(error => {
@@ -60,12 +60,12 @@ export function logoutUser(token) {
     return new Promise((resolve, reject) => {
         fetch('http://localhost:8000/api/logout', {
             method: 'POST',
-            headers: { 
+            headers: {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + token
             },
-            
-        }).then( response => {
+
+        }).then(response => {
             if (response.status == 200) {
                 // console.log('Usuari desloguejat');
                 resolve('Usuari desloguejat');
@@ -87,7 +87,7 @@ export function updateUser(user, token) {
                 'Authorization': 'Bearer ' + token
             },
             body: JSON.stringify(user)
-        }).then( response => {
+        }).then(response => {
             if (response.status == 201) {
                 // console.log('Usuari actualitzat');
                 return response.json();
@@ -112,7 +112,7 @@ export function changePassword(password, token) {
                 'Authorization': 'Bearer ' + token
             },
             body: JSON.stringify(password)
-        }).then( response => {
+        }).then(response => {
             if (response.status == 200) {
                 // console.log('Contrasenya canviada');
                 return response.json();
@@ -136,7 +136,7 @@ export function deleteUser(token) {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + token
             }
-        }).then( response => {
+        }).then(response => {
             if (response.status == 200) {
                 // console.log('Usuari eliminat');
                 return response.json();
@@ -153,16 +153,28 @@ export function deleteUser(token) {
 }
 
 // functions DOMAINS
-export function createDomain(domain, token) {
+export function createDomain(content, portfolioComponents, link, category, isPublic, token) {
     return new Promise((resolve, reject) => {
+        let formData = new FormData();
+        console.log(content);
+        console.log(portfolioComponents);
+        console.log(link);
+        console.log(category);
+        console.log(isPublic);
+        console.log(token);
+        formData.append('content', JSON.stringify(content));
+        formData.append('portfolioComponents', JSON.stringify(portfolioComponents));
+        formData.append('webURL', link);
+        formData.append('category', category);
+        formData.append('isPublic', isPublic);
         fetch('http://localhost:8000/api/domains', {
             method: 'POST',
             headers: {
-                'Content-Type': 'application/json',
-                'Authorization': 'Bearer ' + token
+                'Access-Control-Allow-Origin': '*',
+                Authorization: `Bearer ${token}`,
             },
-            body: JSON.stringify(domain)
-        }).then( response => {
+            body: formData
+        }).then(response => {
             if (response.status == 201) {
                 console.log('Domini creat');
                 return response.json();
@@ -189,7 +201,7 @@ export function updateDomain(domain, token) {
                 'Authorization': 'Bearer ' + token
             },
             body: JSON.stringify(domain)
-        }).then( response => {
+        }).then(response => {
             if (response.status == 201) {
                 console.log('Domini actualitzat');
                 return response.json();
@@ -215,7 +227,7 @@ export function deleteDomain(token) {
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + token
             }
-        }).then( response => {
+        }).then(response => {
             if (response.status == 200) {
                 console.log('Domini eliminat');
                 return response.json();
@@ -240,7 +252,7 @@ export function getDomains() {
             headers: {
                 'Content-Type': 'application/json'
             }
-        }).then( response => {
+        }).then(response => {
             if (response.status == 200) {
                 return response.json();
             } else {
@@ -262,7 +274,7 @@ export function showDomain(id) {
             headers: {
                 'Content-Type': 'application/json'
             }
-        }).then( response => {
+        }).then(response => {
             if (response.status == 200) {
                 return response.json();
             } else {

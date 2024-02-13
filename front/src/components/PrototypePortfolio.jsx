@@ -6,7 +6,7 @@ import { useRightSideBarStore } from '../store/rightSideBarStore.js'
 
 export function PrototypePortfolio() {
     const [draggedOverIndex, setDraggedOverIndex] = useState(null);
-    const { setType, portfolioComponents, setPortfolioComponents, componentItem, setComponentItem, addContent } = useRightSideBarStore(state => state);
+    const { setType, portfolioComponents, setPortfolioComponents, componentItem, setComponentItem, addContent, setPortfolioRow } = useRightSideBarStore(state => state);
 
     const draggingOver = (evt, gridIndex, componentIndex) => {
         evt.preventDefault();
@@ -28,8 +28,7 @@ export function PrototypePortfolio() {
         if (componentItem.mode == "add") {
             switch (componentItem.id) {
                 case "TitleComponent":
-                    updatePortfolioComponent(TitleComponent, gridIndex, componentIndex, evt);
-                    console.log(componentItem.key);
+                    updatePortfolioComponent(TitleComponent, gridIndex, componentIndex, componentItem.key, evt);
                     addContent({ text: 'Hey, I\'m Loris Crisafo Norte', bold: true, id: parseInt(componentItem.key), align: 'left' });
                     break;
                 case "ImgComponent":
@@ -81,6 +80,20 @@ export function PrototypePortfolio() {
         setType('component')
     }
 
+    const addRow = () => {
+        const newComponents = [...portfolioComponents];
+        newComponents.push({
+            components: [[], [], []],
+            style: {
+                sizes: [1, 1, 1],
+                string: "minmax(40px,1fr) minmax(40px,1fr) minmax(40px,1fr)"
+            }
+        });
+
+        console.log(newComponents)
+        setPortfolioComponents(newComponents);
+    }
+
     return (
         <>
             <div className="h-screen w-3/4 max-w-proses mx-20 bg-white shadow-lg p-8 overflow-hidden overflow-ellipsis overflow-y-visible whitespace-nowrap">
@@ -106,6 +119,10 @@ export function PrototypePortfolio() {
                         })}
                     </div>
                 ))}
+                <button onClick={() => addRow()} className='hover:text-blue-300 text-white mt-2 w-full flex items-center justify-center bg-blue-500 hover:bg-blue-600 rounded-sm py-2'>
+                    <span className="icon-[tabler--circle-plus]  text-xl"></span>
+                </button>
+
             </div>
         </>
     )
