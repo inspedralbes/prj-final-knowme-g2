@@ -95,20 +95,18 @@ class DomainController extends Controller
         return response($domains, 200);
     }
 
-    public function show($web){
-        $domain = Domain::where('webURL', $web)->first();
+    public function show($id){
+        $domain = Domain::where('id', $id)->first();
 
         if(!$domain){
             return response(['error' => 'No s\'ha trobat el portfoli'], 404);
         } else if ($domain->isPublic == false){
             return response(['error' => 'Aquest portfoli és privat!'], 403);
+        } else {
+            $response = [
+                'domini' => $domain
+            ];
+            return response($response, 200);
         }
-
-        $response = [
-            'domain_content' => $domain->content
-        ];
-
-        return response($response, 200);
     }
-
 }

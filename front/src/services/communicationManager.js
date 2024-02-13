@@ -200,7 +200,7 @@ export function updateDomain(domain, token) {
             }
         }).then(data => {
             resolve(data);
-            console.log(data);
+            // console.log(data);
         }).catch(error => {
             reject(error);
         });
@@ -226,7 +226,51 @@ export function deleteDomain(token) {
             }
         }).then(data => {
             resolve(data);
-            console.log(data.message);
+            // console.log(data.message);
+        }).catch(error => {
+            reject(error);
+        });
+    });
+}
+
+export function getDomains() {
+    return new Promise((resolve, reject) => {
+        fetch('http://localhost:8000/api/domains', {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then( response => {
+            if (response.status == 200) {
+                return response.json();
+            } else {
+                reject('Error al obtenir els dominis');
+            }
+        }).then(data => {
+            resolve(data);
+            console.log(data);
+        }).catch(error => {
+            reject(error);
+        });
+    });
+}
+
+export function showDomain(id) {
+    return new Promise((resolve, reject) => {
+        fetch(`http://localhost:8000/api/domains/${id}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }).then( response => {
+            if (response.status == 200) {
+                return response.json();
+            } else {
+                reject('Error al mostrar el domini');
+            }
+        }).then(data => {
+            resolve(data);
+            console.log(data);
         }).catch(error => {
             reject(error);
         });
