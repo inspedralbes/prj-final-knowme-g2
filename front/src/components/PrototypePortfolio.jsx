@@ -19,7 +19,7 @@ export function PrototypePortfolio() {
     }
 
     const startDrag = (evt, gridIndex, componentIndex, elementIndex) => {
-        setComponentItem({ elementIndex: elementIndex, componentIndex: componentIndex, gridIndex: gridIndex, mode: "move" });
+        setComponentItem({ elementIndex: elementIndex, componentIndex: componentIndex, gridIndex: gridIndex, mode: "move", key: componentItem.key });
     }
 
     const onDrop = (evt, gridIndex, componentIndex) => {
@@ -29,6 +29,7 @@ export function PrototypePortfolio() {
             switch (componentItem.id) {
                 case "TitleComponent":
                     updatePortfolioComponent(TitleComponent, gridIndex, componentIndex, componentItem.key, evt);
+                    console.log(componentItem.key);
                     addContent({ text: 'Hey, I\'m Loris Crisafo Norte', bold: true, id: parseInt(componentItem.key), align: 'left' });
                     break;
                 case "ImgComponent":
@@ -52,6 +53,7 @@ export function PrototypePortfolio() {
                 newComponents[gridIndex].components[componentIndex].splice(elementIndex, 0, draggedComponent);
             }
 
+            console.log(newComponents);
             setPortfolioComponents(newComponents);
         }
     }
