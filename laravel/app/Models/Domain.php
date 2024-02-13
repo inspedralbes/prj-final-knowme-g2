@@ -24,8 +24,4 @@ class Domain extends Model
     ];
 
     public $timestamps = false;
-
-    protected $hidden = [
-        'id'
-    ];
 }
