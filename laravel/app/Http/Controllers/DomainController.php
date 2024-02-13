@@ -12,20 +12,23 @@ class DomainController extends Controller
     
     public function create(Request $request){
         $user = auth('sanctum')->user();
-        return $user;
         if(!$user){
             return response(['error' => 'Unauthorized'], 401);
         } else if (Domain::where('id_user', $user->id)->count() >= 1){
             return response(['error' => 'Ja tens un portfoli creat!'], 403);
         } else {
             $fields = $request->validate([
-                'webURL' => 'required|string|unique:domains,webURL',
-                'content' => 'required|string',
-                'category' => 'required|string',
-                'isPublic' => 'required|boolean',
-                'portfolioComponents' => 'required|string'
+                'webURL' => 'required|unique:domains,webURL',
+                'content' => 'required',
+                'category' => 'required',
+                'isPublic' => 'required',
+                'portfolioComponents' => 'required'
             ]);
-    
+            if($fields['isPublic'] == 'true'){
+                $fields['isPublic'] = 1;
+            } else {
+                $fields['isPublic'] = 0;
+            }
             $domain = Domain::create([
                 'id_user'=> $user->id,
                 'webURL'=> $fields['webURL'],
