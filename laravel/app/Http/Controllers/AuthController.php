@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Domain;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
@@ -18,14 +19,16 @@ class AuthController extends Controller
             'surnames' => 'required|string',
             'email'=> 'required|string|unique:users_api,email',
             'password'=> 'required|string|min:8|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/|confirmed'
-        ]);
+        ]); 
+
+
 
         $user = UserApi::create([
             'user'=> $fields['user'],
             'name'=> $fields['name'],
             'surnames'=> $fields['surnames'],
             'email'=> $fields['email'],
-            'password'=> bcrypt($fields['password'])
+            'password'=> $fields['password']
         ]);
 
         $token = $user->createToken('myapptoken')->plainTextToken;
@@ -48,7 +51,7 @@ class AuthController extends Controller
         $user = UserApi::where('user', $fields['user'])->first();
 
         //Check password
-        if(!$user || !Hash::check($fields['password'], $user->password)){
+        if(!$user || $fields['password'] != $user->password){
             return response([
                 'message' => 'Credencials incorrectes'
             ], 401);
@@ -99,14 +102,14 @@ class AuthController extends Controller
 
         $user = auth()->user();
         
-        if (!Hash::check($fields['oldPassword'], $user->password)){
+        if ($fields['oldPassword'] != $user->password){
             return response([
                 'message' => 'Old password incorrect'
             ], 401);
         }
 
         $user->update([
-            'password'=> bcrypt($fields['password'])
+            'password'=> $fields['password']
         ]);
 
         return  [
@@ -116,6 +119,7 @@ class AuthController extends Controller
 
     public function delete(Request $request){
         $user = auth()->user();
+        Domain::where('user_id', $user->id)->delete();
         $user->delete();
         $user->tokens()->delete();
 
