@@ -27,5 +27,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     //domains
     Route::put('/domains/update', [DomainController::class, 'update']);
     Route::delete('/domains/delete', [DomainController::class, 'delete']);
+    Route::post('/domains', [DomainController::class, 'create']);
 });
 

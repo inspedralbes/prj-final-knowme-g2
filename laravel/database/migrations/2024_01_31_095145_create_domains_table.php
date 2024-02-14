@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('domains', function (Blueprint $table) {
             $table->id()->autoIncrement();
-            $table->bigInteger('id_user')->unsigned();
+            $table->foreignId('id_user')->references('id')->on('users_api');
             $table->string('webURL', 100)->unique();
             $table->longText('content');
             $table->string('category', 100);
