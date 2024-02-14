@@ -75,7 +75,7 @@ services:
       context: ./sites-available
     container_name: docker-php
     ports:
-      - "82:80"
+      - "80:80"
       - "8000:8000"
     volumes:
       - ./laravel:/var/www/html/

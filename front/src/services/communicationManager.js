@@ -156,22 +156,47 @@ export function deleteUser(token) {
 export function createDomain(content, portfolioComponents, link, category, isPublic, token) {
     return new Promise((resolve, reject) => {
         let formData = new FormData();
-        console.log(content);
+        // console.log(content);
         console.log(portfolioComponents);
-        console.log(link);
-        console.log(category);
-        console.log(isPublic);
-        console.log(token);
-        formData.append('content', JSON.stringify(content));
+        // console.log(content);
+        // console.log(link);
+        // console.log(category);
+        // console.log(isPublic);
+        // console.log(token);
+
+        const modificarContent = content.map((element) => {
+            element.type=element.text==undefined?'TitleComponent':'ImageComponent';
+            return element;
+        });
+        
+
+        const enviar = portfolioComponents.map((row) => {
+            return {
+                components: row.components.map((element) => {
+                    return element.map((component) => {
+                        return content[component.props.id-1];
+                    })
+                }),
+                    style: row.style
+                }
+        });
+
+        console.log(enviar);
+        
+
+
+
+        formData.append('content', JSON.stringify({content, portfolioComponents}));
         formData.append('portfolioComponents', JSON.stringify(portfolioComponents));
         formData.append('webURL', link);
+        formData.append('id_user', 2)
         formData.append('category', category);
         formData.append('isPublic', isPublic);
         fetch('http://web/public/api/domains', {
             method: 'POST',
             headers: {
                 'Access-Control-Allow-Origin': '*',
-                // Authorization: `Bearer ${token}`,
+                Authorization: `Bearer ${token}`,
             },
             body: formData
         }).then(response => {

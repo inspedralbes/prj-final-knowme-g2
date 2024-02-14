@@ -1,8 +1,7 @@
 ---
 import EditPortfolioLayout from "../layouts/EditPortfolioLayout.astro";
 import { ShowPortfolio } from "../components/ShowPortfolio.jsx";
-import { getDomains, showDomain, getProbes, getProba } from "../services/communicationManager.js";
-
+import { getDomains, showDomain, getProbes, getProba} from "../services/communicationManager.js";
 
 export const prerender = true;
 
@@ -14,7 +13,19 @@ let jsonData;
 if (id) {
   jsonData = [
     {
-      components: [[], [4], []],
+      components: [
+        [],
+        [
+          {
+            id: 1,
+            type: "TitleComponent",
+            text: "Título",
+            bold: true,
+            align: "center",
+          },
+        ],
+        [],
+      ],
       style: {
         sizes: [1, 1, 1],
         string: "minmax(40px,1fr) minmax(40px,1fr) minmax(40px,1fr)",
@@ -37,10 +48,16 @@ if (id) {
   ];
 }
 
+if (id) {
+  jsonData = await showDomain(id);
+
+  let content;
+}
+
 console.log(jsonData);
 
 export async function getStaticPaths() {
-  const data = [{ id: 1 }];
+  const data = await getDomains();
 
   return data.map((info) => {
     return {
