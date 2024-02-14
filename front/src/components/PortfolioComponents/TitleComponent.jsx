@@ -1,25 +1,24 @@
 import { useRightSideBarStore } from '../../store/rightSideBarStore.js'
-import { useEffect } from 'react';
 
 export function TitleComponent({ id }) {
-    const { setType, content, addContent, setContentIndex } = useRightSideBarStore(state => state);
-    let contentIndex = content.findIndex(item => item.id === id);
+    const { setType, content, setContentIndex } = useRightSideBarStore(state => state);
+
     const handleClick = () => {
+        setContentIndex(id)
         setType('text');
-        setContentIndex(contentIndex)
         try {
             document.getElementById('editText').select();
-        } catch (error) {}
+        } catch (error) { }
     }
-
-    useEffect(() => {
-        addContent({ ...content, text: 'Hey, I\'m Loris Crisafo Norte', bold: true, id: id });
-    }, []);
 
     return (
         <>
-            <div onClick={() => handleClick()} className="w-2/3 min-w-96 min-h-12">
-                <h1 className={"text-8xl transition-all duration-75 font-inter text-pretty hover:cursor-text " + (content[contentIndex]?.bold ? 'font-bold ' : '') + (content[contentIndex]?.italic ? 'italic ' : '')}> {content[contentIndex]?.text} </h1>
+            <div onClick={() => handleClick()} className={"w-2/3 min-w-96 min-h-12 " +
+                (content[id]?.align == 'left' ?
+                    "text-left mr-auto" : content[id]?.align == 'center' ?
+                        "text-center m-auto" : content[id]?.align == 'right' ?
+                            "text-right ml-auto" : "")}>
+                <h1 className={"text-8xl transition-all duration-75 font-inter text-pretty hover:cursor-text " + (content[id]?.bold ? 'font-bold ' : '') + (content[id]?.italic ? 'italic ' : '')}> {content[id]?.text} </h1>
             </div>
         </>
     )

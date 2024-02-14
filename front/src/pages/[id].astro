@@ -1,6 +1,7 @@
 ---
 import EditPortfolioLayout from "../layouts/EditPortfolioLayout.astro";
-import { getProbes, getProba } from "../../communicationManager.js";
+import { ShowPortfolio } from "../components/ShowPortfolio.jsx";
+import { getDomains, showDomain } from "../services/communicationManager.js";
 
 
 export const prerender = true;
@@ -11,11 +12,11 @@ const { id } = Astro.params;
 let jsonData;
 
 if (id) {
-  jsonData = await getProba(id);
+  jsonData = await showDomain(id);
 }
 
 export async function getStaticPaths() {
-  const data = await getProbes();
+  const data = await getDomains();
 
   return data.map((info) => {
     return {
@@ -25,11 +26,10 @@ export async function getStaticPaths() {
 }
 ---
 
-<EditPortfolioLayout title="KnowMe Playground">
+<EditPortfolioLayout title={jsonData.attributes.proba}>
   <main class="h-max w-screen">
     <div class="flex">
-      {jsonData.attributes.example}
-      {jsonData.attributes.proba}, you are number {id}!
+      <ShowPortfolio jsonData={jsonData}/>
     </div>
   </main>
 </EditPortfolioLayout>

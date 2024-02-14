@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { TitleComponent } from "./PortfolioComponents/TitleComponent.jsx";
 import { ImgComponent } from "./PortfolioComponents/ImgComponent.jsx";
 import { useRightSideBarStore } from '../store/rightSideBarStore.js'
@@ -6,11 +6,7 @@ import { useRightSideBarStore } from '../store/rightSideBarStore.js'
 
 export function PrototypePortfolio() {
     const [draggedOverIndex, setDraggedOverIndex] = useState(null);
-    const { setType, portfolioComponents, setPortfolioComponents } = useRightSideBarStore(state => state);
-
-    useEffect(() => {
-        console.log(portfolioComponents);
-    }, []);
+    const { setType, portfolioComponents, setPortfolioComponents, componentItem, setComponentItem, addContent } = useRightSideBarStore(state => state);
 
     const draggingOver = (evt, gridIndex, componentIndex) => {
         evt.preventDefault();
@@ -23,34 +19,28 @@ export function PrototypePortfolio() {
     }
 
     const startDrag = (evt, gridIndex, componentIndex, elementIndex) => {
-        evt.dataTransfer.setData("itemMode", "move");
-        evt.dataTransfer.setData("gridIndex", gridIndex);
-        evt.dataTransfer.setData("componentIndex", componentIndex);
-        evt.dataTransfer.setData("elementIndex", elementIndex);
+        setComponentItem({ elementIndex: elementIndex, componentIndex: componentIndex, gridIndex: gridIndex, mode: "move" });
     }
 
     const onDrop = (evt, gridIndex, componentIndex) => {
         setDraggedOverIndex(null);
 
-        const item = {
-            id: evt.dataTransfer.getData("itemID"),
-            mode: evt.dataTransfer.getData("itemMode"),
-            key: evt.dataTransfer.getData("itemComponentId"),
-        }
-
-        if (item.mode == "add") {
-            switch (item.id) {
+        if (componentItem.mode == "add") {
+            switch (componentItem.id) {
                 case "TitleComponent":
-                    updatePortfolioComponent(TitleComponent, gridIndex, componentIndex, item.key, evt);
+                    updatePortfolioComponent(TitleComponent, gridIndex, componentIndex, componentItem.key, evt);
+                    addContent({ text: 'Hey, I\'m Loris Crisafo Norte', bold: true, id: parseInt(componentItem.key), align: 'left' });
                     break;
                 case "ImgComponent":
-                    updatePortfolioComponent(ImgComponent, gridIndex, componentIndex, item.key, evt);
+                    updatePortfolioComponent(ImgComponent, gridIndex, componentIndex, componentItem.key, evt);
+                    addContent({ src: 'https://via.placeholder.com/150', srcOrig: 'https://via.placeholder.com/150', border: 3, radius: 50, width: 250, height: 250, rotate: 0, zoom: 100, align: 'left', id: parseInt(componentItem.key) });
                     break;
             }
-        } else if (item.mode === "move") {
-            const draggedItemGridIndex = parseInt(evt.dataTransfer.getData("gridIndex"));
-            const draggedItemComponentIndex = parseInt(evt.dataTransfer.getData("componentIndex"));
-            const draggedItemElementIndex = parseInt(evt.dataTransfer.getData("elementIndex"));
+
+        } else if (componentItem.mode === "move") {
+            const draggedItemGridIndex = parseInt(componentItem.gridIndex);
+            const draggedItemComponentIndex = parseInt(componentItem.componentIndex);
+            const draggedItemElementIndex = parseInt(componentItem.elementIndex);
 
             const newComponents = [...portfolioComponents];
             const draggedComponent = newComponents[draggedItemGridIndex].components[draggedItemComponentIndex][draggedItemElementIndex];
@@ -89,17 +79,6 @@ export function PrototypePortfolio() {
         setType('component')
     }
 
-    const setSizeGrid = (gridIndex, componentIndex, value) => {
-        const newComponents = [...portfolioComponents];
-        newComponents[gridIndex].style.sizes[componentIndex] = value;
-        let styleString = newComponents[gridIndex].style.string.split(" ");
-        styleString[componentIndex] = "minmax(40px," + value + "fr)";
-        let style = styleString[0] + " " + styleString[1] + " " + styleString[2];
-        newComponents[gridIndex].style.string = style;
-
-        setPortfolioComponents(newComponents);
-    }
-
     return (
         <>
             <div className="h-screen w-3/4 max-w-proses mx-20 bg-white shadow-lg p-8 overflow-hidden overflow-ellipsis overflow-y-visible whitespace-nowrap">
@@ -108,11 +87,6 @@ export function PrototypePortfolio() {
                         {gridComponent.components.map((component, componentIndex) => {
                             return (
                                 <div className={`border-2 hover:border-transparent ${draggedOverIndex && draggedOverIndex[0] == gridIndex && draggedOverIndex[1] == componentIndex ? ' border-pink-500' : ''} `} droppable="true" key={componentIndex} onDragOver={(evt => draggingOver(evt, gridIndex, componentIndex))} onDragLeave={(evt => draggingLeave(evt))} onDrop={(evt => onDrop(evt, gridIndex, componentIndex))}>
-                                    <div className='absolute z-10 h-12 flex flex-col items-end justify-start'>
-                                        <input type="range" min="0" max="2" step="0.05" value={portfolioComponents[gridIndex].style.sizes[componentIndex]} onChange={(e) => setSizeGrid(gridIndex, componentIndex, e.target.value)}
-                                            className="w-full h-1 transition-opacity duration-[0.2s] rounded-[5px]"
-                                        />
-                                    </div>
                                     {component.map((element, elementIndex) => {
                                         return (
                                             <div key={elementIndex} data-key={elementIndex} className='group w-full h-fit border-2 border-dashed border-transparent hover:border-pink-500' draggable onDragStart={(evt) => startDrag(evt, gridIndex, componentIndex, elementIndex)}>

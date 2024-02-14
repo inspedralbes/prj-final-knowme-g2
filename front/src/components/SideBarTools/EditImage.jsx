@@ -3,11 +3,9 @@ import { useRightSideBarStore } from '../../store/rightSideBarStore.js'
 import AvatarEditor from 'react-avatar-editor'
 
 export function EditImage() {
-    const { content, setContent, contentIndex, type } = useRightSideBarStore(state => state);
+    const { content, setContent, contentIndex } = useRightSideBarStore(state => state);
     const [firstTime, setFirstTime] = useState(true);
-    const [cambiadoZoom, setCambiadoZoom] = useState(false);
     const [onCanvas, setOnCanvas] = useState(false);
-    const [ctrlDown, setCtrlDown] = useState(false);
     let styles = {
         border: `${content[contentIndex]?.border}px solid`,
         borderRadius: `${content[contentIndex]?.radius}%`,
@@ -29,7 +27,7 @@ export function EditImage() {
                 setContent({ zoom: content[contentIndex]?.zoom - 10, id: contentIndex })
             }
         }
-    }, [setCtrlDown, onCanvas, setContent, contentIndex, content[contentIndex]?.zoom]);
+    }, [onCanvas, setContent, contentIndex, content[contentIndex]?.zoom]);
 
 
     const wheelEvent = useCallback((event) => {
@@ -60,7 +58,6 @@ export function EditImage() {
             window.removeEventListener('wheel', wheelEvent, { passive: false })
         }
 
-        // Cleanup function
         return () => {
             window.removeEventListener('keydown', keyDownEvent, false);
             window.removeEventListener('wheel', wheelEvent, { passive: false })
@@ -77,8 +74,12 @@ export function EditImage() {
             setContent({ src: canvas.toDataURL(), width: content[contentIndex]?.width, zoom: content[contentIndex]?.zoom, rotate: content[contentIndex]?.rotate, height: content[contentIndex]?.height, id: contentIndex })
         }
     }
+
     const handleZoom = (value) => {
         setOnCanvas(value)
+    }
+    const handlerPositionChange = (e) => {
+        setContent({ position: e, id: contentIndex })
     }
 
     return (
@@ -92,39 +93,38 @@ export function EditImage() {
                 }} className="top-0 left-0 rounded-full opacity-0 bg-slate-500 absolute size-full hover:cursor-pointer" type="file" name="img" id="imatge" accept="image/*" />
             </button>
             <div className="flex mt-4">
-                <div className="flex items-center justify-center gap-4 mb-4 ">
+                <div className="flex items-center justify-center gap-4">
                     <label htmlFor="radius" className="text-lg text-gray-100">Radius</label>
                     <input type="number" min="0" max="50" value={content[contentIndex]?.radius} onChange={(e) => setContent({ radius: e.target.value, id: contentIndex })} name="border" id="border"
                         className=" h-7 w-12 p-1 right-0 border rounded-xl focus:outline-none text-right focus:border-blue-500 text-slate-700"
                     />
                 </div>
 
-                <div className="mb-4 ml-10 flex items-center">
+                <div className=" ml-10 flex items-center">
                     <label htmlFor="border" className="text-lg text-gray-100 mr-2">Border</label>
                     <input type="number" min="0" max="100" value={content[contentIndex]?.border} onChange={(e) => setContent({ border: e.target.value, id: contentIndex })} name="border" id="border"
                         className=" h-7 w-12 p-1 right-0 border rounded-xl focus:outline-none text-right focus:border-blue-500 text-slate-700"
                     />
                 </div>
             </div>
+            <hr className='h-0.5 my-5 bg-[#4e4e4e] border-0'></hr>
+            <div className="flex items-center w-1/2 mb-5">
+                <button onClick={() => setContent({ align: 'left', id: contentIndex })} className={"rounded-md bg-[#454545] w-24 h-10 min-w-10 transition-all duration-100 hover:bg-opacity-80 mr-2 flex justify-center items-center " + (content[contentIndex]?.align == 'left' ? 'bg-[#e0ffff] text-[#444444]' : '')}>
+                    <span className="icon-[clarity--align-left-text-line] text-2xl"></span>
+                </button>
+                <button onClick={() => setContent({ align: 'center', id: contentIndex })} className={"rounded-md bg-[#454545] w-24 h-10 min-w-10 transition-all duration-100 hover:bg-opacity-80 mr-2 flex justify-center items-center " + (content[contentIndex]?.align == 'center' ? 'bg-[#e0ffff] text-[#444444]' : '')}>
+                    <span className="icon-[clarity--center-text-line] text-2xl"></span>
+                </button>
+                <button onClick={() => setContent({ align: 'right', id: contentIndex })} className={"rounded-md bg-[#454545] w-24 h-10 min-w-10 transition-all duration-100 hover:bg-opacity-80 mr-2 flex justify-center items-center " + (content[contentIndex]?.align == 'right' ? 'bg-[#e0ffff] text-[#444444]' : '')}>
+                    <span className="icon-[clarity--align-right-text-line] text-2xl"></span>
+                </button>
+            </div>
             {content[contentIndex]?.srcOrig != "https://via.placeholder.com/150" ?
                 <div className={"flex align-middle justify-center flex-col"}>
 
 
                     <div className="max-w-96">
-                        <div className="flex items-center justify-center gap-4 mb-4 mt-4">
-                            <label htmlFor="zoom" className="text-lg font-bold text-gray-100">Zoom</label>
-                            <input type="range" id='zoom' min="40" max="400" value={content[contentIndex]?.zoom} onInput={(e) => setContent({ zoom: e.target.value, id: contentIndex })}
-                                className=" w-full h-1 opacity-100 transition-opacity duration-[0.2s] rounded-[5px] "
-                            />
-                            <p className="font-semibold">{content[contentIndex]?.zoom}%</p>
-                        </div>
-                        <div className="flex items-center justify-center gap-4 mb-4 mt-4">
-                            <label htmlFor="rotate" className="text-lg font-bold text-gray-100">Rotate</label>
-                            <input type="range" id='rotate' min="0" max="360" value={content[contentIndex]?.rotate} onChange={(e) => setContent({ rotate: e.target.value, id: contentIndex })}
-                                className="w-full h-1 opacity-100 transition-opacity duration-[0.2s] rounded-[5px]"
-                            />
-                            <p className="font-semibold">{content[contentIndex]?.rotate}</p>
-                        </div>
+
                         <div className="flex mt-4">
 
                             <div className="flex items-center justify-center gap-2 mb-4 mr-4">
@@ -146,6 +146,7 @@ export function EditImage() {
                             image={content[contentIndex]?.srcOrig}
                             width={content[contentIndex]?.width}
                             height={content[contentIndex]?.height}
+                            position={content[contentIndex]?.position}
                             borderRadius={parseInt(content[contentIndex]?.radius)}
                             border={parseInt(content[contentIndex]?.border)}
                             color={[255, 255, 255, 0.6]} // RGBA
@@ -153,7 +154,22 @@ export function EditImage() {
                             rotate={parseInt(content[contentIndex]?.rotate)}
                             onImageChange={handlerChange}
                             onImageReady={handlerUpload}
+                            onPositionChange={ (e) => handlerPositionChange(e)}
                         />
+                        <div className="flex items-center justify-center gap-4 mb-4 mt-4">
+                            <label htmlFor="zoom" className="text-lg font-bold text-gray-100">Zoom</label>
+                            <input type="range" id='zoom' min="40" max="400" value={content[contentIndex]?.zoom} onInput={(e) => setContent({ zoom: e.target.value, id: contentIndex })}
+                                className=" w-full h-1 opacity-100 transition-opacity duration-[0.2s] rounded-[5px] "
+                            />
+                            <p className="font-semibold">{content[contentIndex]?.zoom}%</p>
+                        </div>
+                        <div className="flex items-center justify-center gap-4 mb-4 mt-4">
+                            <label htmlFor="rotate" className="text-lg font-bold text-gray-100">Rotate</label>
+                            <input type="range" id='rotate' min="0" max="360" value={content[contentIndex]?.rotate} onChange={(e) => setContent({ rotate: e.target.value, id: contentIndex })}
+                                className="w-full h-1 opacity-100 transition-opacity duration-[0.2s] rounded-[5px]"
+                            />
+                            <p className="font-semibold">{content[contentIndex]?.rotate}</p>
+                        </div>
                     </div>
                 </div> : ""}
         </>

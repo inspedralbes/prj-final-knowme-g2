@@ -4,6 +4,7 @@ export const useRightSideBarStore = create((set) => ({
     type: 'component',
     content: [],
     contentIndex: 0,
+    componentItem: {},
     portfolioComponents: [
         {
             components: [[], [], []],
@@ -38,4 +39,5 @@ export const useRightSideBarStore = create((set) => ({
     })),
     setContentIndex: (value) => set({ contentIndex: value }),
     setPortfolioComponents: (newContent) => set({ portfolioComponents: newContent }),
+    setComponentItem: (newComponentItem) => set({ componentItem: newComponentItem }),
 }));
