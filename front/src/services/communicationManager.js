@@ -156,8 +156,8 @@ export function deleteUser(token) {
 export function createDomain(content, portfolioComponents, link, category, isPublic, token) {
     return new Promise((resolve, reject) => {
         let formData = new FormData();
-        // console.log(content);
-        console.log(portfolioComponents);
+        console.log(content);
+        // console.log(portfolioComponents);
         // console.log(content);
         // console.log(link);
         // console.log(category);
@@ -174,7 +174,9 @@ export function createDomain(content, portfolioComponents, link, category, isPub
             return {
                 components: row.components.map((element) => {
                     return element.map((component) => {
-                        return content[component.props.id-1];
+                        return content.find((item) => item.id == component.props.id);
+
+                        // 
                     })
                 }),
                     style: row.style
@@ -192,7 +194,7 @@ export function createDomain(content, portfolioComponents, link, category, isPub
         formData.append('id_user', 2)
         formData.append('category', category);
         formData.append('isPublic', isPublic);
-        fetch('http://web/public/api/domains', {
+        fetch('http://localhost/public/api/domains', {
             method: 'POST',
             headers: {
                 'Access-Control-Allow-Origin': '*',
