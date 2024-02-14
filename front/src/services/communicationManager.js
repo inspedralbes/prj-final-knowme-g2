@@ -167,11 +167,11 @@ export function createDomain(content, portfolioComponents, link, category, isPub
         formData.append('webURL', link);
         formData.append('category', category);
         formData.append('isPublic', isPublic);
-        fetch('http://localhost:8000/api/domains', {
+        fetch('http://web/public/api/domains', {
             method: 'POST',
             headers: {
                 'Access-Control-Allow-Origin': '*',
-                Authorization: `Bearer ${token}`,
+                // Authorization: `Bearer ${token}`,
             },
             body: formData
         }).then(response => {
