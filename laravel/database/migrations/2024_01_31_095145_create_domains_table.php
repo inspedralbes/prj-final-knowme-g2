@@ -24,7 +24,83 @@ return new class extends Migration
             array(
                 'id_user' => 2,
                 'webURL' => 'arnau-f',
-                'content' => "{\"id_user\":1,\"webURL\":\"loris-crisafo\",\"content\":\"{\"content\":[{\"text\":\"Hey, I\'m Loris Crisafo Norte\",\"bold\":true,\"id\":0,\"align\":\"left\"},{\"src\":\"https://via.placeholder.com/150\",\"srcOrig\":\"https://via.placeholder.com/150\",\"border\":3,\"radius\":50,\"width\":250,\"height\":250,\"rotate\":0,\"zoom\":100,\"align\":\"left\",\"id\":1},{\"src\":\"https://via.placeholder.com/150\",\"srcOrig\":\"https://via.placeholder.com/150\",\"border\":3,\"radius\":50,\"width\":250,\"height\":250,\"rotate\":0,\"zoom\":100,\"align\":\"left\",\"id\":2}],\"portfolioComponents\":[[[],[0],[]],[[],[],[1]],[[2],[],[]]]}\",\"isPublic\":true}",
+                'content' => `[
+                    {
+                      "components": [
+                        [],
+                        [
+                          {
+                            "text": "Hey, I'm Loris Crisafo Norte",
+                            "bold": true,
+                            "id": 1,
+                            "align": "left",
+                            "type": "ImageComponent"
+                          }
+                        ],
+                        []
+                      ],
+                      "style": {
+                        "sizes": [
+                          1,
+                          1,
+                          1
+                        ],
+                        "string": "minmax(40px,1fr) minmax(40px,1fr) minmax(40px,1fr)"
+                      }
+                    },
+                    {
+                      "components": [
+                        [],
+                        [],
+                        [
+                          {
+                            "text": "Hey, I'm Loris Crisafo Norte",
+                            "bold": true,
+                            "id": 2,
+                            "align": "left",
+                            "type": "ImageComponent"
+                          }
+                        ]
+                      ],
+                      "style": {
+                        "sizes": [
+                          1,
+                          1,
+                          1
+                        ],
+                        "string": "minmax(40px,1fr) minmax(40px,1fr) minmax(40px,1fr)"
+                      }
+                    },
+                    {
+                      "components": [
+                        [
+                          {
+                            "src": "https://via.placeholder.com/150",
+                            "srcOrig": "https://via.placeholder.com/150",
+                            "border": 3,
+                            "radius": 50,
+                            "width": 250,
+                            "height": 250,
+                            "rotate": 0,
+                            "zoom": 100,
+                            "align": "left",
+                            "id": 3,
+                            "type": "TitleComponent"
+                          }
+                        ],
+                        [],
+                        []
+                      ],
+                      "style": {
+                        "sizes": [
+                          1,
+                          1,
+                          1
+                        ],
+                        "string": "minmax(40px,1fr) minmax(40px,1fr) minmax(40px,1fr)"
+                      }
+                    }
+                  ]`,
                 'category' => 'personal',
                 'isPublic' => true
             )
