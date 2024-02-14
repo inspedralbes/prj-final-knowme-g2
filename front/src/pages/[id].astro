@@ -17,8 +17,8 @@ if (id) {
 
 console.log(jsonData);
 
-export async function getDomains() {
-  const data = await getProbes();
+export async function getStaticPaths() {
+  const data = await getDomains();
 
   return data.map((info) => {
     return {
