@@ -37,7 +37,7 @@ export function EditImage() {
                 event.preventDefault();
                 if (event.deltaY < 0) {
                     if (content[contentIndex]?.zoom < 400) {
-                        setContent({ zoom: content[contentIndex]?.zoom + 10, id: contentIndex })
+                        setContent({ zoom: parseInt(content[contentIndex]?.zoom) + parseInt(10), id: contentIndex })
                     }
                 }
                 else if (event.deltaY > 0) {
