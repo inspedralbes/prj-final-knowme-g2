@@ -12,11 +12,10 @@ export function TitleComponent({ id }) {
             document.getElementById('editText').select();
         } catch (error) { }
     }
-    console.log(id);
 
     return (
         <>
-            <motion.div layoutId={id} onClick={() => handleClick()} className={"w-2/3 min-w-96 min-h-12 " +
+            <motion.div layoutId={id + 1} onClick={() => handleClick()} className={"w-2/3 min-w-96 min-h-12 " +
                 (content[contentIndex]?.align == 'left' ?
                     "text-left mr-auto" : content[contentIndex]?.align == 'center' ?
                         "text-center m-auto" : content[contentIndex]?.align == 'right' ?

@@ -6,8 +6,8 @@ export function EditComponent() {
 
     const startDrag = (evt, id) => {
         evt.dataTransfer.setData("itemID", id);
-        setComponentItem({key: componentItem.key == undefined ? 1 : componentItem.key + 1, id: id, mode: "add"});
-        evt.dataTransfer.setData("itemComponentId", componentItem.key == undefined ? 1 : componentItem.key + 1);
+        setComponentItem({key: componentItem.key == undefined ? 0 : componentItem.key + 1, id: id, mode: "add"});
+        evt.dataTransfer.setData("itemComponentId", componentItem.key == undefined ? 0 : componentItem.key + 1);
         evt.dataTransfer.setData("itemMode", "add");
     }
 
