@@ -12,13 +12,35 @@ const { id } = Astro.params;
 let jsonData;
 
 if (id) {
-  jsonData = await showDomain(id);
+  jsonData = [
+    {
+      components: [[], [4], []],
+      style: {
+        sizes: [1, 1, 1],
+        string: "minmax(40px,1fr) minmax(40px,1fr) minmax(40px,1fr)",
+      },
+    },
+    {
+      components: [[], [], []],
+      style: {
+        sizes: [1, 1, 1],
+        string: "minmax(40px,1fr) minmax(40px,1fr) minmax(40px,1fr)",
+      },
+    },
+    {
+      components: [[], [], []],
+      style: {
+        sizes: [1, 1, 1],
+        string: "minmax(40px,1fr) minmax(40px,1fr) minmax(40px,1fr)",
+      },
+    },
+  ];
 }
 
 console.log(jsonData);
 
 export async function getStaticPaths() {
-  const data = await getDomains();
+  const data = [{ id: 1 }];
 
   return data.map((info) => {
     return {
@@ -31,7 +53,7 @@ export async function getStaticPaths() {
 <EditPortfolioLayout title={jsonData.domini.webURL}>
   <main class="h-max w-screen">
     <div class="flex">
-      <ShowPortfolio jsonData={jsonData}/>
+      <ShowPortfolio jsonData={jsonData} />
     </div>
   </main>
 </EditPortfolioLayout>
