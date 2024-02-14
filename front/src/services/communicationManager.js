@@ -235,7 +235,7 @@ export function deleteDomain(token) {
 
 export function getDomains() {
     return new Promise((resolve, reject) => {
-        fetch('http://laravel:8000/api/domains', {
+        fetch('http://web/public/api/domains', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -257,7 +257,7 @@ export function getDomains() {
 
 export function showDomain(id) {
     return new Promise((resolve, reject) => {
-        fetch(`http://laravel:8000/api/domains/${id}`, {
+        fetch(`http://web/public/api/domains/${id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
