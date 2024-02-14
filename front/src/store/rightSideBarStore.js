@@ -2,6 +2,7 @@ import { create } from 'zustand';
 
 export const useRightSideBarStore = create((set) => ({
     type: 'component',
+    viewMode: true,
     content: [],
     contentIndex: 0,
     componentItem: {},
@@ -29,10 +30,21 @@ export const useRightSideBarStore = create((set) => ({
         },
     ],
     setType: (value) => set({ type: value }),
-    setContent: (newContent) => set(prevState => ({
-        ...prevState,
-        content: prevState.content.map(item => item.id === newContent.id ? { ...item, ...newContent } : item)
-    })),
+    setContent: (newContent) => set(prevState => {
+        const found = prevState.content.find(item => item.id === newContent.id);
+
+        if (found) {
+            return {
+                ...prevState,
+                content: prevState.content.map(item => item.id === newContent.id ? { ...item, ...newContent } : item)
+            };
+        } else {
+            return {
+                ...prevState,
+                content: [...prevState.content, newContent]
+            };
+        }
+    }),
     addContent: (newContent) => set(prevState => ({
         ...prevState,
         content: [...prevState.content, newContent]

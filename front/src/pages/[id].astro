@@ -1,5 +1,5 @@
 ---
-import EditPortfolioLayout from "../layouts/EditPortfolioLayout.astro";
+import PortfolioLayout from "../layouts/PortfolioLayout.astro";
 import { ShowPortfolio } from "../components/ShowPortfolio.jsx";
 import { getDomains, showDomain } from "../services/communicationManager.js";
 
@@ -13,7 +13,19 @@ let jsonData;
 if (id) {
   jsonData = [
     {
-      components: [[], [4], []],
+      components: [
+        [],
+        [
+          {
+            id: 1,
+            type: "TitleComponent",
+            text: "Hi, I'm Loris Crisafo Norte",
+            bold: true,
+            align: "center",
+          },
+        ],
+        [],
+      ],
       style: {
         sizes: [1, 1, 1],
         string: "minmax(40px,1fr) minmax(40px,1fr) minmax(40px,1fr)",
@@ -47,10 +59,10 @@ export async function getStaticPaths() {
 }
 ---
 
-<EditPortfolioLayout title={"hola"}>
+<PortfolioLayout title={"hola"}>
   <main class="h-max w-screen">
     <div class="flex">
-      <ShowPortfolio jsonData={jsonData} />
+      <ShowPortfolio client:visible jsonData={jsonData} />
     </div>
   </main>
-</EditPortfolioLayout>
+</PortfolioLayout>
