@@ -13,10 +13,6 @@ use App\Http\Controllers\DomainController;
     Route::get('/domains', [DomainController::class, 'index']);
     Route::get('/domains/{id}', [DomainController::class, 'show']);
 
-    //test
-    Route::post('/domains', [DomainController::class, 'create']);
-
-
 //protected routes
 Route::group(['middleware' => ['auth:sanctum']], function () {
     //users
@@ -27,5 +23,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     //domains
     Route::put('/domains/update', [DomainController::class, 'update']);
     Route::delete('/domains/delete', [DomainController::class, 'delete']);
+    Route::post('/domains', [DomainController::class, 'create']);
 });
 
