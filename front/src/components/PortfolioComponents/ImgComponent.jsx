@@ -16,7 +16,9 @@ export function ImgComponent({ id }) {
         border: `${content[contentIndex]?.border}px solid black`,
         borderRadius: `${content[contentIndex]?.radius}%`,
         width: `${content[contentIndex]?.width}px`,
-        height: `${content[contentIndex]?.height}px`
+        height: `${content[contentIndex]?.height}px`,
+        transform: `scaleX(${content[contentIndex]?.flip})`,
+
     }
     return (
 
