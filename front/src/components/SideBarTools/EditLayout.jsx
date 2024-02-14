@@ -6,6 +6,10 @@ export function EditLayout() {
     const [grid, setGrid] = useState(0);
     const [tableGrid, setTableGrid] = useState(portfolioComponents);
 
+    useEffect(() => {
+        setTableGrid(portfolioComponents);
+    }, [portfolioComponents]);
+
     const handleRowChange = (event) => {
         const newRow = parseInt(event.target.value);
         setGrid(newRow);
@@ -37,13 +41,13 @@ export function EditLayout() {
                 {grid != "-1" ? (
                     <>
                         <div className="w-full">
-                            {portfolioComponents.map((component, rowIndex) => (
+                            {tableGrid.length == portfolioComponents.length ? (portfolioComponents.map((component, rowIndex) => (
                                 <div onClick={() => setGrid(rowIndex)} key={rowIndex} className={'w-full max-w-full min-h-[33%] grid relative border' + (grid == rowIndex ? "border-orange-600" : "border-white")} style={{ gridTemplateColumns: tableGrid[rowIndex].style.string }}>
                                     {component.components.map((_, colIndex) => (
                                         <div key={colIndex} className={(grid == rowIndex ? "border-orange-600" : "border-white") + " border h-12"}></div>
                                     ))}
                                 </div>
-                            ))}
+                            ))) : (<></>)}
                         </div>
                         <div className='flex mt-2'>
                             <div className="flex items-center justify-center gap-4 mb-4">

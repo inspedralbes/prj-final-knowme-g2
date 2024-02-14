@@ -1,25 +1,28 @@
 import { useRightSideBarStore } from '../../store/rightSideBarStore.js'
+import { motion } from "framer-motion";
+
 
 export function TitleComponent({ id }) {
     const { setType, content, setContentIndex } = useRightSideBarStore(state => state);
-
+    let contentIndex = content.findIndex(item => item.id === id);
     const handleClick = () => {
-        setContentIndex(id)
+        setContentIndex(contentIndex)
         setType('text');
         try {
             document.getElementById('editText').select();
         } catch (error) { }
     }
+    console.log(id);
 
     return (
         <>
-            <div onClick={() => handleClick()} className={"w-2/3 min-w-96 min-h-12 " +
-                (content[id]?.align == 'left' ?
-                    "text-left mr-auto" : content[id]?.align == 'center' ?
-                        "text-center m-auto" : content[id]?.align == 'right' ?
+            <motion.div layoutId={id} onClick={() => handleClick()} className={"w-2/3 min-w-96 min-h-12 " +
+                (content[contentIndex]?.align == 'left' ?
+                    "text-left mr-auto" : content[contentIndex]?.align == 'center' ?
+                        "text-center m-auto" : content[contentIndex]?.align == 'right' ?
                             "text-right ml-auto" : "")}>
-                <h1 className={"text-8xl transition-all duration-75 font-inter text-pretty hover:cursor-text " + (content[id]?.bold ? 'font-bold ' : '') + (content[id]?.italic ? 'italic ' : '')}> {content[id]?.text} </h1>
-            </div>
+                <h1 className={"text-8xl transition-all duration-75 font-inter text-pretty hover:cursor-text " + (content[contentIndex]?.bold ? 'font-bold ' : '') + (content[contentIndex]?.italic ? 'italic ' : '')}> {content[contentIndex]?.text} </h1>
+            </motion.div>
         </>
     )
 }

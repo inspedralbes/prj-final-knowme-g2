@@ -6,7 +6,7 @@ import { useRightSideBarStore } from '../store/rightSideBarStore.js'
 
 export function PrototypePortfolio() {
     const [draggedOverIndex, setDraggedOverIndex] = useState(null);
-    const { setType, portfolioComponents, setPortfolioComponents, componentItem, setComponentItem, addContent } = useRightSideBarStore(state => state);
+    const { setType, portfolioComponents, setPortfolioComponents, componentItem, setComponentItem, addContent, setPortfolioRow } = useRightSideBarStore(state => state);
 
     const draggingOver = (evt, gridIndex, componentIndex) => {
         evt.preventDefault();
@@ -19,12 +19,12 @@ export function PrototypePortfolio() {
     }
 
     const startDrag = (evt, gridIndex, componentIndex, elementIndex) => {
-        setComponentItem({ elementIndex: elementIndex, componentIndex: componentIndex, gridIndex: gridIndex, mode: "move" });
+        console.log(portfolioComponents);
+        setComponentItem({ elementIndex: elementIndex, componentIndex: componentIndex, gridIndex: gridIndex, mode: "move", key: componentItem.key });
     }
 
     const onDrop = (evt, gridIndex, componentIndex) => {
         setDraggedOverIndex(null);
-
         if (componentItem.mode == "add") {
             switch (componentItem.id) {
                 case "TitleComponent":
@@ -52,14 +52,15 @@ export function PrototypePortfolio() {
                 newComponents[gridIndex].components[componentIndex].splice(elementIndex, 0, draggedComponent);
             }
 
+            console.log(newComponents);
             setPortfolioComponents(newComponents);
         }
     }
 
-    const updatePortfolioComponent = (Component, gridIndex, componentIndex, ItemKey, evt) => {
+    const updatePortfolioComponent = (Component, gridIndex, componentIndex, evt) => {
         const newComponents = [...portfolioComponents];
         const key = newComponents.length + 1;
-        const component = <Component key={key} id={parseInt(ItemKey)} />;
+        const component = <Component key={key} id={parseInt(componentItem.key)} />;
 
         if (newComponents[gridIndex].components[componentIndex].length != 0) {
             const elementIndex = evt.target.parentNode.parentNode.dataset.key;
@@ -77,6 +78,20 @@ export function PrototypePortfolio() {
 
         setPortfolioComponents(newComponents);
         setType('component')
+    }
+
+    const addRow = () => {
+        const newComponents = [...portfolioComponents];
+        newComponents.push({
+            components: [[], [], []],
+            style: {
+                sizes: [1, 1, 1],
+                string: "minmax(40px,1fr) minmax(40px,1fr) minmax(40px,1fr)"
+            }
+        });
+
+        console.log(newComponents)
+        setPortfolioComponents(newComponents);
     }
 
     return (
@@ -104,6 +119,10 @@ export function PrototypePortfolio() {
                         })}
                     </div>
                 ))}
+                <button onClick={() => addRow()} className='hover:text-blue-300 text-white mt-2 w-full flex items-center justify-center bg-blue-500 hover:bg-blue-600 rounded-sm py-2'>
+                    <span className="icon-[tabler--circle-plus]  text-xl"></span>
+                </button>
+
             </div>
         </>
     )
