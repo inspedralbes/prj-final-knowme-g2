@@ -1,5 +1,5 @@
 ---
-import EditPortfolioLayout from "../layouts/EditPortfolioLayout.astro";
+import PortfolioLayout from "../layouts/PortfolioLayout.astro";
 import { ShowPortfolio } from "../components/ShowPortfolio.jsx";
 import { getDomains, showDomain, getProbes, getProba} from "../services/communicationManager.js";
 
@@ -25,6 +25,7 @@ if (id) {
           },
         ],
         [],
+
       ],
       style: {
         sizes: [1, 1, 1],
@@ -67,10 +68,10 @@ export async function getStaticPaths() {
 }
 ---
 
-<EditPortfolioLayout title={jsonData.domini.webURL}>
+<PortfolioLayout title={jsonData.domini.webURL}>
   <main class="h-max w-screen">
     <div class="flex">
-      <ShowPortfolio jsonData={jsonData} />
+      <ShowPortfolio client:visible jsonData={jsonData} />
     </div>
   </main>
-</EditPortfolioLayout>
+</PortfolioLayout>
