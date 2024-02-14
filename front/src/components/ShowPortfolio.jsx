@@ -1,11 +1,12 @@
 import TitleComponent from "./PortfolioComponents/TitleComponent";
 import { useRightSideBarStore } from '../store/rightSideBarStore.js'
 import { useEffect } from "react";
+import ImgComponent from "./PortfolioComponents/ImgComponent.jsx";
 
 
 export function ShowPortfolio({ jsonData }) {
     const { content, setContent } = useRightSideBarStore(state => state);
-    
+
 
     useEffect(() => {
         jsonData.forEach((gridComponent) => {
@@ -14,7 +15,8 @@ export function ShowPortfolio({ jsonData }) {
                     if (element.id) {
                         let contentIndex = content.findIndex(item => item.id === element.id);
                         if (contentIndex === -1) {
-                            setContent({ text: element.text, bold: element.bold, id: element.id, align: element.align });
+                            
+                            setContent( element );
                         }
                     }
                 });
@@ -31,11 +33,19 @@ export function ShowPortfolio({ jsonData }) {
                             return (
                                 <div key={componentIndex}>
                                     {component.map((element, elementIndex) => {
-                                        return (
-                                            <div key={elementIndex} data-key={elementIndex} className='group w-full h-fit'>
-                                                <TitleComponent id={element.id} />
-                                            </div>
-                                        )
+                                        if (element.type == 'TitleComponent') {
+                                            return (
+                                                <div key={elementIndex} data-key={elementIndex} className='group w-full h-fit'>
+                                                    <TitleComponent id={element.id} />
+                                                </div>
+                                            )
+                                        }else if (element.type == 'ImageComponent'){
+                                            return (
+                                                <div key={elementIndex} data-key={elementIndex} className='group w-full h-fit'>
+                                                    <ImgComponent id={element.id} />
+                                                </div>
+                                            )
+                                        }
                                     })}
                                 </div>
                             );
