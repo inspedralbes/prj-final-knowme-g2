@@ -13,10 +13,12 @@ use App\Http\Controllers\DomainController;
     Route::get('/domains', [DomainController::class, 'index']);
     Route::get('/domains/{id}', [DomainController::class, 'show']);
 
+    Route::post('/domains', [DomainController::class, 'create']);
+
 //protected routes
 Route::group(['middleware' => ['auth:sanctum']], function () {
     //users
-    Route::post('/domains', [DomainController::class, 'create']);
+    
 
     Route::post('/logout', [AuthController::class,'logout']);
     Route::put('/users/update', [AuthController::class, 'update']);
