@@ -165,10 +165,10 @@ export function createDomain(content, portfolioComponents, link, category, isPub
         // console.log(token);
 
         const modificarContent = content.map((element) => {
-            element.type=element.text==undefined?'TitleComponent':'ImageComponent';
+            element.type = element.text == undefined ? 'TitleComponent' : 'ImageComponent';
             return element;
         });
-        
+
 
         const enviar = portfolioComponents.map((row) => {
             return {
@@ -179,26 +179,26 @@ export function createDomain(content, portfolioComponents, link, category, isPub
                         // 
                     })
                 }),
-                    style: row.style
-                }
+                style: row.style
+            }
         });
 
         console.log(enviar);
-        
 
 
 
-        formData.append('content', JSON.stringify({content, portfolioComponents}));
-        formData.append('portfolioComponents', JSON.stringify(portfolioComponents));
+
+        formData.append('content', JSON.stringify(enviar));
+        // formData.append('portfolioComponents', JSON.stringify(portfolioComponents));
         formData.append('webURL', link);
         formData.append('id_user', 2)
         formData.append('category', category);
         formData.append('isPublic', isPublic);
-        fetch('http://localhost/public/api/domains', {
+        fetch('http://localhost:8000/api/domains', {
             method: 'POST',
             headers: {
                 'Access-Control-Allow-Origin': '*',
-                Authorization: `Bearer ${token}`,
+                // Authorization: `Bearer ${token}`,
             },
             body: formData
         }).then(response => {
@@ -274,7 +274,7 @@ export function deleteDomain(token) {
 
 export function getDomains() {
     return new Promise((resolve, reject) => {
-        fetch('http://web/public/api/domains', {
+        fetch('http://localhost:8000/api/domains', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -287,7 +287,7 @@ export function getDomains() {
             }
         }).then(data => {
             resolve(data);
-            console.log(data);
+            // console.log(data);
         }).catch(error => {
             reject(error);
         });
@@ -295,21 +295,25 @@ export function getDomains() {
 }
 
 export function showDomain(id) {
+    console.log(id);
     return new Promise((resolve, reject) => {
-        fetch(`http://web/public/api/domains/${id}`, {
+        fetch(`http://localhost:8000/api/domains/${id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
             }
         }).then(response => {
+
             if (response.status == 200) {
                 return response.json();
+                
             } else {
                 reject('Error al mostrar el domini');
+                return 0;
             }
         }).then(data => {
             resolve(data);
-            console.log(data);
+            console.log("adeu", data);
         }).catch(error => {
             reject(error);
         });
@@ -317,7 +321,7 @@ export function showDomain(id) {
 }
 
 export async function getProbes() {
-    const response = await fetch('http://localhost:1337/api/domains',{
+    const response = await fetch('http://localhost:1337/api/domains', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -325,13 +329,13 @@ export async function getProbes() {
         },
 
     });
-    
+
     const data = await response.json();
     return data.data;
 }
 
 export async function getProba(id) {
-    const response = await fetch(`http://localhost:1337/api/domains/${id}`,{
+    const response = await fetch(`http://localhost:1337/api/domains/${id}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -339,7 +343,7 @@ export async function getProba(id) {
         },
 
     });
-    
+
     const data = await response.json();
     return data.data;
 }

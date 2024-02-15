@@ -10,6 +10,7 @@ const { id } = Astro.params;
 
 let jsonData;
 
+/*
 if (id) {
   jsonData = [
     {
@@ -48,14 +49,15 @@ if (id) {
     },
   ];
 }
+*/
 
 if (id) {
   jsonData = await showDomain(id);
 
-  let content;
+  console.log("data", jsonData);
 }
 
-console.log(jsonData);
+
 
 export async function getStaticPaths() {
   const data = await getDomains();

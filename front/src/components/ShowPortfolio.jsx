@@ -9,10 +9,6 @@ import { getDomains, showDomain, getProbes, getProba} from "../services/communic
 export function ShowPortfolio({ jsonData }) {
     const { content, setContent } = useRightSideBarStore(state => state);
 
-    const data = showDomain(1).then((data) => {
-        console.log("HOLAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", data);
-    });
-
     
 
 
