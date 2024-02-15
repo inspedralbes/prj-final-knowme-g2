@@ -104,14 +104,27 @@ export function EditImage() {
             <div className="flex mt-4">
                 <div className="flex items-center justify-center gap-4">
                     <label htmlFor="radius" className="text-lg text-gray-100">Radius</label>
-                    <input type="number" min="0" max="50" value={content[contentIndex]?.radius} onChange={(e) => setContent({ radius: e.target.value, id: contentIndex })} name="border" id="border"
+                    <input type="number" min="0" max="50" value={content[contentIndex]?.radius} onInput={(e) => {
+                        if (e.target.value < 0) e.target.value = 0;
+                        if (e.target.value > 50) e.target.value = 50;
+                        if (!e.target.value) e.target.value = 0;
+                        setContent({ radius: parseInt(e.target.value), id: contentIndex })
+
+                    }
+                    } name="border" id="border"
                         className=" h-7 w-12 p-1 right-0 border rounded-xl focus:outline-none text-right focus:border-blue-500 text-slate-700"
                     />
                 </div>
 
                 <div className=" ml-10 flex items-center">
                     <label htmlFor="border" className="text-lg text-gray-100 mr-2">Border</label>
-                    <input type="number" min="0" max="100" value={content[contentIndex]?.border} onChange={(e) => setContent({ border: e.target.value, id: contentIndex })} name="border" id="border"
+                    <input type="number" min="0" max="100" value={content[contentIndex]?.border} onInput={(e) => {
+                        if (e.target.value < 0) e.target.value = 0;
+                        if (e.target.value > 100) e.target.value = 100;
+                        if (!e.target.value) e.target.value = 0;
+                        setContent({ border: parseInt(e.target.value), id: contentIndex })
+
+                    }} name="border" id="border"
                         className=" h-7 w-12 p-1 right-0 border rounded-xl focus:outline-none text-right focus:border-blue-500 text-slate-700"
                     />
                 </div>
@@ -127,8 +140,8 @@ export function EditImage() {
                 <button onClick={() => setContent({ align: 'right', id: contentIndex })} className={"rounded-md bg-[#454545] w-24 h-10 min-w-10 transition-all duration-100 hover:bg-opacity-80 mr-2 flex justify-center items-center " + (content[contentIndex]?.align == 'right' ? 'bg-[#e0ffff] text-[#444444]' : '')}>
                     <span className="icon-[clarity--align-right-text-line] text-2xl"></span>
                 </button>
-                <button onClick={() => handleFlip()} className={"rounded-full bg-[#454545] w-24 h-10 min-w-10 transition-all duration-100 hover:bg-opacity-80 mr-2 flex justify-center items-center " + (content[contentIndex]?.flip == -1 ? 'bg-[#e0ffff] text-[#444444]' : '')}> 
-                <span className="icon-[mingcute--flip-vertical-line] text-2xl"></span>
+                <button onClick={() => handleFlip()} className={"rounded-full bg-[#454545] w-24 h-10 min-w-10 transition-all duration-100 hover:bg-opacity-80 mr-2 flex justify-center items-center " + (content[contentIndex]?.flip == -1 ? 'bg-[#e0ffff] text-[#444444]' : '')}>
+                    <span className="icon-[mingcute--flip-vertical-line] text-2xl"></span>
                 </button>
             </div>
             {content[contentIndex]?.srcOrig != "https://via.placeholder.com/150" ?
@@ -141,13 +154,25 @@ export function EditImage() {
 
                             <div className="flex items-center justify-center gap-2 mb-4 mr-4">
                                 <label htmlFor='width' className="text-lg font-bold text-gray-100">Width</label>
-                                <input type="number" min="0" max="1000" value={content[contentIndex]?.width} onChange={(e) => setContent({ width: parseInt(e.target.value), id: contentIndex })} name="width" id="width"
+                                <input type="number" min="0" max="1000" value={content[contentIndex]?.width} onInput={(e) => {
+                                    if (e.target.value < 0) e.target.value = 0;
+                                    if (e.target.value > 1920) e.target.value = 1920;
+                                    if (!e.target.value) e.target.value = 0;
+                                    setContent({ width: parseInt(e.target.value), id: contentIndex })
+
+                                }} name="width" id="width"
                                     className=" h-7 w-16 p-1 right-0 border rounded-xl focus:outline-none text-right focus:border-blue-500 text-slate-700"
                                 />
                             </div>
                             <div className="flex items-center justify-center gap-2 mb-4 ">
                                 <label htmlFor='height' className="text-lg font-bold text-gray-100">Height</label>
-                                <input type="number" min="0" max="1000" value={content[contentIndex]?.height} onChange={(e) => setContent({ height: parseInt(e.target.value), id: contentIndex })} name="height" id="height"
+                                <input type="number" min="0" max="1000" value={content[contentIndex]?.height} onInput={(e) => {
+                                    if (e.target.value < 0) e.target.value = 0;
+                                    if (e.target.value > 1920) e.target.value = 1920;
+                                    if (!e.target.value) e.target.value = 0;
+                                    setContent({ height: parseInt(e.target.value), id: contentIndex })
+
+                                }}  name="height" id="height"
                                     className=" h-7  w-16 p-1 right-0 border rounded-xl focus:outline-none text-right focus:border-blue-500 text-slate-700"
                                 />
                             </div>
