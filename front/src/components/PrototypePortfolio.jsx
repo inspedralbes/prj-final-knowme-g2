@@ -19,7 +19,6 @@ export function PrototypePortfolio() {
     }
 
     const startDrag = (evt, gridIndex, componentIndex, elementIndex) => {
-        console.log(portfolioComponents);
         setComponentItem({ elementIndex: elementIndex, componentIndex: componentIndex, gridIndex: gridIndex, mode: "move", key: componentItem.key });
     }
 

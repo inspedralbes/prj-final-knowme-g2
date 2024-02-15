@@ -1,3 +1,4 @@
+import React, { useEffect } from 'react';
 import { useRightSideBarStore } from '../../store/rightSideBarStore.js'
 import { motion } from "framer-motion";
 
@@ -8,8 +9,7 @@ export function ImgComponent({ id }) {
 
     const handleClick = () => {
         setType('image')
-        setContentIndex(contentIndex)
-        console.log(id);
+        setContentIndex(contentIndex);
     }
 
     const styles = {
@@ -21,7 +21,7 @@ export function ImgComponent({ id }) {
     return (
 
         <>
-            <motion.div layoutId={id + 1} onClick={() => handleClick()} className={"min-h-12 items-center flex " +
+            <motion.div layoutId={contentIndex + 1} key={contentIndex + 1} onClick={() => handleClick()} className={"min-h-12 items-center flex " +
                 (content[contentIndex]?.align == 'left' ?
                     "justify-start" : content[contentIndex]?.align == 'center' ?
                         "justify-center" : content[contentIndex]?.align == 'right' ?
