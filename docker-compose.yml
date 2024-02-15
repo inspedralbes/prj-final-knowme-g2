@@ -18,30 +18,20 @@ services:
 # S'ha de fer un npm install per instal·lar les dependències ABANS
 # d'engegar-ho tot
 # El Dockerfile és totalment autocontingut
-  node:
-    image: node:20-buster-slim
-    volumes:
-      - ./node:/home/node/app
-    working_dir: /home/node/app
-    command: bash -c  "npm install && npm start" 
-    ports:
-      - 8080:8080
+  # node:
+  #   image: node:20-buster-slim
+  #   volumes:
+  #     - ./node:/home/node/app
+  #   working_dir: /home/node/app
+  #   command: bash -c  "npm install && npm start" 
+  #   ports:
+  #     - 8080:8080
 
 
 # Servidor de node que aixeca un servidor al port 4321
 # Serveix els fitxers de la carpeta "front" 
 
-  front:
-    image: node:20-buster-slim
-    volumes:
-      - ./front:/home/node/app
-    working_dir: /home/node/app
-    ports:
-      - 4321:4321
-    command: bash -c  "npm install && npm run dev -- --host 0.0.0.0"
-# -- --host 0.0.0.0
-    depends_on:
-      - node
+  
 
 # Base de dades MySQL (db)
 # anomeneu-la com vulgueu, però recordeu que ha de coincidir amb el nom
@@ -67,35 +57,45 @@ services:
       # Per crear algunes taules al primer inici
       - ./mysql/dades.sql:/docker-entrypoint-initdb.d/dades.sql      
   
-  phpmyadmin:
-      image: phpmyadmin
-      container_name: pma
-      links:
-        - db
-      environment:
-        PMA_HOST: db
-        PMA_PORT: 3306
-        PMA_ARBITRARY: 1
-      restart: always
-      ports:
-        - 8081:80
-      depends_on: 
-        - db 
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+    links:
+      - db
+    depends_on: 
+      - db 
+
+
   web:
     build: 
       dockerfile: ./apache.DockerFile
       context: ./sites-available
     container_name: docker-php
     ports:
-      - "82:80"
+      - "80:80"
+      - "8000:8000"
     volumes:
-      - ./front:/var/www/html
-      - ./laravel:/var/www/html/laravel
-    links:
-      - db
+      - ./laravel:/var/www/html/
     depends_on:
-      - node
-    working_dir: /var/www/html/laravel
+      - db
+    working_dir: /var/www/html/
+
+
+  front:
+    image: node:20-buster-slim
+    volumes:
+      - ./front:/home/node/app
+    working_dir: /home/node/app
+    ports:
+      - 4321:4321
+    command: bash -c  "npm install && npm run dev -- --host 0.0.0.0"
+    # -- --host 0.0.0.0
+    depends_on:
+      - web
+
 
   composer.test:
     image: composer/composer

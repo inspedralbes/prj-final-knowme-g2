@@ -37,7 +37,7 @@ export function PrototypePortfolio() {
                     break;
                 case "ImgComponent":
                     updatePortfolioComponent(ImgComponent, gridIndex, componentIndex, evt);
-                    addContent({ src: 'https://via.placeholder.com/150', srcOrig: 'https://via.placeholder.com/150', border: 3, radius: 50, width: 250, height: 250, rotate: 0, zoom: 100, align: 'left', id: parseInt(componentItem.key) });
+                    addContent({ src: 'https://via.placeholder.com/150', srcOrig: 'https://via.placeholder.com/150', border: 3, radius: 50, width: 250, height: 250, rotate: 0, flip: 1, zoom: 100, align: 'left', id: parseInt(componentItem.key) });
                     break;
 
             }

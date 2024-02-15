@@ -10,7 +10,10 @@ export function EditImage() {
         border: `${content[contentIndex]?.border}px solid`,
         borderRadius: `${content[contentIndex]?.radius}%`,
         borderColor: 'white',
+        transform: `scaleX(${content[contentIndex]?.flip})`,
+
     }
+
 
 
     let editor = useRef(null);
@@ -37,7 +40,7 @@ export function EditImage() {
                 event.preventDefault();
                 if (event.deltaY < 0) {
                     if (content[contentIndex]?.zoom < 400) {
-                        setContent({ zoom: content[contentIndex]?.zoom + 10, id: contentIndex })
+                        setContent({ zoom: parseInt(content[contentIndex]?.zoom) + parseInt(10), id: contentIndex })
                     }
                 }
                 else if (event.deltaY > 0) {
@@ -65,11 +68,13 @@ export function EditImage() {
     }, [onCanvas, keyDownEvent, wheelEvent]);
     const handlerUpload = () => {
         const canvas = editor.current.getImage();
+
         setContent({ src: canvas.toDataURL(), width: content[contentIndex]?.width, zoom: content[contentIndex]?.zoom, rotate: content[contentIndex]?.rotate, height: content[contentIndex]?.height, id: contentIndex })
         setFirstTime(false);
     }
     const handlerChange = (e) => {
         if (!firstTime) {
+
             const canvas = editor.current.getImage();
             setContent({ src: canvas.toDataURL(), width: content[contentIndex]?.width, zoom: content[contentIndex]?.zoom, rotate: content[contentIndex]?.rotate, height: content[contentIndex]?.height, id: contentIndex })
         }
@@ -80,6 +85,10 @@ export function EditImage() {
     }
     const handlerPositionChange = (e) => {
         setContent({ position: e, id: contentIndex })
+    }
+    const handleFlip = () => {
+        setContent({ flip: -1 * content[contentIndex].flip, id: contentIndex })
+        console.log(content[contentIndex].flip)
     }
 
     return (
@@ -118,6 +127,9 @@ export function EditImage() {
                 <button onClick={() => setContent({ align: 'right', id: contentIndex })} className={"rounded-md bg-[#454545] w-24 h-10 min-w-10 transition-all duration-100 hover:bg-opacity-80 mr-2 flex justify-center items-center " + (content[contentIndex]?.align == 'right' ? 'bg-[#e0ffff] text-[#444444]' : '')}>
                     <span className="icon-[clarity--align-right-text-line] text-2xl"></span>
                 </button>
+                <button onClick={() => handleFlip()} className={"rounded-full bg-[#454545] w-24 h-10 min-w-10 transition-all duration-100 hover:bg-opacity-80 mr-2 flex justify-center items-center " + (content[contentIndex]?.flip == -1 ? 'bg-[#e0ffff] text-[#444444]' : '')}> 
+                <span className="icon-[mingcute--flip-vertical-line] text-2xl"></span>
+                </button>
             </div>
             {content[contentIndex]?.srcOrig != "https://via.placeholder.com/150" ?
                 <div className={"flex align-middle justify-center flex-col"}>
@@ -141,7 +153,8 @@ export function EditImage() {
                             </div>
                         </div>
                         <h1 className='text-xl font-bold'>Preview {onCanvas}</h1>
-                        <AvatarEditor id="canvas" onMouseOver={() => { handleZoom(true) }} onMouseLeave={() => { handleZoom(false) }} style={styles} className=" max-w-64 max-h-64 ml-auto mr-auto border-2 border-gray-100 rounded-md overflow-hidden mt-4 mb-4 w-3/4 h-3/4"
+                        <AvatarEditor id="canvas" onMouseOver={() => { handleZoom(true) }} onMouseLeave={() => { handleZoom(false) }} style={styles} className="
+                         max-w-64 max-h-64 ml-auto mr-auto border-2 border-gray-100 rounded-md overflow-hidden mt-4 mb-4 w-3/4 h-3/4"
                             ref={editor}
                             image={content[contentIndex]?.srcOrig}
                             width={content[contentIndex]?.width}
@@ -154,7 +167,8 @@ export function EditImage() {
                             rotate={parseInt(content[contentIndex]?.rotate)}
                             onImageChange={handlerChange}
                             onImageReady={handlerUpload}
-                            onPositionChange={ (e) => handlerPositionChange(e)}
+                            onPositionChange={(e) => handlerPositionChange(e)}
+
                         />
                         <div className="flex items-center justify-center gap-4 mb-4 mt-4">
                             <label htmlFor="zoom" className="text-lg font-bold text-gray-100">Zoom</label>
