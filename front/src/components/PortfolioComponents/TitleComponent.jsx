@@ -20,7 +20,7 @@ export function TitleComponent({ id }) {
                     "text-left mr-auto" : content[contentIndex]?.align == 'center' ?
                         "text-center m-auto" : content[contentIndex]?.align == 'right' ?
                             "text-right ml-auto" : "")}>
-                <h1 className={"text-8xl transition-all duration-75 font-inter text-pretty hover:cursor-text " + (content[contentIndex]?.bold ? 'font-bold ' : '') + (content[contentIndex]?.italic ? 'italic ' : '')}> {content[contentIndex]?.text} </h1>
+                <h1 className={(content[contentIndex]?.size ? "text-" + content[contentIndex]?.size + "xl " : "text-8xl") + " transition-all duration-75 font-inter text-pretty hover:cursor-text " + (content[contentIndex]?.bold ? 'font-bold ' : '') + (content[contentIndex]?.italic ? 'italic ' : '')}> {content[contentIndex]?.text} </h1>
             </motion.div>
         </>
     )

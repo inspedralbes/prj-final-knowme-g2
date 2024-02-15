@@ -45,6 +45,7 @@ export function EditText() {
                                     onClick={() => {
                                         setSize(index);
                                         setDropDown(false);
+                                        setContent({ size: (8 - index), id: contentIndex })
                                     }}
                                     className='hover:bg-[#E8E9EA] rounded px-4 cursor-pointer p-2'
                                 >
