@@ -15,7 +15,7 @@ export function TextComponent({ id }) {
 
     return (
         <>
-            <motion.div layoutId={contentIndex + 1} key={contentIndex + 1} onClick={() => handleClick()} className={"w-2/3 min-w-96 min-h-12 " +
+            <motion.div layoutId={contentIndex + 1} key={contentIndex + 1} onClick={() => handleClick()} className={"min-w-96 min-h-5 " +
                 (content[contentIndex]?.align == 'left' ?
                     "text-left mr-auto" : content[contentIndex]?.align == 'center' ?
                         "text-center m-auto" : content[contentIndex]?.align == 'right' ?

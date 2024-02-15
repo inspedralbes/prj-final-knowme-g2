@@ -3,6 +3,7 @@ import { useRightSideBarStore } from '../store/rightSideBarStore.js'
 import { useEffect, useState, useCallback } from "react";
 import ImgComponent from "./PortfolioComponents/ImgComponent.jsx";
 import { showDomain } from "../services/communicationManager.js";
+import TextComponent from "./PortfolioComponents/TextComponent.jsx";
 
 export function ShowPortfolio({ webURL }) {
     const { content, setContent } = useRightSideBarStore(state => state);
@@ -55,6 +56,12 @@ export function ShowPortfolio({ webURL }) {
                                             return (
                                                 <div key={elementIndex} data-key={elementIndex} className='group w-full h-fit'>
                                                     <ImgComponent id={element.id} />
+                                                </div>
+                                            )
+                                        } else if (element.type === 'TextComponent') {
+                                            return (
+                                                <div key={elementIndex} data-key={elementIndex} className='group w-full h-fit'>
+                                                    <TextComponent id={element.id} />
                                                 </div>
                                             )
                                         }

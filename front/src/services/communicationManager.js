@@ -194,28 +194,28 @@ export function createDomain(content, portfolioComponents, link, category, isPub
         formData.append('id_user', 2)
         formData.append('category', category);
         formData.append('isPublic', isPublic);
-        // fetch('http://localhost:8000/api/domains', {
-        //     method: 'POST',
-        //     headers: {
-        //         'Access-Control-Allow-Origin': '*',
-        //         // Authorization: `Bearer ${token}`,
-        //     },
-        //     body: formData
-        // }).then(response => {
-        //     if (response.status == 201) {
-        //         console.log('Domini creat');
-        //         return response.json();
-        //     } else if (response.status == 403) {
-        //         reject('Ja tens un portfoli creat!');
-        //     } else {
-        //         reject('Error al crear domini');
-        //     }
-        // }).then(data => {
-        //     resolve(data);
-        //     // console.log(data);
-        // }).catch(error => {
-        //     reject(error);
-        // });
+        fetch('http://localhost:8000/api/domains', {
+            method: 'POST',
+            headers: {
+                'Access-Control-Allow-Origin': '*',
+                // Authorization: `Bearer ${token}`,
+            },
+            body: formData
+        }).then(response => {
+            if (response.status == 201) {
+                console.log('Domini creat');
+                return response.json();
+            } else if (response.status == 403) {
+                reject('Ja tens un portfoli creat!');
+            } else {
+                reject('Error al crear domini');
+            }
+        }).then(data => {
+            resolve(data);
+            // console.log(data);
+        }).catch(error => {
+            reject(error);
+        });
     });
 }
 
