@@ -2,6 +2,7 @@
 import PortfolioLayout from "../layouts/PortfolioLayout.astro";
 import { ShowPortfolio } from "../components/ShowPortfolio.jsx";
 import { getDomains, showDomain, getProbes, getProba} from "../services/communicationManager.js";
+import { info } from "astro/dist/core/logger/core";
 
 export const prerender = true;
 
@@ -51,11 +52,6 @@ if (weburl) {
 }
 */
 
-if (weburl) {
-  jsonData = await showDomain(weburl);
-
-  console.log("data", jsonData);
-}
 
 
 
@@ -70,10 +66,10 @@ export async function getStaticPaths() {
 }
 ---
 
-<PortfolioLayout title={jsonData.domini.webURL}>
+<PortfolioLayout title={"hola"}>
   <main class="h-max w-screen">
     <div class="flex">
-      <ShowPortfolio client:visible jsonData={jsonData} />
+      <ShowPortfolio client:visible webURL={weburl} />
     </div>
   </main>
 </PortfolioLayout>

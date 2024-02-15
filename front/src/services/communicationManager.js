@@ -165,7 +165,7 @@ export function createDomain(content, portfolioComponents, link, category, isPub
         // console.log(token);
 
         const modificarContent = content.map((element) => {
-            element.type = element.text == undefined ? 'TitleComponent' ::element.img == undefined ? 'hola' : 'ImageComponent';
+            element.type = element.text != undefined ? 'TitleComponent' : 'ImageComponent';
             return element;
         });
 
@@ -295,7 +295,6 @@ export function getDomains() {
 }
 
 export function showDomain(id) {
-    console.log(id);
     return new Promise((resolve, reject) => {
         fetch(`http://localhost:8000/api/domains/${id}`, {
             method: 'GET',
@@ -313,7 +312,6 @@ export function showDomain(id) {
             }
         }).then(data => {
             resolve(data);
-            console.log("adeu", data);
         }).catch(error => {
             reject(error);
         });
