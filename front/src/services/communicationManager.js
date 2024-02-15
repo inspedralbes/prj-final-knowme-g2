@@ -165,7 +165,7 @@ export function createDomain(content, portfolioComponents, link, category, isPub
         // console.log(token);
 
         const modificarContent = content.map((element) => {
-            element.type = element.text == undefined ? 'TitleComponent' : 'ImageComponent';
+            element.type = element.text == undefined ? 'TitleComponent' ::element.img == undefined ? 'hola' : 'ImageComponent';
             return element;
         });
 
