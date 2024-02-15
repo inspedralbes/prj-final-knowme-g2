@@ -1,18 +1,18 @@
 # LARAVEL API
 
-En la api se ecnuentran diferentes tablas a las cuales acceder:
+En la api se encuentran diferentes tablas a las cuales acceder:
     - Users_api (funcional, todo correcto)
     - Domains (funcional, todo correcto)
     - Tags (creada, falta comprobar)
     - domain_tag (creada, falta comprobar)
 
 Las tablas estan relacionadas entre ellas,
-    en Domains se guarda el "user_id" de la persona que crea su web(dominio).
+    en Domains se guarda el "id_user" de la persona que crea su web(dominio).
     en domain_tag se guarda el ide de dominio y ide de tag por cada que se relacionan siendo esta tabla una table "PIVOTE".
 
 ## Rutas
-    Publicas --> 👀
-        Hay 4 rutas públicas:
+    Públicas --> 👀
+        Hay 5 rutas públicas:
             ### Users:
                 - /register --> http://127.0.0.1:8000/api/register --> Method: POST
                     #### Parámetros
@@ -80,6 +80,40 @@ Las tablas estan relacionadas entre ellas,
                                 'isPublic': 1,
                                 'id': 1
                             }
+                        }
+                - /domains --> http://localhost:8000/api/domains --> Method: POST
+                    #### Parámetros
+                        Se debe enviar el token del usuario que quiere crear un dominio/web y los datos del dominio/web.
+                        Todos los campos son NECESARIOS. Además de webURL ser UNIQUE.
+                        EJEMPLO -->
+                            headers: { 
+                                'Content-Type': 'application/json',
+                            }
+                            json {
+                                'id_user': 1
+                                'webURL': 'exampleWeb.com',
+                                'content': 'contentExample',
+                                'category': 'exampleCategory',
+                                'isPublic': 1
+                            }
+                    #### Respuesta
+                        En caso de que el token no sea valido no te deja acceder a la ruta. Error 500.
+                        Si tienes ya un dominio creado te devuelve error 403, 'Ja tens un portfoli creat!'.
+                        json --> data {
+                            'domain': {
+                                'webURL': 'exampleWeb.com',
+                                'content': 'contentExample',
+                                'category': 'exampleCategory',
+                                'isPublic': 1,
+                                'id': 1
+                            },
+                            'user': {
+                                'user': 'exampleUser',
+                                'name': 'exampleName',
+                                'surnames': 'exampleSurnames',
+                                'email': 'exampleEmail@gmail.com'
+                            },
+                            'id_user': 1
                         }
     Privadas --> 🔏
         Hay 7 rutas privadas:
@@ -150,40 +184,6 @@ Las tablas estan relacionadas entre ellas,
                             'message': 'User deleted!'
                         }
             ### Domains:
-                - /domains --> http://localhost:8000/api/domains --> Method: POST
-                    #### Parámetros
-                        Se debe enviar el token del usuario que quiere crear un dominio/web y los datos del dominio/web.
-                        Todos los campos son NECESARIOS. Además de webURL ser UNIQUE.
-                        EJEMPLO -->
-                            headers: { 
-                                'Content-Type': 'application/json',
-                                'Authorization': 'Bearer ' + token
-                            }
-                            json {
-                                'webURL': 'exampleWeb.com',
-                                'content': 'contentExample',
-                                'category': 'exampleCategory',
-                                'isPublic': 1
-                            }
-                    #### Respuesta
-                        En caso de que el token no sea valido no te deja acceder a la ruta. Error 500.
-                        Si tienes ya un dominio creado te devuelve error 403, 'Ja tens un portfoli creat!'.
-                        json --> data {
-                            'domain': {
-                                'webURL': 'exampleWeb.com',
-                                'content': 'contentExample',
-                                'category': 'exampleCategory',
-                                'isPublic': 1,
-                                'id': 1
-                            },
-                            'user': {
-                                'user': 'exampleUser',
-                                'name': 'exampleName',
-                                'surnames': 'exampleSurnames',
-                                'email': 'exampleEmail@gmail.com'
-                            },
-                            'id_user': 1
-                        }
                 - /domains/update --> http://localhost:8000/api/domains/update --> Method: PUT
                     #### Parámetros
                         Se debe enviar el token del usuario que quiere modificar su dominio/web y los datos a modificar.
