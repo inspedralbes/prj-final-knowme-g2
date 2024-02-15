@@ -3,12 +3,12 @@ import PortfolioLayout from "../layouts/PortfolioLayout.astro";
 import { ShowPortfolio } from "../components/ShowPortfolio.jsx";
 import { getDomains, showDomain, getProbes, getProba} from "../services/communicationManager.js";
 
-export const prerender = true;
+// export const prerender = true;
 
 // A docker compose dona error de connexió si es proba amb el Strapi
 const { weburl } = Astro.params;
 
-let jsonData;
+// let jsonData;
 
 /*
 if (weburl) {
@@ -51,29 +51,31 @@ if (weburl) {
 }
 */
 
-if (weburl) {
-  jsonData = await showDomain(weburl);
+// if (weburl) {
+//   jsonData = await showDomain(weburl);
 
-  console.log("data", jsonData);
-}
+//   console.log("data", jsonData);
+// }
 
 
 
-export async function getStaticPaths() {
-  const data = await getDomains();
+// export async function getStaticPaths() {
+//   const data = await getDomains();
 
-  return data.map((info) => {
-    return {
-      params: { weburl: info.webURL },
-    };
-  });
-}
+//   return data.map((info) => {
+//     return {
+//       params: { weburl: info.webURL },
+//     };
+//   });
+// }
 ---
 
-<PortfolioLayout title={jsonData.domini.webURL}>
+<!-- <PortfolioLayout title={jsonData.domini.webURL}>
   <main class="h-max w-screen">
     <div class="flex">
       <ShowPortfolio client:visible jsonData={jsonData} />
     </div>
   </main>
-</PortfolioLayout>
+</PortfolioLayout> -->
+
+<div>{ weburl }</div>
