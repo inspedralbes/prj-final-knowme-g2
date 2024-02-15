@@ -6,19 +6,19 @@ import { getDomains, showDomain, getProbes, getProba} from "../services/communic
 export const prerender = true;
 
 // A docker compose dona error de connexió si es proba amb el Strapi
-const { id } = Astro.params;
+const { weburl } = Astro.params;
 
 let jsonData;
 
 /*
-if (id) {
+if (weburl) {
   jsonData = [
     {
       components: [
         [],
         [
           {
-            id: 1,
+            weburl: 1,
             type: "TitleComponent",
             text: "Título",
             bold: true,
@@ -51,8 +51,8 @@ if (id) {
 }
 */
 
-if (id) {
-  jsonData = await showDomain(id);
+if (weburl) {
+  jsonData = await showDomain(weburl);
 
   console.log("data", jsonData);
 }
@@ -64,7 +64,7 @@ export async function getStaticPaths() {
 
   return data.map((info) => {
     return {
-      params: { id: info.id },
+      params: { weburl: info.webURL },
     };
   });
 }

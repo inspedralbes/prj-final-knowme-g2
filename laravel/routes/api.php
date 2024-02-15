@@ -11,7 +11,7 @@ use App\Http\Controllers\DomainController;
     // Route::post('/login', [AuthController::class, 'login']);
     //domains
     Route::get('/domains', [DomainController::class, 'index']);
-    Route::get('/domains/{id}', [DomainController::class, 'show']);
+    Route::get('/domains/{weburl}', [DomainController::class, 'show']);
 
     Route::post('/domains', [DomainController::class, 'create']);
 

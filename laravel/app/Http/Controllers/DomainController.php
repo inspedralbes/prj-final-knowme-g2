@@ -105,9 +105,9 @@ class DomainController extends Controller
         return response($domains, 200);
     }
 
-    public function show($id)
+    public function show($weburl)
     {
-        $domain = Domain::find($id)->first();
+        $domain = Domain::where("webURL", $weburl)->first();
         $response = [
             'domini' => $domain
         ];
