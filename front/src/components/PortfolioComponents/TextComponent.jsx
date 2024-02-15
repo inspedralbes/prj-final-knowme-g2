@@ -2,7 +2,7 @@ import { useRightSideBarStore } from '../../store/rightSideBarStore.js'
 import { motion } from "framer-motion";
 
 
-export function TitleComponent({ id }) {
+export function TextComponent({ id }) {
     const { setType, content, setContentIndex } = useRightSideBarStore(state => state);
     let contentIndex = content.findIndex(item => item.id === id);
     const handleClick = () => {
@@ -15,14 +15,14 @@ export function TitleComponent({ id }) {
 
     return (
         <>
-            <motion.div layoutId={contentIndex + 1} key={contentIndex + 1} onClick={() => handleClick()} className={"min-h-12 " +
+            <motion.div layoutId={contentIndex + 1} key={contentIndex + 1} onClick={() => handleClick()} className={"w-2/3 min-w-96 min-h-12 " +
                 (content[contentIndex]?.align == 'left' ?
                     "text-left mr-auto" : content[contentIndex]?.align == 'center' ?
                         "text-center m-auto" : content[contentIndex]?.align == 'right' ?
                             "text-right ml-auto" : "")}>
-                <h1 className={"text-8xl transition-all duration-75 font-inter text-pretty hover:cursor-text " + (content[contentIndex]?.bold ? 'font-bold ' : '') + (content[contentIndex]?.italic ? 'italic ' : '')}> {content[contentIndex]?.text} </h1>
+                <p className={"text-2xl transition-all duration-75 font-inter text-pretty hover:cursor-text " + (content[contentIndex]?.bold ? 'font-bold ' : '') + (content[contentIndex]?.italic ? 'italic ' : '')}> {content[contentIndex]?.text} </p>
             </motion.div>
         </>
     )
 }
-export default TitleComponent
+export default TextComponent
