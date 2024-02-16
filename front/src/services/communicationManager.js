@@ -1,3 +1,7 @@
+
+
+const URL_PROD = "knowme.dam.inspedralbes.cat/public";
+
 // functions USERS
 export function registerUser(user) {
     return new Promise((resolve, reject) => {
@@ -194,7 +198,7 @@ export function createDomain(content, portfolioComponents, link, category, isPub
         formData.append('id_user', 2)
         formData.append('category', category);
         formData.append('isPublic', isPublic);
-        fetch('http://localhost:8000/api/domains', {
+        fetch(`http://${URL_PROD}/api/domains`, {
             method: 'POST',
             headers: {
                 'Access-Control-Allow-Origin': '*',
@@ -274,7 +278,7 @@ export function deleteDomain(token) {
 
 export function getDomains() {
     return new Promise((resolve, reject) => {
-        fetch('http://localhost:8000/api/domains', {
+        fetch(`http://${URL_PROD}/api/domains`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -296,7 +300,7 @@ export function getDomains() {
 
 export function showDomain(id) {
     return new Promise((resolve, reject) => {
-        fetch(`http://localhost:8000/api/domains/${id}`, {
+        fetch(`http://${URL_PROD}/api/domains/${id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
