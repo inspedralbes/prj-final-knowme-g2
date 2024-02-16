@@ -29,15 +29,15 @@ export function PrototypePortfolio() {
             switch (componentItem.id) {
                 case "TitleComponent":
                     updatePortfolioComponent(TitleComponent, gridIndex, componentIndex, evt);
-                    addContent({ text: 'Hey, I\'m Loris Crisafo Norte', bold: true, id: parseInt(componentItem.key), align: 'left' });
+                    addContent({ type: 'TitleComponent', text: 'Hey, I\'m Loris Crisafo Norte', bold: true, id: parseInt(componentItem.key), align: 'left' });
                     break;
                 case "TextComponent":
                     updatePortfolioComponent(TextComponent, gridIndex, componentIndex, evt);
-                    addContent({ text: 'Hey, I\'m Loris Crisafo Norte', bold: false, id: parseInt(componentItem.key), align: 'left' });
+                    addContent({ type: 'TextComponent', text: 'Hey, I\'m Loris Crisafo Norte', bold: false, id: parseInt(componentItem.key), align: 'left' });
                     break;
                 case "ImgComponent":
                     updatePortfolioComponent(ImgComponent, gridIndex, componentIndex, evt);
-                    addContent({ src: 'https://via.placeholder.com/150', srcOrig: 'https://via.placeholder.com/150', border: 3, radius: 50, width: 250, height: 250, rotate: 0, flip: 1, zoom: 100, align: 'left', id: parseInt(componentItem.key) });
+                    addContent({ type: 'ImageComponent', src: 'https://via.placeholder.com/150', srcOrig: 'https://via.placeholder.com/150', border: 3, radius: 50, width: 250, height: 250, rotate: 0, flip: 1, zoom: 100, align: 'left', id: parseInt(componentItem.key) });
                     break;
 
             }
