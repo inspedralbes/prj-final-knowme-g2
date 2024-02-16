@@ -1,13 +1,31 @@
 export function BackgroundLR() {
     return (
-        // <div class="flex items-center justify-center h-screen">
-        //     <div class="cube bg-blue-500 w-20 h-20 animate-bounce shadow-lg"></div>
-        //     <div class="w-16 h-16 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full animate-spin"></div>
+        // <div class="absolute top-0 left-0 w-full h-full overflow-hidden">
+        //     <div class="absolute top-0 left-0 w-full h-full">
+        //         <div class="h-full w-full bg-gradient-to-b from-blue-900 via-blue-700 to-purple-900"></div>
+        //     </div>
+        //     <div class="absolute top-0 left-0 w-full h-full">
+        //         <div class="cube bg-blue-500"></div>
+        //         <div class="sphere absolute top-1/4 left-1/4"></div>
+        //         <div class="sphere absolute top-1/2 right-1/4"></div>
+        //     </div>
         // </div>
-        <div class="flex justify-center items-center h-screen">
-            <div class="cube bg-blue-500"></div>
-            <div class="sphere absolute top-1/4 left-1/4"></div>
-            <div class="sphere absolute top-1/2 right-1/4"></div>
+
+        <div class="absolute top-0 left-0 w-full h-full overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-full">
+                <div class="h-full w-full bg-gradient-to-b from-blue-900 via-blue-700 to-purple-900"></div>
+            </div>
+            <div class="absolute top-0 left-0 w-full h-full">
+                <div class="absolute top-1/4 left-1/4 animate-ping">
+                    <div class="cube bg-blue-500 w-16 h-16"></div>
+                </div>
+                <div class="absolute top-1/2 right-1/4 animate-bounce">
+                    <div class="sphere bg-red-500 w-16 h-16 rounded-full"></div>
+                </div>
+                <div class="absolute top-1/2 left-1/4 animate-spin">
+                    <div class="sphere bg-red-500 w-16 h-16 rounded-full"></div>
+                </div>
+            </div>
         </div>
     )
 }
