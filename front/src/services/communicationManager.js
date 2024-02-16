@@ -1,6 +1,6 @@
 
 
-const URL_PROD = "knowme.dam.inspedralbes.cat/public";
+const URL_PROD = "knowme.dam.inspedralbes.cat/laravel/public";
 
 // functions USERS
 export function registerUser(user) {
