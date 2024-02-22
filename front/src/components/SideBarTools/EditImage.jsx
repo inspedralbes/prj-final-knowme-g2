@@ -21,13 +21,13 @@ export function EditImage() {
         if (event.keyCode == 107 && event.ctrlKey) {
             event.preventDefault();
             if (content[contentIndex]?.zoom < 400) {
-                setContent({ zoom: content[contentIndex]?.zoom + 10, id: contentIndex })
+                setContent({ zoom: content[contentIndex]?.zoom + 10, id: content[contentIndex].id })
             }
         }
         if (event.keyCode == 109 && event.ctrlKey) {
             event.preventDefault();
             if (content[contentIndex]?.zoom > 40) {
-                setContent({ zoom: content[contentIndex]?.zoom - 10, id: contentIndex })
+                setContent({ zoom: content[contentIndex]?.zoom - 10, id: content[contentIndex].id })
             }
         }
     }, [onCanvas, setContent, contentIndex, content[contentIndex]?.zoom]);
@@ -40,12 +40,12 @@ export function EditImage() {
                 event.preventDefault();
                 if (event.deltaY < 0) {
                     if (content[contentIndex]?.zoom < 400) {
-                        setContent({ zoom: parseInt(content[contentIndex]?.zoom) + parseInt(10), id: contentIndex })
+                        setContent({ zoom: parseInt(content[contentIndex]?.zoom) + parseInt(10), id: content[contentIndex].id })
                     }
                 }
                 else if (event.deltaY > 0) {
                     if (content[contentIndex]?.zoom > 40) {
-                        setContent({ zoom: content[contentIndex]?.zoom - 10, id: contentIndex })
+                        setContent({ zoom: content[contentIndex]?.zoom - 10, id: content[contentIndex].id })
                     }
                 }
             }
@@ -69,14 +69,14 @@ export function EditImage() {
     const handlerUpload = () => {
         const canvas = editor.current.getImage();
 
-        setContent({ src: canvas.toDataURL(), width: content[contentIndex]?.width, zoom: content[contentIndex]?.zoom, rotate: content[contentIndex]?.rotate, height: content[contentIndex]?.height, id: contentIndex })
+        setContent({ src: canvas.toDataURL(), width: content[contentIndex]?.width, zoom: content[contentIndex]?.zoom, rotate: content[contentIndex]?.rotate, height: content[contentIndex]?.height, id: content[contentIndex].id })
         setFirstTime(false);
     }
     const handlerChange = (e) => {
         if (!firstTime) {
 
             const canvas = editor.current.getImage();
-            setContent({ src: canvas.toDataURL(), width: content[contentIndex]?.width, zoom: content[contentIndex]?.zoom, rotate: content[contentIndex]?.rotate, height: content[contentIndex]?.height, id: contentIndex })
+            setContent({ src: canvas.toDataURL(), width: content[contentIndex]?.width, zoom: content[contentIndex]?.zoom, rotate: content[contentIndex]?.rotate, height: content[contentIndex]?.height, id: content[contentIndex].id })
         }
     }
 
@@ -84,10 +84,10 @@ export function EditImage() {
         setOnCanvas(value)
     }
     const handlerPositionChange = (e) => {
-        setContent({ position: e, id: contentIndex })
+        setContent({ position: e, id: content[contentIndex].id })
     }
     const handleFlip = () => {
-        setContent({ flip: -1 * content[contentIndex].flip, id: contentIndex })
+        setContent({ flip: -1 * content[contentIndex].flip, id: content[contentIndex].id })
         console.log(content[contentIndex].flip)
     }
 
@@ -98,7 +98,7 @@ export function EditImage() {
                 + Add File
                 <input onInput={(event) => {
                     let srcImg = URL.createObjectURL(event.target.files[0])
-                    setContent({ srcOrig: srcImg, id: contentIndex })
+                    setContent({ srcOrig: srcImg, id: content[contentIndex].id })
                 }} className="top-0 left-0 rounded-full opacity-0 bg-slate-500 absolute size-full hover:cursor-pointer" type="file" name="img" id="imatge" accept="image/*" />
             </button>
             <div className="flex mt-4">
@@ -108,7 +108,7 @@ export function EditImage() {
                         if (e.target.value < 0) e.target.value = 0;
                         if (e.target.value > 50) e.target.value = 50;
                         if (!e.target.value) e.target.value = 0;
-                        setContent({ radius: parseInt(e.target.value), id: contentIndex })
+                        setContent({ radius: parseInt(e.target.value), id: content[contentIndex].id })
 
                     }
                     } name="border" id="border"
@@ -122,7 +122,7 @@ export function EditImage() {
                         if (e.target.value < 0) e.target.value = 0;
                         if (e.target.value > 100) e.target.value = 100;
                         if (!e.target.value) e.target.value = 0;
-                        setContent({ border: parseInt(e.target.value), id: contentIndex })
+                        setContent({ border: parseInt(e.target.value), id: content[contentIndex].id })
 
                     }} name="border" id="border"
                         className=" h-7 w-12 p-1 right-0 border rounded-xl focus:outline-none text-right focus:border-blue-500 text-slate-700"
@@ -131,13 +131,13 @@ export function EditImage() {
             </div>
             <hr className='h-0.5 my-5 bg-[#4e4e4e] border-0'></hr>
             <div className="flex items-center w-1/2 mb-5">
-                <button onClick={() => setContent({ align: 'left', id: contentIndex })} className={"rounded-md bg-[#454545] w-24 h-10 min-w-10 transition-all duration-100 hover:bg-opacity-80 mr-2 flex justify-center items-center " + (content[contentIndex]?.align == 'left' ? 'bg-[#e0ffff] text-[#444444]' : '')}>
+                <button onClick={() => setContent({ align: 'left', id: content[contentIndex].id })} className={"rounded-md bg-[#454545] w-24 h-10 min-w-10 transition-all duration-100 hover:bg-opacity-80 mr-2 flex justify-center items-center " + (content[contentIndex]?.align == 'left' ? 'bg-[#e0ffff] text-[#444444]' : '')}>
                     <span className="icon-[clarity--align-left-text-line] text-2xl"></span>
                 </button>
-                <button onClick={() => setContent({ align: 'center', id: contentIndex })} className={"rounded-md bg-[#454545] w-24 h-10 min-w-10 transition-all duration-100 hover:bg-opacity-80 mr-2 flex justify-center items-center " + (content[contentIndex]?.align == 'center' ? 'bg-[#e0ffff] text-[#444444]' : '')}>
+                <button onClick={() => setContent({ align: 'center', id: content[contentIndex].id })} className={"rounded-md bg-[#454545] w-24 h-10 min-w-10 transition-all duration-100 hover:bg-opacity-80 mr-2 flex justify-center items-center " + (content[contentIndex]?.align == 'center' ? 'bg-[#e0ffff] text-[#444444]' : '')}>
                     <span className="icon-[clarity--center-text-line] text-2xl"></span>
                 </button>
-                <button onClick={() => setContent({ align: 'right', id: contentIndex })} className={"rounded-md bg-[#454545] w-24 h-10 min-w-10 transition-all duration-100 hover:bg-opacity-80 mr-2 flex justify-center items-center " + (content[contentIndex]?.align == 'right' ? 'bg-[#e0ffff] text-[#444444]' : '')}>
+                <button onClick={() => setContent({ align: 'right', id: content[contentIndex].id })} className={"rounded-md bg-[#454545] w-24 h-10 min-w-10 transition-all duration-100 hover:bg-opacity-80 mr-2 flex justify-center items-center " + (content[contentIndex]?.align == 'right' ? 'bg-[#e0ffff] text-[#444444]' : '')}>
                     <span className="icon-[clarity--align-right-text-line] text-2xl"></span>
                 </button>
                 <button onClick={() => handleFlip()} className={"rounded-full bg-[#454545] w-24 h-10 min-w-10 transition-all duration-100 hover:bg-opacity-80 mr-2 flex justify-center items-center " + (content[contentIndex]?.flip == -1 ? 'bg-[#e0ffff] text-[#444444]' : '')}>
@@ -158,7 +158,7 @@ export function EditImage() {
                                     if (e.target.value < 0) e.target.value = 0;
                                     if (e.target.value > 1920) e.target.value = 1920;
                                     if (!e.target.value) e.target.value = 0;
-                                    setContent({ width: parseInt(e.target.value), id: contentIndex })
+                                    setContent({ width: parseInt(e.target.value), id: content[contentIndex].id })
 
                                 }} name="width" id="width"
                                     className=" h-7 w-16 p-1 right-0 border rounded-xl focus:outline-none text-right focus:border-blue-500 text-slate-700"
@@ -170,7 +170,7 @@ export function EditImage() {
                                     if (e.target.value < 0) e.target.value = 0;
                                     if (e.target.value > 1920) e.target.value = 1920;
                                     if (!e.target.value) e.target.value = 0;
-                                    setContent({ height: parseInt(e.target.value), id: contentIndex })
+                                    setContent({ height: parseInt(e.target.value), id: content[contentIndex].id })
 
                                 }}  name="height" id="height"
                                     className=" h-7  w-16 p-1 right-0 border rounded-xl focus:outline-none text-right focus:border-blue-500 text-slate-700"
@@ -197,14 +197,14 @@ export function EditImage() {
                         />
                         <div className="flex items-center justify-center gap-4 mb-4 mt-4">
                             <label htmlFor="zoom" className="text-lg font-bold text-gray-100">Zoom</label>
-                            <input type="range" id='zoom' min="40" max="400" value={content[contentIndex]?.zoom} onInput={(e) => setContent({ zoom: e.target.value, id: contentIndex })}
+                            <input type="range" id='zoom' min="40" max="400" value={content[contentIndex]?.zoom} onInput={(e) => setContent({ zoom: e.target.value, id: content[contentIndex].id })}
                                 className=" w-full h-1 opacity-100 transition-opacity duration-[0.2s] rounded-[5px] "
                             />
                             <p className="font-semibold">{content[contentIndex]?.zoom}%</p>
                         </div>
                         <div className="flex items-center justify-center gap-4 mb-4 mt-4">
                             <label htmlFor="rotate" className="text-lg font-bold text-gray-100">Rotate</label>
-                            <input type="range" id='rotate' min="0" max="360" value={content[contentIndex]?.rotate} onChange={(e) => setContent({ rotate: e.target.value, id: contentIndex })}
+                            <input type="range" id='rotate' min="0" max="360" value={content[contentIndex]?.rotate} onChange={(e) => setContent({ rotate: e.target.value, id: content[contentIndex].id })}
                                 className="w-full h-1 opacity-100 transition-opacity duration-[0.2s] rounded-[5px]"
                             />
                             <p className="font-semibold">{content[contentIndex]?.rotate}</p>

@@ -33,11 +33,11 @@ export function PrototypePortfolio() {
                     break;
                 case "TextComponent":
                     updatePortfolioComponent(TextComponent, gridIndex, componentIndex, evt);
-                    addContent({ type: 'TextComponent', text: 'Hey, I\'m Loris Crisafo Norte', bold: false, id: parseInt(componentItem.key), align: 'left' });
+                    addContent({ type: 'TextComponent', text: 'My portfolio showcases my passion for design and creativity, from vibrant brands to captivating digital experiences.', bold: false, id: parseInt(componentItem.key), align: 'left' });
                     break;
                 case "ImgComponent":
                     updatePortfolioComponent(ImgComponent, gridIndex, componentIndex, evt);
-                    addContent({ type: 'ImageComponent', src: 'https://via.placeholder.com/150', srcOrig: 'https://via.placeholder.com/150', border: 3, radius: 50, width: 250, height: 250, rotate: 0, flip: 1, zoom: 100, align: 'left', id: parseInt(componentItem.key) });
+                    addContent({ type: 'ImageComponent', src: 'https://via.placeholder.com/150', srcOrig: 'https://via.placeholder.com/150', border: 2, radius: 10, width: 250, height: 250, rotate: 0, flip: 1, zoom: 100, align: 'left', id: parseInt(componentItem.key) });
                     break;
 
             }
@@ -110,7 +110,7 @@ export function PrototypePortfolio() {
                                         return (
                                             <div key={elementIndex} data-key={elementIndex} className='group w-full h-fit border-2 border-dashed border-transparent hover:border-pink-500' draggable onDragStart={(evt) => startDrag(evt, gridIndex, componentIndex, elementIndex)}>
                                                 {element}
-                                                <div className='relative right-[-16px] z-10 h-0 flex flex-col items-end justify-start'>
+                                                <div className='relative top-0 right-[-16px] z-10 h-0 flex flex-col items-end justify-start'>
                                                     <button onClick={() => deleteComponent(gridIndex, componentIndex, elementIndex)} className='flex justify-center items-center opacity-0 group-hover:opacity-100 bg-red-600 rounded-full w-8 h-10 p-2 transition-all duration-150 hover:bg-red-700'>
                                                         <span className="icon-[tabler--trash] text-white"></span>
                                                     </button>
@@ -123,7 +123,7 @@ export function PrototypePortfolio() {
                         })}
                     </div>
                 ))}
-                <button onClick={() => addRow()} className='hover:text-blue-300 text-white mt-2 w-full flex items-center justify-center bg-blue-500 hover:bg-blue-600 rounded-sm py-2'>
+                <button onClick={() => addRow()} className='hover:text-blue-300 text-indigo-300 mt-2 w-full flex items-center justify-center border-2 border-indigo-300 hover:bg-blue-600 rounded-sm py-3'>
                     <span className="icon-[tabler--circle-plus]  text-xl"></span>
                 </button>
 

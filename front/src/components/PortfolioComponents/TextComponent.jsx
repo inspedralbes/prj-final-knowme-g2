@@ -20,7 +20,7 @@ export function TextComponent({ id }) {
                     "text-left mr-auto" : content[contentIndex]?.align == 'center' ?
                         "text-center m-auto" : content[contentIndex]?.align == 'right' ?
                             "text-right ml-auto" : "")}>
-                <p className={"text-2xl transition-all duration-75 font-inter text-pretty hover:cursor-text " + (content[contentIndex]?.bold ? 'font-bold ' : '') + (content[contentIndex]?.italic ? 'italic ' : '')}> {content[contentIndex]?.text} </p>
+                <h1 className={"text-2xl transition-all duration-75 font-inter text-pretty hover:cursor-text " + (content[contentIndex]?.bold ? 'font-bold ' : '') + (content[contentIndex]?.italic ? 'italic ' : '')}> {content[contentIndex]?.text} </h1>
             </motion.div>
         </>
     )
