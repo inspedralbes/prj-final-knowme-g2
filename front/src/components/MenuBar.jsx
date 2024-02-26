@@ -1,4 +1,4 @@
-import { useRightSideBarStore } from '../store/rightSideBarStore.js'
+import { useRightSideBarStore } from '@/store/rightSideBarStore.js'
 
 export function MenuBar() {
     const { type, setType } = useRightSideBarStore(state => state);

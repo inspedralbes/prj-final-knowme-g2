@@ -1,4 +1,4 @@
-import { useRightSideBarStore } from '../../store/rightSideBarStore.js'
+import { useRightSideBarStore } from '@/store/rightSideBarStore.js'
 import { motion } from "framer-motion";
 
 

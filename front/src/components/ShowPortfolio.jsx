@@ -1,8 +1,8 @@
 import TitleComponent from "./PortfolioComponents/TitleComponent";
-import { useRightSideBarStore } from '../store/rightSideBarStore.js'
+import { useRightSideBarStore } from '@/store/rightSideBarStore.js'
 import { useEffect, useState, useCallback } from "react";
 import ImgComponent from "./PortfolioComponents/ImgComponent.jsx";
-import { showDomain } from "../services/communicationManager.js";
+import { showDomain } from "@/services/communicationManager.js";
 import TextComponent from "./PortfolioComponents/TextComponent.jsx";
 
 export function ShowPortfolio({ webURL }) {

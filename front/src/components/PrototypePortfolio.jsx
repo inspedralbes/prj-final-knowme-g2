@@ -2,7 +2,8 @@ import { useState } from 'react';
 import { TitleComponent } from "./PortfolioComponents/TitleComponent.jsx";
 import { ImgComponent } from "./PortfolioComponents/ImgComponent.jsx";
 import { TextComponent } from "./PortfolioComponents/TextComponent.jsx";
-import { useRightSideBarStore } from '../store/rightSideBarStore.js'
+import { useRightSideBarStore } from '@/store/rightSideBarStore.js'
+import { Draggable, Droppable } from 'react-beautiful-dnd';
 
 
 export function PrototypePortfolio() {
@@ -123,7 +124,7 @@ export function PrototypePortfolio() {
                         })}
                     </div>
                 ))}
-                <button onClick={() => addRow()} className='hover:text-blue-300 text-indigo-300 mt-2 w-full flex items-center justify-center border-2 border-indigo-300 hover:bg-blue-600 rounded-sm py-3'>
+                <button onClick={() => addRow()} className='hover:text-blue-300 text-indigo-300 mt-2 w-full flex items-center justify-center border-[3px] border-indigo-300 hover:bg-blue-600 rounded-sm py-3'>
                     <span className="icon-[tabler--circle-plus]  text-xl"></span>
                 </button>
 

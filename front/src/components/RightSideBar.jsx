@@ -3,7 +3,7 @@ import { EditComponent } from "./SideBarTools/EditComponent.jsx";
 import { EditLayout } from "./SideBarTools/EditLayout.jsx";
 import { SaveData } from "./SideBarTools/SaveData.jsx";
 import { useState } from 'react'
-import { useRightSideBarStore } from '../store/rightSideBarStore.js'
+import { useRightSideBarStore } from '@/store/rightSideBarStore.js'
 import { MenuBar } from "./MenuBar.jsx";
 import { EditImage } from "./SideBarTools/EditImage.jsx";
 
