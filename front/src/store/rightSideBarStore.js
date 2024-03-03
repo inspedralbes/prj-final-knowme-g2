@@ -2,6 +2,7 @@ import { create } from 'zustand';
 
 export const useRightSideBarStore = create((set) => ({
     type: 'component',
+    title: 'KnowMe Playground',
     viewMode: true,
     content: [],
     contentIndex: 0,
@@ -30,6 +31,7 @@ export const useRightSideBarStore = create((set) => ({
         },
     ],
     setType: (value) => set({ type: value }),
+    setTitle: (value) => set({ title: value }),
     setContent: (newContent) => set(prevState => {
         const found = prevState.content.find(item => item.id === newContent.id);
 

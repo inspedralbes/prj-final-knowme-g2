@@ -1,6 +1,6 @@
 import { useRightSideBarStore } from "../../store/rightSideBarStore.js";
 
-export function EditComponent() {
+export function AddComponent() {
   const { setComponentItem, componentItem } = useRightSideBarStore();
 
   const startDrag = (evt, id) => {
@@ -62,4 +62,4 @@ export function EditComponent() {
   );
 }
 
-export default EditComponent;
+export default AddComponent;

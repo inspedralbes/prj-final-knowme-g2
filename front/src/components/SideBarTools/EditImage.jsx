@@ -7,12 +7,11 @@ export function EditImage() {
     const [firstTime, setFirstTime] = useState(true);
     const [onCanvas, setOnCanvas] = useState(false);
     let styles = {
-        border: `${content[contentIndex]?.border}px solid`,
-        borderRadius: `${content[contentIndex]?.radius}%`,
+        border: `${!isNaN(content[contentIndex]?.border) ? content[contentIndex]?.border : 0}px solid`,
+        borderRadius: `${!isNaN(content[contentIndex]?.radius) ? content[contentIndex]?.radius : 0}%`,
         borderColor: 'white',
         transform: `scaleX(${content[contentIndex]?.flip})`,
-
-    }
+    };
 
 
 
@@ -40,12 +39,12 @@ export function EditImage() {
                 event.preventDefault();
                 if (event.deltaY < 0) {
                     if (content[contentIndex]?.zoom < 400) {
-                        setContent({ zoom: parseInt(content[contentIndex]?.zoom) + parseInt(10), id: content[contentIndex].id })
+                        setContent({ zoom: parseInt(content[contentIndex]?.zoom) + parseInt(10), id: content[contentIndex]?.id })
                     }
                 }
                 else if (event.deltaY > 0) {
                     if (content[contentIndex]?.zoom > 40) {
-                        setContent({ zoom: content[contentIndex]?.zoom - 10, id: content[contentIndex].id })
+                        setContent({ zoom: content[contentIndex]?.zoom - 10, id: content[contentIndex]?.id })
                     }
                 }
             }
@@ -69,14 +68,14 @@ export function EditImage() {
     const handlerUpload = () => {
         const canvas = editor.current.getImage();
 
-        setContent({ src: canvas.toDataURL(), width: content[contentIndex]?.width, zoom: content[contentIndex]?.zoom, rotate: content[contentIndex]?.rotate, height: content[contentIndex]?.height, id: content[contentIndex].id })
+        setContent({ src: canvas.toDataURL(), width: content[contentIndex]?.width, zoom: content[contentIndex]?.zoom, rotate: content[contentIndex]?.rotate, height: content[contentIndex]?.height, id: content[contentIndex]?.id })
         setFirstTime(false);
     }
     const handlerChange = (e) => {
         if (!firstTime) {
 
             const canvas = editor.current.getImage();
-            setContent({ src: canvas.toDataURL(), width: content[contentIndex]?.width, zoom: content[contentIndex]?.zoom, rotate: content[contentIndex]?.rotate, height: content[contentIndex]?.height, id: content[contentIndex].id })
+            setContent({ src: canvas.toDataURL(), width: content[contentIndex]?.width, zoom: content[contentIndex]?.zoom, rotate: content[contentIndex]?.rotate, height: content[contentIndex]?.height, id: content[contentIndex]?.id })
         }
     }
 
@@ -95,7 +94,7 @@ export function EditImage() {
         <>
             <h2 className="text-2xl font-bold">Image</h2>
             <button className="relative font-bold text-lg w-full h-12 rounded-full bg-[#69b4ff] text-[#ffffff] hover:opacity-90 transition-all duration-100 mt-3">
-                + Add File
+                {content[contentIndex]?.srcOrig != "https://via.placeholder.com/150" ? "Change Image" : "Add Image"}
                 <input onInput={(event) => {
                     let srcImg = URL.createObjectURL(event.target.files[0])
                     setContent({ srcOrig: srcImg, id: content[contentIndex].id })

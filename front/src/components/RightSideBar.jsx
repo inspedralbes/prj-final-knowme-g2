@@ -1,11 +1,13 @@
 import { EditText } from "./SideBarTools/EditText.jsx";
-import { EditComponent } from "./SideBarTools/EditComponent.jsx";
+import { AddComponent } from "./SideBarTools/AddComponent.jsx";
 import { EditLayout } from "./SideBarTools/EditLayout.jsx";
+import { EditNavBar } from "./SideBarTools/EditNavBar.jsx";
 import { SaveData } from "./SideBarTools/SaveData.jsx";
 import { useState } from 'react'
 import { useRightSideBarStore } from '@/store/rightSideBarStore.js'
 import { MenuBar } from "./MenuBar.jsx";
 import { EditImage } from "./SideBarTools/EditImage.jsx";
+import Palette from "./SideBarTools/Pelette.jsx";
 
 export function RightSideBar() {
     let [selected, setSelected] = useState(null);
@@ -23,7 +25,13 @@ export function RightSideBar() {
                             {type == 'text' ? <EditText /> : ''}
                         </div>
                         <div className={`transition-all duration-700 ease-in-out overflow-hidden ${type == 'component' ? 'opacity-100 max-h-screen' : 'opacity-0 max-h-0'}`}>
-                            {type == 'component' ? <EditComponent /> : ''}
+                            {type == 'component' ? <AddComponent /> : ''}
+                        </div>
+                        <div className={`transition-all duration-700 ease-in-out overflow-hidden ${type == 'palette' ? 'opacity-100 max-h-screen' : 'opacity-0 max-h-0'}`}>
+                           <Palette />
+                        </div>
+                        <div className={`transition-all duration-700 ease-in-out overflow-hidden ${type == 'navbar' ? 'opacity-100 max-h-screen' : 'opacity-0 max-h-0'}`}>
+                           <EditNavBar />
                         </div>
                         <div className={`transition-all duration-700 ease-in-out overflow-hidden ${type == 'layout' ? 'opacity-100 max-h-screen' : 'opacity-0 max-h-0'}`}>
                             <EditLayout />

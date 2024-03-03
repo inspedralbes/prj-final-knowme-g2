@@ -124,8 +124,8 @@ export function PrototypePortfolio() {
                         })}
                     </div>
                 ))}
-                <button onClick={() => addRow()} className='hover:text-blue-300 text-indigo-300 mt-2 w-full flex items-center justify-center border-[3px] border-indigo-300 hover:bg-blue-600 rounded-sm py-3'>
-                    <span className="icon-[tabler--circle-plus]  text-xl"></span>
+                <button onClick={() => addRow()} className='hover:text-white transition-all duration-100 text-indigo-300 mt-2 w-full flex items-center justify-center border-[3px] border-indigo-300 hover:bg-indigo-300 rounded-sm py-2'>
+                    <span className="icon-[fluent--add-12-filled] text-2xl"></span>
                 </button>
 
             </div>

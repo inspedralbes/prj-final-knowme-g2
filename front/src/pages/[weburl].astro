@@ -2,58 +2,11 @@
 import PortfolioLayout from "../layouts/PortfolioLayout.astro";
 import { ShowPortfolio } from "../components/ShowPortfolio.jsx";
 import { getDomains, showDomain, getProbes, getProba} from "../services/communicationManager.js";
-import { info } from "astro/dist/core/logger/core";
 
 export const prerender = true;
 
 // A docker compose dona error de connexió si es proba amb el Strapi
 const { weburl } = Astro.params;
-
-let jsonData;
-
-/*
-if (weburl) {
-  jsonData = [
-    {
-      components: [
-        [],
-        [
-          {
-            weburl: 1,
-            type: "TitleComponent",
-            text: "Título",
-            bold: true,
-            align: "center",
-          },
-        ],
-        [],
-
-      ],
-      style: {
-        sizes: [1, 1, 1],
-        string: "minmax(40px,1fr) minmax(40px,1fr) minmax(40px,1fr)",
-      },
-    },
-    {
-      components: [[], [], []],
-      style: {
-        sizes: [1, 1, 1],
-        string: "minmax(40px,1fr) minmax(40px,1fr) minmax(40px,1fr)",
-      },
-    },
-    {
-      components: [[], [], []],
-      style: {
-        sizes: [1, 1, 1],
-        string: "minmax(40px,1fr) minmax(40px,1fr) minmax(40px,1fr)",
-      },
-    },
-  ];
-}
-*/
-
-
-
 
 export async function getStaticPaths() {
   const data = await getDomains();

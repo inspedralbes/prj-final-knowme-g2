@@ -15,7 +15,7 @@ export function MenuBar() {
                     </button>
                 </li>
                 <li>
-                    <button onClick={() => setType('header')} className={"bg-[#2d2d2d] border-solid border-2 border-[#2d2d2d] w-12 h-12 mt-3  rounded-xl ml-1 shadow-sm shadow-black transition-all duration-100" + (type == 'header' ? ' border-[#ffffff] ' : ' ')}> <span className="icon-[solar--smile-square-bold] w-8 h-8 justify-center align-middle text-white" ></span>
+                    <button onClick={() => setType('navbar')} className={"bg-[#2d2d2d] border-solid border-2 border-[#2d2d2d] w-12 h-12 mt-3  rounded-xl ml-1 shadow-sm shadow-black transition-all duration-100" + (type == 'navbar' ? ' border-[#ffffff] ' : ' ')}> <span className="icon-[solar--smile-square-bold] w-8 h-8 justify-center align-middle text-white" ></span>
                     </button>
                 </li>
                 <li>
